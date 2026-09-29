@@ -9,7 +9,8 @@ without redeploying the main site.
 ## One-time setup
 
 1. **GitHub Pages**: Settings → Pages → Build and deployment → Source: *Deploy from a branch* →
-   Branch `main`, folder `/ (root)` → Save.
+   Branch `main`, folder `/ (root)` → Save. Leave **Custom domain** empty: halom.io is served by
+   Vercel, so setting it here makes GitHub forward the page to halom.io, where it 404s.
 2. **halom.io `vercel.json`** (in the Halom site on the Mac, so later deploys keep it): add the
    redirect to the existing `redirects` list and a new `rewrites` list, then deploy the Halom site as usual:
 
