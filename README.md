@@ -10,25 +10,22 @@ without redeploying the main site.
 
 1. **GitHub Pages**: Settings → Pages → Build and deployment → Source: *Deploy from a branch* →
    Branch `main`, folder `/ (root)` → Save.
-2. **halom.io `vercel.json`**: add these rewrites, then deploy the Halom site as usual:
+2. **halom.io `vercel.json`** (in the Halom site on the Mac, so later deploys keep it): add the
+   redirect to the existing `redirects` list and a new `rewrites` list, then deploy the Halom site as usual:
 
 ```json
+"redirects": [
+  { "source": "/projects/selva-resort/landing", "destination": "/projects/selva-resort/landing/", "permanent": false }
+],
 "rewrites": [
-  { "source": "/projects/selva-resort/landing", "destination": "https://danieltinker.github.io/halom-projects/projects/selva-resort/landing/" },
   { "source": "/projects/selva-resort/landing/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/selva-resort/landing/$1" }
 ]
 ```
 
-Both rules are needed: Vercel matches sources strictly, so a `:path*` rule on its own would not
-match the trailing-slash URL.
-
-The builds use absolute asset paths (`/projects/selva-resort/landing/…`), so they work only
-when served through halom.io, not directly at `danieltinker.github.io/halom-projects/…`.
+The builds use relative asset paths, so each preview also works directly on GitHub Pages
+(e.g. `https://danieltinker.github.io/halom-projects/projects/selva-resort/landing/`). The redirect
+adds the trailing slash that relative paths need; Vercel matches sources strictly, so it can't loop.
 
 ## Updating a preview
 
-Rebuild with the subpath as the base, then replace the folder and push:
-
-```sh
-SELVA_BASE=/projects/selva-resort/landing/ npm run build
-```
+Build with the default relative base (`npm run build`), replace the folder with `dist/`, and push.
