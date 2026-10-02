@@ -4,7 +4,8 @@ Static builds served at `halom.io/projects/…`. GitHub Pages hosts the files, a
 Vercel project proxies the paths to them, so a preview can be updated by pushing here
 without redeploying the main site.
 
-- `projects/selva-resort/landing/` — Selva Resort 3D site (concept preview by Halom)
+- `projects/selva-resort/landing/` — Selva Resort 3D site, v4.1 (concept preview by Halom; the pitch build)
+- `projects/selva-resort/landing-v5/` — Selva Resort v5 preview: Selva's own photographs shown in 3D, one smooth tour per villa. Not routed from halom.io; if it becomes the pitch build, publish it over `landing/`.
 
 ## One-time setup
 
