@@ -5,6 +5,9 @@ Vercel project proxies the paths to them, so a preview can be updated by pushing
 without redeploying the main site.
 
 - `projects/selva-resort/landing/` — Selva Resort 3D site, v4.1 (concept preview by Halom; the pitch build)
+- `projects/3d-menu/` — Halom 3D Menu: ten Tel Aviv restaurant menus as hologram menus (a Halom concept demo; the page says it is not
+  affiliated with the restaurants and that the dish images are AI-generated previews; `noindex`). Needs the `3d-menu` lines below in the halom.io `vercel.json`.
+- `projects/menus/<slug>/` — one restaurant's own hologram menu, written here by Menu Studio (Halom OS) when a menu is published. Needs the `menus` lines below, once.
 - `projects/selva-resort/landing-v5/` — Selva Resort v5 preview: Selva's own photographs shown in 3D, one smooth tour per villa. Not routed from halom.io; if it becomes the pitch build, publish it over `landing/`.
 
 ## One-time setup
@@ -21,6 +24,19 @@ without redeploying the main site.
 ],
 "rewrites": [
   { "source": "/projects/selva-resort/landing/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/selva-resort/landing/$1" }
+]
+```
+
+For the 3D menu and the menus Menu Studio publishes, the same two lists get these entries (the `menus` pair covers every future restaurant, so it is added once):
+
+```json
+"redirects": [
+  { "source": "/projects/3d-menu", "destination": "/projects/3d-menu/", "permanent": false },
+  { "source": "/projects/menus/:slug", "destination": "/projects/menus/:slug/", "permanent": false }
+],
+"rewrites": [
+  { "source": "/projects/3d-menu/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/3d-menu/$1" },
+  { "source": "/projects/menus/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/menus/$1" }
 ]
 ```
 
