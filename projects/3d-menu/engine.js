@@ -498,6 +498,7 @@ function loadLogo(v) {            // a restaurant's own logo file, shown on the 
 function setVenue(v) { S.venue = v; S.course = null; setFocus(false); loadLogo(v); applyTheme(v); layRing(false); resize(); renderVenue(); if (CLIENT) document.title = tx(v.name); }
 function switchVenue(v) {
   closeSheets(); $('veil').classList.add('on');
+  if (!v.own && MENUS.length > 1) { try { history.replaceState(null, '', '#' + v.id); } catch (e) { /* a link to this restaurant is optional */ } }
   setTimeout(() => { setVenue(v); requestAnimationFrame(() => requestAnimationFrame(() => $('veil').classList.remove('on'))); }, reduce ? 0 : 430);
 }
 function updateTray() {
@@ -607,6 +608,7 @@ function bind() {
     if (e.key === 'ArrowRight') { hideHint(); goTo(S.turn + dirSign()); } else if (e.key === 'ArrowLeft') { hideHint(); goTo(S.turn - dirSign()); }
   });
   window.addEventListener('resize', resize);
+  window.addEventListener('hashchange', () => { const v = MENUS.find((m) => m.id === (location.hash || '').replace('#', '')); if (v && v !== S.venue) switchVenue(v); });
   $('stDishes').value = SAMPLE;
   $('stLogo').addEventListener('change', (e) => { const f = e.target.files && e.target.files[0]; if (!f) { ownLogo = null; return; } const rd = new FileReader(); rd.onload = () => { const im = new Image(); im.onload = () => { ownLogo = im; }; im.src = rd.result; }; rd.readAsDataURL(f); });
   $('studioForm').addEventListener('submit', (e) => { e.preventDefault(); const v = buildOwn(); if (v) switchVenue(v); });
