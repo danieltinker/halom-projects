@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>/* served for /m/<slug> as well as from this folder: point relative URLs back at the folder */
+if (/^\/m\//.test(location.pathname)) document.write('<base href="/projects/menus/view/">');</script>
+<title>Menu</title>
+<meta name="theme-color" content="#0b0907">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app" id="app" data-mode="boot">
+  <a class="skip" id="skip" href="#panel"></a>
+
+  <header class="top" id="top">
+    <div class="bar">
+      <div class="brand">
+        <img class="brand-logo" id="logo" alt="" hidden>
+        <div class="brand-txt"><p class="brand-name" id="bizName"></p><p class="brand-meta" id="bizMeta"></p></div>
+      </div>
+      <div class="tools">
+        <button class="tool" id="langBtn" type="button" hidden></button>
+        <button class="tool" id="viewBtn" type="button" aria-pressed="false" hidden>
+          <svg class="ico-list" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <svg class="ico-table" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><ellipse cx="10" cy="10.5" rx="7.5" ry="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="10" cy="10.5" rx="3.4" ry="2" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+          <span class="tool-lbl" id="viewLbl"></span>
+        </button>
+        <button class="tool tool-tray" id="trayBtn" type="button" aria-haspopup="dialog" hidden>
+          <span id="trayLbl"></span><b id="trayCount">0</b>
+        </button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </header>
+
+  <main class="main" id="main">
+    <section class="stage" id="stage" hidden>
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <div class="stage-shade" aria-hidden="true"></div>
+      <div class="stage-title" id="stageTitle" aria-hidden="true"><span class="st-count" id="stCount"></span><span class="st-name" id="stName"></span></div>
+      <div class="caps" id="caps" aria-hidden="true"></div>
+      <div class="pager" id="pager" hidden>
+        <button class="round sm" id="pagePrev" type="button"><svg class="flip" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="pager-txt" id="pagerTxt"></span>
+        <button class="round sm" id="pageNext" type="button"><svg class="flip" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <button class="chip back" id="backBtn" type="button" hidden>
+        <svg class="flip" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="backLbl"></span>
+      </button>
+      <button class="round side prev" id="prevBtn" type="button" hidden><svg class="flip" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="round side next" id="nextBtn" type="button" hidden><svg class="flip" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="chip look" id="lookBtn" type="button" aria-pressed="false" hidden>
+        <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2.2 8a6 6 0 0 1 10.3-3.9M13.8 8a6 6 0 0 1-10.3 3.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.6v2.9H10M3.1 14.4v-2.9H6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="lookLbl"></span>
+      </button>
+      <p class="hint" id="hint" hidden></p>
+    </section>
+
+    <section class="panel" id="panel" tabindex="-1">
+      <p class="notice" id="notice" hidden><span id="noticeTxt"></span> <button class="link" id="noticeBtn" type="button" hidden></button></p>
+      <div class="overview" id="overview">
+        <header class="cat-head"><h1 id="catTitle" tabindex="-1"></h1><p id="catCount"></p></header>
+        <ol class="index" id="index"></ol>
+        <nav class="cat-foot" id="catFoot"></nav>
+      </div>
+      <article class="detail" id="detail" hidden>
+        <a class="detail-back link" id="detailBack"></a>
+        <img class="detail-photo" id="dPhoto" alt="" hidden>
+        <p class="eyebrow"><span id="dCat"></span><span id="dIdx" dir="ltr"></span></p>
+        <h1 id="dName" tabindex="-1"></h1>
+        <p class="price-row"><span class="price" id="dPrice"></span><span class="price-note" id="dNote"></span><span class="badge sold" id="dSold" hidden></span></p>
+        <p class="desc" id="dDesc"></p>
+        <ul class="tags" id="dTags"></ul>
+        <p class="allergens" id="dAllergens" hidden><b id="dAllergensLbl"></b> <span id="dAllergensTxt"></span></p>
+        <dl class="facts" id="dFacts" hidden></dl>
+        <div class="detail-actions"><button class="primary" id="addBtn" type="button"></button></div>
+        <nav class="detail-nav" id="detailNav"></nav>
+      </article>
+      <p class="credit" id="credit"></p>
+    </section>
+  </main>
+
+  <div class="sr" id="live" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="status" id="status" role="status">
+    <div class="status-card">
+      <p class="status-mark" aria-hidden="true"></p>
+      <h1 id="statusTitle"></h1>
+      <p id="statusBody"></p>
+      <button class="primary" id="statusBtn" type="button" hidden></button>
+    </div>
+  </div>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+  <aside class="sheet" id="traySheet" role="dialog" aria-modal="true" aria-labelledby="trayTitle" hidden>
+    <div class="sheet-head"><h2 id="trayTitle"></h2><button class="round sm" id="trayClose" type="button">&times;</button></div>
+    <ul class="lines" id="trayList"></ul>
+    <p class="note" id="trayEmpty"></p>
+    <div class="total" id="trayTotalRow"><span id="trayTotalLbl"></span><span id="trayTotal"></span></div>
+    <p class="note" id="trayNote"></p>
+    <a class="primary order" id="orderLink" target="_blank" rel="noopener noreferrer" hidden></a>
+    <button class="link" id="trayClear" type="button"></button>
+  </aside>
+</div>
+<noscript><p style="padding:24px;font:16px sans-serif;color:#f4ede2;background:#0b0907">This menu needs JavaScript. Please ask the staff for a printed menu. / התפריט הזה צריך JavaScript. אפשר לבקש מהצוות תפריט מודפס.</p></noscript>
+<script type="module" src="app.js"></script>
+</body>
+</html>

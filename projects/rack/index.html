@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+// Every address in this page is relative, so it works from any folder or path prefix. If a proxy serves it as ".../rack"
+// with no closing slash, relative addresses would resolve one folder too high: give them the folder back.
+(function () { var p = location.pathname; if (!/(\/|\.[a-z0-9]+)$/i.test(p)) { var b = document.createElement('base'); b.href = p + '/'; document.head.appendChild(b); } })();
+</script>
+<title>Blank Rack · a concept by Halom</title>
+<meta name="description" content="A clothing rail you can handle. Turn a piece, pull it forward, change its colour, print one logo on everything. A concept by Halom for small-batch startup merch.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E7E8E4">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Halom">
+<meta property="og:title" content="Blank Rack · a concept by Halom">
+<meta property="og:description" content="A clothing rail you can handle. Turn a piece, pull it forward, change its colour, print one logo on everything.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Blank garments hanging on a chrome rail against a pale wall.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E7E8E4'/%3E%3Cg transform='rotate(-4 16 16)' fill='none' stroke='%23121417'%3E%3Crect x='9.5' y='6.5' width='13' height='19' rx='1.5' stroke-width='2.6'/%3E%3Cpath d='M10 10.6h12' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/rack.css">
+<noscript><style>#hint { display: none; }</style></noscript>
+</head>
+<body>
+<div id="app">
+  <header class="bar">
+    <button class="link" id="btn-storage" type="button">Storage <span class="n" id="n-storage">0</span></button>
+    <div class="wordmark"><b>blank</b><small id="forline"></small></div>
+    <button class="link" id="btn-bag" type="button">Bag <span class="n" id="n-bag">0</span></button>
+  </header>
+
+  <main id="stage" aria-label="Clothing rail">
+    <canvas id="rackblur" aria-hidden="true"></canvas>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="tag" id="tag"><div class="t1" id="tag-1"></div><div class="t2" id="tag-2"></div></div>
+    <div class="dropzone" id="dropzone"><span>Let go here to put it in storage</span></div>
+    <p class="hint" id="hint">Putting the collection on the rail</p>
+    <noscript><p class="hint">This rail is drawn with JavaScript, and it is switched off in this browser.</p></noscript>
+    <ul class="sr" id="sr-list" aria-label="Pieces on the rail"></ul>
+  </main>
+
+  <footer class="dock">
+    <button class="link" id="btn-custom" type="button" aria-expanded="false" aria-controls="custom"><span class="mini"><img class="logo-thumb" alt=""></span>Customise</button>
+    <button class="pill" id="btn-send" type="button">Send this collection</button>
+    <span></span>
+  </footer>
+
+  <div class="pop" id="custom" aria-hidden="true">
+    <div class="pop-row">
+      <button class="well" id="logo-well" type="button" aria-label="Upload a logo"><img class="logo-thumb" alt=""></button>
+      <div class="stack">
+        <span class="cap">One logo, printed on every piece</span>
+        <button class="txt" id="logo-pick" type="button">Upload a logo</button>
+      </div>
+      <input class="sr" type="file" id="logo-file" accept="image/*" tabindex="-1">
+    </div>
+    <div class="pop-row">
+      <label class="opt" for="sel-place">Position
+        <select id="sel-place">
+          <option value="default">As designed</option>
+          <option value="chest">Chest</option>
+          <option value="center">Centre</option>
+          <option value="back">Back</option>
+        </select>
+      </label>
+      <label class="opt" for="sel-ink">Ink
+        <select id="sel-ink">
+          <option value="auto">Auto</option>
+          <option value="original">Original colours</option>
+          <option value="tonal">Tone on tone</option>
+        </select>
+      </label>
+    </div>
+    <div class="pop-row">
+      <span class="cap">Colours for the whole rail</span>
+      <div class="seg" id="seg-pal" role="group" aria-label="Colour palette"></div>
+    </div>
+  </div>
+
+  <section id="detail" aria-hidden="true">
+    <div class="d-top"><button class="link act" id="d-close" type="button">Close</button></div>
+    <div class="d-mid">
+      <button class="round act" id="d-prev" type="button" aria-label="Previous piece"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button>
+      <button class="round act" id="d-next" type="button" aria-label="Next piece"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+    </div>
+    <div class="d-bot">
+      <div class="d-count" id="d-count"></div>
+      <h1 class="d-name"><span id="d-name"></span> <span class="d-meta" id="d-meta"></span></h1>
+      <div class="swatches act" id="d-swatches"></div>
+      <div class="d-actions">
+        <button class="pill act" id="d-add" type="button">Add to bag</button>
+        <button class="txt act" id="d-store" type="button">Move to storage</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="scrim" id="scrim"></div>
+
+  <aside class="sheet" id="storage" aria-label="Storage" aria-hidden="true">
+    <div class="sheet-h">
+      <div><h2>Storage</h2><p>Choose a piece here to hang it. Choose one on the rail to take it off.</p></div>
+      <button class="link" id="st-close" type="button">Close</button>
+    </div>
+    <div class="sheet-b">
+      <div class="shelf" id="shelf"></div>
+      <input class="sr" type="file" id="pic-file" accept="image/*" multiple tabindex="-1">
+    </div>
+  </aside>
+
+  <aside class="sheet" id="bag" aria-label="Bag" aria-hidden="true">
+    <div class="sheet-h"><div><h2>Bag</h2><p id="bag-sub">Pieces you want made.</p></div><button class="link" id="bag-close" type="button">Close</button></div>
+    <div class="sheet-b" id="bag-list"></div>
+    <div class="sheet-f" id="bag-foot">
+      <div class="sum"><span>Total</span><span id="bag-total">0 units</span></div>
+      <button class="pill solid" id="bag-copy" type="button">Copy the request</button>
+      <div class="note" id="bag-note"></div>
+      <textarea class="handcopy" id="bag-text" rows="5" readonly hidden aria-label="The request, to copy by hand"></textarea>
+      <p class="note about">This is a concept. The bag writes a request for you to copy. It is not an order, and nothing is sent anywhere.</p>
+    </div>
+  </aside>
+
+  <div id="share" role="dialog" aria-label="Send this collection" aria-hidden="true">
+    <h2>Send this collection</h2>
+    <p>The link opens this rail exactly as it is now, with the logo on every piece. It carries everything itself. Nothing is uploaded.</p>
+    <div class="field"><label for="sh-name">Who is it for?</label><input id="sh-name" type="text" placeholder="Startup name" autocomplete="off" maxlength="40"></div>
+    <div class="field"><label for="sh-link">Link</label>
+      <div class="linkrow"><input class="linkbox" id="sh-link" type="text" readonly><button class="pill solid" id="sh-copy" type="button">Copy link</button></div>
+    </div>
+    <div class="note" id="sh-note"></div>
+    <div><button class="link" id="sh-close" type="button">Close</button></div>
+  </div>
+
+  <div class="filedrop" id="filedrop">Drop a logo to print it on every piece.<br>Drop clothing pictures to add them to storage.</div>
+  <div class="toast" id="toast" role="status"></div>
+  <a class="concept" href="https://halom.io" target="_top" rel="noopener">Concept by <b>Halom</b></a>
+</div>
+
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/rack.js"></script>
+</body>
+</html>
