@@ -1,0 +1,68 @@
+{
+ "harmony": {
+  "file": "harmony.mp3",
+  "title": "Lovely Piano Song",
+  "artist": "Kevin MacLeod",
+  "license": "CC0 (FreePD)",
+  "bpm": 100.002,
+  "beat": 0.59999,
+  "bar": 2.39994,
+  "bars": 36,
+  "loop": 86.3978
+ },
+ "ebony": {
+  "file": "ebony.mp3",
+  "title": "Groovin",
+  "artist": "Kevin MacLeod",
+  "license": "CC0 (FreePD)",
+  "bpm": 120.019,
+  "beat": 0.49992,
+  "bar": 1.99969,
+  "bars": 75,
+  "loop": 149.9766
+ },
+ "ivory": {
+  "file": "ivory.mp3",
+  "title": "Martini Sunset",
+  "artist": "Kevin MacLeod",
+  "license": "CC0 (FreePD)",
+  "bpm": 140.0,
+  "beat": 0.42857,
+  "bar": 1.71429,
+  "bars": 87,
+  "loop": 149.143
+ },
+ "guanacaste": {
+  "file": "guanacaste.mp3",
+  "title": "Bass Meant Jazz",
+  "artist": "Kevin MacLeod",
+  "license": "CC0 (FreePD)",
+  "bpm": 124.0,
+  "beat": 0.48387,
+  "bar": 1.93549,
+  "bars": 77,
+  "loop": 149.0326
+ },
+ "ivy": {
+  "file": "ivy.mp3",
+  "title": "Take the Sting Out - Jazz Fi",
+  "artist": "Kevin MacLeod",
+  "license": "CC0 (FreePD)",
+  "bpm": 71.998,
+  "beat": 0.83336,
+  "bar": 3.33343,
+  "bars": 44,
+  "loop": 146.671
+ },
+ "studio54": {
+  "file": "studio54.mp3",
+  "title": "Relaxing Ballad",
+  "artist": "Kevin MacLeod",
+  "license": "CC0 (FreePD)",
+  "bpm": 135.953,
+  "beat": 0.44133,
+  "bar": 1.76532,
+  "bars": 84,
+  "loop": 148.2868
+ }
+}
