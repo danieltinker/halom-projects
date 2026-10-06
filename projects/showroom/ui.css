@@ -1,0 +1,240 @@
+@font-face { font-family: 'Heebo'; src: url('fonts/heebo-hebrew-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Heebo'; src: url('fonts/heebo-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Jost'; src: url('fonts/jost-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF; }
+/* Halom 3D showroom overlay. The brand block (fonts, colours) is written in front of this file by the build. */
+:root {
+  --accent: #d5001c; --accent-ink: #fff;
+  --plate: #f6f3ee; --ink: #17181a; --soft: #5d5a56; --rule: rgba(23, 24, 26, 0.14);
+  --glass: rgba(14, 15, 17, 0.58); --on-glass: #f6f3ee;
+  --sans: Arial, sans-serif; --dw: 800; --mark-w: 800; --mark-track: 0.14em; --h1-track: 0;
+  --pad: clamp(14px, 2.2vw, 28px);
+  --safe-b: env(safe-area-inset-bottom, 0px); --safe-l: env(safe-area-inset-left, 0px); --safe-r: env(safe-area-inset-right, 0px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: #0c0c0d; color: var(--on-glass); font-family: var(--sans); -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+#ui { position: fixed; inset: 0; pointer-events: none; }
+#ui button, #panel, #modal, #fail { pointer-events: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible, h2:focus-visible, a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+[hidden] { display: none !important; }
+svg { width: 20px; height: 20px; flex: none; }
+
+/* top: the concept ribbon (always on screen) and the bar under it, on a scrim so they read over any ceiling */
+#bar { position: absolute; top: 0; inset-inline: 0; z-index: 6; }
+#bar::before { content: ''; position: absolute; inset: 0 0 auto; height: 150px; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0)); pointer-events: none; transition: opacity 0.6s; }
+#ribbon { position: relative; text-align: center; font-size: 12.5px; line-height: 1.35; padding: 6px max(12px, var(--safe-r)) 6px max(12px, var(--safe-l)); background: rgba(8, 8, 9, 0.74); color: #e9e5df; text-wrap: balance; }
+#top { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px max(var(--pad), var(--safe-r)) 12px max(var(--pad), var(--safe-l)); transition: opacity 0.6s; }
+#top .id { display: flex; align-items: baseline; gap: 12px; min-width: 0; text-shadow: 0 1px 14px rgba(0, 0, 0, 0.6); }
+#top .id strong { font-weight: var(--mark-w); font-size: 21px; letter-spacing: var(--mark-track); direction: ltr; white-space: nowrap; }
+#top .id span { font-size: 15px; opacity: 0.9; white-space: nowrap; }
+#top .tools { display: flex; gap: 8px; align-items: center; flex: none; }
+.seg { display: flex; background: var(--glass); border-radius: 999px; padding: 3px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.seg button { padding: 7px 15px; border-radius: 999px; font-size: 14px; min-height: 38px; }
+.seg button[aria-pressed='true'] { background: #f6f3ee; color: #111214; font-weight: 600; }
+.ic { width: 44px; height: 44px; border-radius: 50%; background: var(--glass); display: grid; place-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+body[data-state='loading'] #top, body[data-state='intro'] #top { opacity: 0; }
+body[data-state='intro'] #bar::before, body[data-state='loading'] #bar::before { opacity: 0; }
+body[data-state='focus'] #bar::before { background: linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.42) 55%, rgba(0, 0, 0, 0)); }
+#top .lbl { display: grid; place-items: center; opacity: 0.65; padding-inline: 11px 3px; } #top .lbl svg { width: 17px; height: 17px; } /* a ceiling lamp, not a word (a word in the row read as a fourth choice) and not a sun (beside "יום" it read as that button's own icon) */
+
+/* entrance: the building is the picture, the words sit on the paving under it */
+#intro { position: absolute; inset-inline: 0; bottom: 0; padding: 150px var(--pad) calc(clamp(26px, 6vh, 64px) + var(--safe-b)); text-align: center; display: grid; justify-items: center; gap: 12px; opacity: 0; transition: opacity 0.8s; background: linear-gradient(to top, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.42) 45%, rgba(0, 0, 0, 0)); }
+body[data-state='intro'] #intro { opacity: 1; }
+#intro .copy { display: grid; gap: 10px; justify-items: center; }
+#intro h1 { font-weight: var(--h1w, var(--dw)); letter-spacing: var(--h1-track); font-size: clamp(30px, 4.6vw, 58px); line-height: 1.1; max-width: 22ch; text-wrap: balance; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5); }
+#intro h1 span { display: block; }
+#intro .sub { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.5; max-width: 36em; opacity: 0.92; text-wrap: pretty; }
+#intro .wait { font-size: 14px; color: #c9c5be; font-variant-numeric: tabular-nums; min-height: 1.4em; }
+.btn { background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 16px; padding: 13px 30px; border-radius: 999px; min-height: 48px; transition: transform 0.15s, filter 0.15s, opacity 0.3s; }
+.btn:hover { filter: brightness(1.08); } .btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.45; cursor: progress; filter: none; }
+#intro .btn { margin-top: 6px; }
+
+/* lobby */
+#ui::after { content: ''; position: absolute; inset: auto 0 0; height: 190px; background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.22) 50%, rgba(0, 0, 0, 0)); pointer-events: none; opacity: 0; transition: opacity 0.6s; z-index: -1; }
+body[data-state='lobby'] #ui::after { opacity: 1; }
+#hint, #fhint { position: absolute; inset-inline: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 32px); text-align: center; font-size: 14.5px; background: var(--glass); padding: 9px 18px; border-radius: 999px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.6s; }
+#hint { bottom: calc(112px + var(--safe-b)); }
+#fhint { bottom: calc(22px + var(--safe-b)); }
+body[data-state='lobby'] #hint, body[data-state='focus'] #fhint { opacity: 1; }
+#hint.gone, #fhint.gone { opacity: 0 !important; }
+#lineup { position: absolute; bottom: calc(18px + var(--safe-b)); inset-inline: 0; display: flex; justify-content: safe center; gap: 10px; padding-block: 4px; padding-inline: max(var(--pad), var(--safe-r)) max(var(--pad), var(--safe-l)); opacity: 0; transform: translateY(14px); transition: opacity 0.6s, transform 0.6s; overflow-x: auto; scrollbar-width: none; }
+#lineup::-webkit-scrollbar { display: none; }
+body[data-state='lobby'] #lineup { opacity: 1; transform: none; }
+#lineup button { flex: 0 1 auto; display: grid; grid-template-columns: 96px minmax(0, auto); grid-template-rows: auto auto; column-gap: 12px; align-items: center; text-align: start; background: var(--glass); color: var(--on-glass); border-radius: 8px; padding-block: 6px; padding-inline: 6px 18px; min-width: 0; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: inset 0 -3px 0 transparent; transition: box-shadow 0.2s, transform 0.2s, background 0.2s; }
+#lineup button img, #lineup button .ph { grid-row: 1 / 3; width: 96px; height: 60px; object-fit: cover; border-radius: 5px; background: #1b1c1f; display: block; }
+#lineup button b { font-weight: 700; font-size: 16px; align-self: end; direction: ltr; text-align: right; white-space: nowrap; }
+#lineup button .ty { font-size: 13px; opacity: 0.78; align-self: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 940px) and (min-width: 761px) { #lineup button .ty { display: none; } #lineup button b { grid-row: 1 / 3; align-self: center; } }
+#lineup button:disabled { opacity: 0.5; cursor: progress; }
+#lineup button:enabled:hover, #lineup button.hot, #lineup button:focus-visible { box-shadow: inset 0 -3px 0 var(--line, var(--accent)); transform: translateY(-3px); background: rgba(14, 15, 17, 0.74); }
+
+/* name tag over the car under the pointer */
+#labels .tag { position: absolute; top: 0; left: 0; display: grid; justify-items: center; padding: 6px 14px 7px; background: var(--plate); color: var(--ink); border-radius: 6px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; will-change: transform; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+#labels .tag b { font-size: 15px; font-weight: 700; direction: ltr; }
+#labels .tag span { font-size: 12.5px; color: var(--soft); }
+#labels .tag.on { opacity: 1; }
+
+/* the plate: the spec stand beside the staged car */
+#panel { position: absolute; z-index: 7; inset-block: 96px 22px; inset-inline-start: max(var(--pad), var(--safe-r)); width: min(348px, 34vw); margin-block: auto; height: max-content; max-height: calc(100% - 118px); overflow: auto; overscroll-behavior: contain; background: var(--plate); color: var(--ink); border-top: 4px solid var(--line, var(--accent)); border-radius: 4px; padding: 12px 22px 0; display: grid; gap: 10px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45); animation: plate 0.6s 0.25s both cubic-bezier(0.2, 0.7, 0.2, 1); }
+@keyframes plate { from { opacity: 0; transform: translateX(26px); } }
+#ui #panel.arming, #ui #panel.arming button { pointer-events: none; }
+#panel .head { display: flex; justify-content: space-between; align-items: center; margin-inline: -8px; }
+#panel .ghost { display: inline-flex; align-items: center; gap: 4px; font-size: 14.5px; padding: 8px; min-height: 44px; border-radius: 6px; color: var(--soft); }
+#panel .ghost:hover { color: var(--ink); }
+#panel .count { font-size: 13px; color: var(--soft); font-variant-numeric: tabular-nums; direction: ltr; padding-inline: 6px; }
+#panel .title { display: grid; gap: 2px; }
+#panel h2 { font-weight: var(--dw); font-size: clamp(26px, 2.6vw, 36px); line-height: 1.08; direction: ltr; text-align: right; letter-spacing: var(--h1-track); outline-offset: 4px; }
+#panel h2:focus-visible { outline-color: var(--line, var(--accent)); box-shadow: none; }
+#panel .type { font-size: 16px; color: var(--soft); }
+#panel .morebtn { display: none; } #panel .morebtn svg { transition: transform 0.2s; } #panel.open .morebtn svg { transform: rotate(180deg); }
+#panel .more { display: grid; gap: 10px; }
+#panel .desc { font-size: 15.5px; line-height: 1.55; text-wrap: pretty; min-height: 3.1em; }
+.specs { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--rule); }
+.specs div { padding: 8px 0; padding-inline-end: 8px; }
+.specs div + div { border-inline-start: 1px solid var(--rule); padding-inline-start: 12px; }
+.specs dt { font-size: 12.5px; color: var(--soft); }
+.specs dd { font-size: 15px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+#panel .group { display: grid; gap: 7px; }
+#panel .more + .group { padding-top: 0; }
+#panel h3 { font-size: 13.5px; font-weight: 500; color: var(--soft); }
+.views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+.views button, .tool { min-width: 0; font-size: 14px; padding: 6px 2px; min-height: 42px; border: 1px solid var(--rule); border-radius: 6px; white-space: nowrap; }
+.views button:hover, .tool:hover { border-color: var(--ink); }
+.views button[aria-pressed='true'] { border-color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); font-weight: 600; }
+#panel .tools { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px; gap: 5px; }
+.tool { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.tool svg { width: 18px; height: 18px; }
+.tool[aria-pressed='true'] { background: var(--ink); color: var(--plate); border-color: var(--ink); }
+.tool.photo { border-color: transparent; } .tool.photo span { display: none; } .tool.photo svg { width: 21px; height: 21px; } .tool.photo:hover { border-color: transparent; background: var(--rule); } /* an action, not a switch: it does not look like the two beside it */
+#panel .cta { position: sticky; bottom: 0; background: var(--plate); padding-block: 8px 16px; margin-top: -2px; }
+#panel .btn { width: 100%; }
+#panel button:focus-visible { outline-color: var(--line, var(--accent)); box-shadow: none; }
+#lineup button:focus-visible { outline-color: #fff; }
+.fine { font-size: 12.5px; line-height: 1.5; color: var(--soft); }
+.stepper { display: flex; align-items: center; gap: 2px; }
+.stepper button { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: var(--soft); }
+.stepper button:hover { color: var(--ink); background: var(--rule); }
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.swatches button { width: 40px; height: 40px; border-radius: 50%; background: var(--sw); border: 1px solid rgba(128, 128, 128, 0.55); border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent); /* the plain grey first, for browsers without color-mix (Safari before 16.2): a white swatch on a white plate needs its edge */ box-shadow: inset 0 0 0 2px var(--plate); position: relative; }
+.swatches button::after { content: ''; position: absolute; inset: -3px; } /* 46px touch area around a 40px dot */
+.swatches button[aria-pressed='true'] { outline: 2px solid var(--ink); outline-offset: 2px; }
+#panel h3 .swname { color: var(--ink); font-weight: 600; }
+
+/* dialog, notices, failure */
+#modal { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.62); display: grid; place-items: center; padding: 20px; z-index: 30; }
+#modal .card { background: var(--plate); color: var(--ink); border-top: 4px solid var(--line, var(--accent)); border-radius: 4px; padding: 24px 26px; width: min(430px, 100%); display: grid; gap: 12px; }
+#modal h2 { font-size: 24px; font-weight: var(--dw); } #modal p { font-size: 16px; line-height: 1.55; } #modal .btn { justify-self: start; }
+#modal button:focus-visible, #modal a:focus-visible, #panel a:focus-visible { outline-color: var(--line, var(--accent)); box-shadow: none; }
+#modal .body { display: grid; gap: 12px; }
+#notice { position: absolute; top: 108px; inset-inline: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 32px); background: rgba(10, 10, 11, 0.86); padding: 10px 18px; border-radius: 8px; font-size: 15px; z-index: 25; }
+#fail { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 16px; padding: 24px; text-align: center; background: #0c0c0d; font-size: 17px; line-height: 1.6; z-index: 40; }
+#fail p { max-width: 30em; }
+
+/* narrow windows: the bar tightens */
+@media (max-width: 760px) {
+  #ribbon { font-size: 11px; padding-block: 5px; }
+  #top { padding-block: 8px; } #top .id span { display: none; } #top .id strong { font-size: 16px; letter-spacing: calc(var(--mark-track) * 0.6); }
+  .seg button { padding: 6px 12px; font-size: 13.5px; min-height: 44px; } #top .lbl { display: none; }
+  #top .fs { display: none; }
+  /* four small cards across: a photo with the name under it */
+  #lineup { gap: 6px; padding-inline: max(8px, var(--safe-r)) max(8px, var(--safe-l)); }
+  #lineup button { flex: 1 1 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; row-gap: 4px; padding: 4px 4px 6px; text-align: center; }
+  #lineup button img, #lineup button .ph { grid-row: auto; width: 100%; height: auto; aspect-ratio: 16 / 10; }
+  #lineup button b { font-size: 13.5px; text-align: center; align-self: center; overflow: hidden; text-overflow: ellipsis; }
+  #lineup button .ty { display: none; }
+  #hint { bottom: calc(15.625vw + 58px + var(--safe-b)); font-size: 13.5px; white-space: normal; border-radius: 14px; } /* the cards grow with the window: the hint stays above them */
+  #notice { top: 92px; }
+}
+/* SHEET: an upright phone or tablet. The plate becomes a sheet under the car: what you play with stays in reach, the words open
+   on demand. The same rule is in main.js (sheet()). */
+@media (max-width: 760px) and (orientation: portrait), (max-aspect-ratio: 4/5) and (max-width: 1100px) {
+  #fhint { display: none; }
+  #panel { inset-block: auto calc(8px + var(--safe-b)); inset-inline: 0; margin-inline: auto; width: min(620px, 100% - 16px); max-height: min(56vh, 100% - 100px); padding: 6px 14px 0; gap: 8px; animation-name: sheet; }
+  @keyframes sheet { from { opacity: 0; transform: translateY(26px); } }
+  #panel .head { margin-inline: -6px; }
+  #panel .title { grid-template-columns: 1fr auto; align-items: end; column-gap: 10px; }
+  #panel h2 { font-size: 24px; grid-column: 1; } #panel .type { font-size: 14.5px; grid-column: 1; }
+  #panel .morebtn { display: inline-flex; align-items: center; gap: 2px; grid-column: 2; grid-row: 1 / 3; font-size: 14px; color: var(--soft); min-height: 44px; padding-inline: 8px 2px; }
+  #panel.open { max-height: min(72vh, 100% - 100px); }
+  #panel .more { display: none; } #panel.open .more { display: grid; }
+  #panel.open .fine, #panel.open > .angle { display: none; } /* with the words open, the angles make room: colours, tools and the button stay whole */
+  #panel .desc { font-size: 14.5px; min-height: 0; }
+  #panel h3 { display: none; }
+  #panel { grid-template-columns: minmax(0, 1fr) auto; column-gap: 10px; }
+  #panel > * { grid-column: 1 / -1; }
+  #panel > .color { grid-column: 1; align-self: center; order: 1; } #panel > .tools { grid-column: 2; grid-template-columns: repeat(3, 44px); order: 1; } #panel > .angle { order: 2; } #panel > .cta { order: 3; } /* colours and tools share a row, above the angles */
+  .tool span { display: none; } .tool { min-height: 44px; }
+  .views button { min-height: 44px; }
+  #panel .cta { padding-block: 4px 12px; }
+}
+@media (max-width: 380px) { .seg button { padding-inline: 9px; min-width: 40px; } #top { gap: 6px; } .views button { font-size: 13px; } .swatches { gap: 6px; flex-wrap: nowrap; } .swatches button { width: 38px; height: 38px; } #panel > .tools { grid-template-columns: repeat(3, 40px); gap: 4px; } #panel { column-gap: 6px; } }
+@media (max-width: 340px) { #panel { padding-inline: 10px; column-gap: 3px; } .swatches { gap: 3px; } #panel > .tools { grid-template-columns: repeat(3, 38px); gap: 3px; } }
+/* short and wide (a small laptop, a phone on its side): the plate stays beside the car, keeps its controls and drops the prose */
+@media (max-height: 760px) and (orientation: landscape) { #panel .fine { display: none; } #panel .desc { font-size: 14.5px; } }
+@media (max-height: 690px) and (orientation: landscape) { #panel .desc { display: none; } #panel { gap: 8px; } }
+@media (max-height: 600px) and (orientation: landscape) { #panel { inset-block: 84px 10px; max-height: calc(100% - 94px); padding-top: 6px; gap: 6px; } #panel .cta { padding-block: 6px 10px; } }
+@media (max-height: 600px) and (orientation: landscape) and (min-width: 761px) { #hint { bottom: calc(96px + var(--safe-b)); } }
+/* a phone on its side: a compact plate (colours and tools on one row), a line-up of names without photos */
+@media (max-height: 500px) and (orientation: landscape) {
+  #panel { inset-block: 62px 6px; max-height: calc(100% - 68px); width: min(330px, 46vw); padding: 2px 12px 0; gap: 5px; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; }
+  #panel > * { grid-column: 1 / -1; }
+  #panel .more, #panel h3 { display: none; } #panel h2 { font-size: 21px; } #panel .type { font-size: 13.5px; }
+  #panel .title { grid-template-columns: 1fr auto; align-items: end; column-gap: 8px; } #panel h2, #panel .type { grid-column: 1; }
+  #panel .morebtn { display: inline-flex; align-items: center; gap: 2px; grid-column: 2; grid-row: 1 / 3; font-size: 13.5px; color: var(--soft); min-height: 40px; padding-inline: 6px 2px; }
+  #panel.open .more { display: grid; gap: 6px; } #panel.open .desc { display: block; font-size: 13.5px; min-height: 0; } #panel.open .fine, #panel.open > .angle, #panel.open > .color, #panel.open > .tools { display: none; } /* the words take the place of the controls while they are open */
+  body[data-state='lobby'] #top .id strong { visibility: hidden; } /* the wall behind already carries the name at this size */
+  .seg button { padding-inline: 8px; min-width: 40px; } /* and the switch ends short of that name */
+  #panel .head { margin-block: -4px; } #panel .ghost { min-height: 40px; } .stepper button { width: 40px; height: 40px; }
+  #panel > .color { grid-column: 1; align-self: center; } #panel > .tools { grid-column: 2; grid-template-columns: repeat(3, 40px); gap: 4px; }
+  .swatches { gap: 6px; flex-wrap: nowrap; } .swatches button { width: 38px; height: 38px; }
+  .tool span { display: none; } .tool, .views button { min-height: 40px; }
+  #panel .cta { padding-block: 3px 8px; } #panel .btn { min-height: 44px; padding-block: 9px; }
+  #top { padding-block: 5px; } #fhint { display: none; }
+  #intro { padding-top: 40px; gap: 6px; } #intro p.sub { display: none; }
+  #lineup { bottom: calc(8px + var(--safe-b)); gap: 6px; }
+  #lineup button { flex: 0 1 auto; display: block; padding: 9px 14px; min-height: 40px; text-align: center; }
+  #lineup button img, #lineup button .ph, #lineup button .ty { display: none; }
+  #lineup button b { font-size: 14px; }
+  #hint { bottom: calc(58px + var(--safe-b)); font-size: 13px; padding: 6px 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+
+/* ---- what only some brands use ---- */
+/* a second face for names and headlines (--display is set by a brand that has one; without it these are the text face, as before) */
+#top .id strong, #intro h1, #panel h2, #modal h2, #lineup button b, #labels .tag b { font-family: var(--display, var(--sans)); }
+/* the label with links in it: who made the page, its "about" words, its other language */
+#ribbon.links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 7px; padding-block: 1px; }
+#ribbon .rl { pointer-events: auto; font: inherit; color: inherit; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.42); text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 28px; padding: 0 3px; border-radius: 4px; cursor: pointer; }
+#ribbon .rl:hover { color: #fff; text-decoration-color: currentColor; }
+#ribbon .rl:focus-visible { outline-offset: -1px; box-shadow: none; }
+#ribbon .dot { opacity: 0.5; }
+@media (max-width: 520px) { #ribbon .note, #ribbon .note + .dot { display: none; } } /* a phone keeps what must always be said (who made it, that the cars are AI-made) and the links; the rest is in "about" */
+/* a note in the label that has a short form for a narrow phone */
+#ribbon .say .short { display: none; }
+@media (max-width: 560px) { #ribbon .say .long { display: none; } #ribbon .say .short { display: inline; } }
+/* a name that came from a link: it may be long (cut with an ellipsis, never wrapped, never under the lighting switch) and it may be Hebrew */
+#top .id strong.fit { min-width: 0; overflow: hidden; text-overflow: ellipsis; padding-block: 2px; }
+#top .id strong.fit.he { direction: rtl; }
+/* the plate's button as a link out */
+a.btn { display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
+/* the "about" card: longer words, so it may scroll on a small phone; its link is the page's ink */
+#modal[data-kind='about'] .card { max-height: 100%; overflow: auto; overscroll-behavior: contain; width: min(480px, 100%); }
+#modal[data-kind='about'] p { font-size: 15.5px; }
+#modal .out a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+
+/* ---- English (a brand that offers it): the page reads left to right; the room does not change, so whatever follows the room keeps its side ---- */
+html[lang='en'] #panel { inset-inline-start: auto; inset-inline-end: max(var(--pad), var(--safe-r)); } /* the plate stays on the right: the staged car is framed to its left */
+@media (max-width: 760px) and (orientation: portrait), (max-aspect-ratio: 4/5) and (max-width: 1100px) { html[lang='en'] #panel { inset-inline: 0; } }
+html[lang='en'] #lineup, html[lang='en'] .stepper { flex-direction: row-reverse; } /* the first car stands on the right of the room, and so does its card; "previous" stays the car to the right */
+html[lang='en'] #panel h2 { text-align: left; }
+@media (min-width: 761px) { html[lang='en'] #lineup button b { text-align: left; } }
+html[lang='en'] #panel .ghost svg { transform: scaleX(-1); }
+html[lang='en'] #boot .bar i { transform-origin: left; }
+
+/* brand */
+:root { --sans: 'Heebo', Arial, sans-serif; --display: 'Jost', 'Heebo', Arial, sans-serif; --dw: 300; --mark-w: 500; --mark-track: 0.2em; --h1-track: 0; --h1w: 400; --accent: #e8b36a; --accent-ink: #000000; --line: #b08851; --plate: #faf8f5; --ink: #131416; --soft: #63605b; --rule: rgba(19,20,22,0.13); --glass: rgba(14,15,17,0.6); }
+@media (max-height: 600px) and (max-width: 760px) and (orientation: portrait) { #panel { row-gap: 5px; padding-top: 2px; } #panel .head { margin-block: -3px; } #panel h2 { font-size: 21px; } #panel .type { font-size: 13.5px; } #panel .cta { padding-block: 2px 9px; } #panel .btn { min-height: 44px; padding-block: 9px; } }

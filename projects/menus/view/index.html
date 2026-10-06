@@ -17,6 +17,7 @@ if (/^\/m\//.test(location.pathname)) document.write('<base href="/projects/menu
   <a class="skip" id="skip" href="#panel"></a>
 
   <header class="top" id="top">
+    <p class="demo-note" id="demoNote" hidden></p>
     <div class="bar">
       <div class="brand">
         <img class="brand-logo" id="logo" alt="" hidden>
@@ -40,6 +41,7 @@ if (/^\/m\//.test(location.pathname)) document.write('<base href="/projects/menu
   <main class="main" id="main">
     <section class="stage" id="stage" hidden>
       <canvas id="gl" aria-hidden="true"></canvas>
+      <div class="standin" id="standin" aria-hidden="true"></div>
       <div class="stage-shade" aria-hidden="true"></div>
       <div class="stage-title" id="stageTitle" aria-hidden="true"><span class="st-count" id="stCount"></span><span class="st-name" id="stName"></span></div>
       <div class="caps" id="caps" aria-hidden="true"></div>
@@ -79,7 +81,7 @@ if (/^\/m\//.test(location.pathname)) document.write('<base href="/projects/menu
         <div class="detail-actions"><button class="primary" id="addBtn" type="button"></button></div>
         <nav class="detail-nav" id="detailNav"></nav>
       </article>
-      <p class="credit" id="credit"></p>
+      <p class="credit"><a id="credit" target="_blank" rel="noopener"></a></p>
     </section>
   </main>
 
