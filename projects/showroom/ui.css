@@ -146,7 +146,7 @@ body[data-state='lobby'] #lineup { opacity: 1; transform: none; }
   #lineup button img, #lineup button .ph { grid-row: auto; width: 100%; height: auto; aspect-ratio: 16 / 10; }
   #lineup button b { font-size: 13.5px; text-align: center; align-self: center; overflow: hidden; text-overflow: ellipsis; }
   #lineup button .ty { display: none; }
-  #hint { bottom: calc(15.625vw + 58px + var(--safe-b)); font-size: 13.5px; white-space: normal; border-radius: 14px; } /* the cards grow with the window: the hint stays above them */
+  #hint { bottom: calc(62.5vw / var(--cards, 4) + 58px + var(--safe-b)); font-size: 13.5px; white-space: normal; border-radius: 14px; } /* the cards grow with the window, and with fewer cards across: the hint stays above them (four cards: 15.625vw) */
   #notice { top: 92px; }
 }
 /* SHEET: an upright phone or tablet. The plate becomes a sheet under the car: what you play with stays in reach, the words open
@@ -225,6 +225,31 @@ a.btn { display: flex; align-items: center; justify-content: center; text-align:
 #modal[data-kind='about'] .card { max-height: 100%; overflow: auto; overscroll-behavior: contain; width: min(480px, 100%); }
 #modal[data-kind='about'] p { font-size: 15.5px; }
 #modal .out a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+
+/* ---- a real model on the stage (#panel.real): its views as icons, its wheels and its trim as small swatches, a doors switch ---- */
+.views.icons { grid-template-columns: repeat(6, minmax(0, 1fr)); } .views.icons.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } .views.icons.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.views.icons button { display: grid; place-items: center; padding: 6px 0; } .views.icons button svg { width: 21px; height: 21px; }
+.views.icons button[aria-pressed='true'] { background: var(--ink); color: var(--plate); border-color: var(--ink); box-shadow: none; }
+#panel .opts { grid-template-columns: 1fr 1fr; column-gap: 14px; } #panel .opt { display: grid; gap: 7px; align-content: start; }
+.swatches.sm { gap: 8px; flex-wrap: nowrap; } .swatches.sm button { width: 32px; height: 32px; } .swatches.sm button::after { inset: -6px -4px; }
+.swatches.rim button { background: radial-gradient(circle, #15161a 0 19%, var(--sw) 21% 57%, #15161a 59% 100%); box-shadow: none; } /* a small wheel in that finish */
+.swatches.trim button { border-radius: 10px; } /* a small seat in that colour */
+#panel.real .tools { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 44px; }
+#panel.real .swatches:not(.sm) { flex-wrap: nowrap; gap: 9px; } #panel.real .swatches:not(.sm) button { width: 38px; height: 38px; }
+@media (max-height: 880px) and (orientation: landscape) { #panel.real .fine { display: none; } }
+@media (max-height: 800px) and (orientation: landscape) { #panel.real .desc { display: none; } }
+#modal .credit a { color: var(--ink); text-underline-offset: 2px; }
+/* on a sheet and on a phone held sideways: the colours on a row of their own; wheels and trim share a row with the lamps and the doors; the views share one with the turntable and the photo */
+@media (max-width: 760px) and (orientation: portrait), (max-aspect-ratio: 4/5) and (max-width: 1100px), (max-height: 500px) and (orientation: landscape) {
+  #panel.real { grid-template-columns: minmax(0, 1fr) 40px 40px; column-gap: 4px; }
+  #panel.real > .tools { display: contents; }
+  #panel.real > .color { grid-column: 1 / -1; order: 1; } #panel.real .swatches:not(.sm) { justify-content: space-between; gap: 4px; }
+  #panel.real > .opts { grid-column: 1; order: 2; display: flex; gap: 12px; align-items: center; } #panel.real .swatches.sm { gap: 6px; } #panel.real .swatches.sm button { width: 30px; height: 30px; }
+  #panel.real .tool.lamps { grid-column: 2; order: 2; } #panel.real .tool.doors { grid-column: 3; order: 2; }
+  #panel.real > .angle { grid-column: 1; order: 3; } #panel.real .tool.auto { grid-column: 2; order: 3; } #panel.real .tool.photo { grid-column: 3; order: 3; }
+  #panel.real > .cta { order: 4; } #panel.real .views.icons { gap: 3px; } #panel.real .tool { min-width: 0; padding: 0; }
+  #panel.real.open > .opts, #panel.real.open .tool { display: none; }
+}
 
 /* ---- English (a brand that offers it): the page reads left to right; the room does not change, so whatever follows the room keeps its side ---- */
 html[lang='en'] #panel { inset-inline-start: auto; inset-inline-end: max(var(--pad), var(--safe-r)); } /* the plate stays on the right: the staged car is framed to its left */

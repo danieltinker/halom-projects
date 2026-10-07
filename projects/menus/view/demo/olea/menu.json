@@ -1185,8 +1185,8 @@
        },
        "grape": "Sauvignon Blanc",
        "serving": {
-        "he": "כוס 150 מ״ל",
-        "en": "150 ml glass"
+        "he": "בכוס, 150 מ״ל",
+        "en": "By the glass, 150 ml"
        },
        "color": "white",
        "notes": {
@@ -1254,32 +1254,17 @@
        },
        "grape": "Grenache",
        "serving": {
-        "he": "כוס 150 מ״ל",
-        "en": "150 ml glass"
+        "he": "בכוס, 150 מ״ל",
+        "en": "By the glass, 150 ml"
        },
        "color": "rose",
        "notes": {
-        "sweetness": {
-         "he": "יבש",
-         "en": "Dry"
-        },
-        "acidity": {
-         "he": "בינונית",
-         "en": "Medium"
-        },
-        "body": {
-         "he": "קל",
-         "en": "Light"
-        },
-        "fruit": {
-         "he": "תות, אבטיח",
-         "en": "Strawberry, watermelon"
-        },
+        "sweetness": "",
+        "acidity": "",
+        "body": "",
+        "fruit": "",
         "minerality": "",
-        "pairings": {
-         "he": "ראשונות, שרימפס",
-         "en": "Starters, shrimp"
-        }
+        "pairings": ""
        }
       }
      },
@@ -1320,8 +1305,8 @@
        },
        "grape": "Syrah, Carignan",
        "serving": {
-        "he": "כוס 150 מ״ל",
-        "en": "150 ml glass"
+        "he": "בכוס, 150 מ״ל",
+        "en": "By the glass, 150 ml"
        },
        "color": "red",
        "notes": {
@@ -1386,31 +1371,19 @@
        },
        "grape": "French Colombard",
        "serving": {
-        "he": "כוס 150 מ״ל",
-        "en": "150 ml glass"
+        "he": "בכוס, 150 מ״ל",
+        "en": "By the glass, 150 ml"
        },
        "color": "orange",
        "notes": {
-        "sweetness": {
-         "he": "יבש",
-         "en": "Dry"
-        },
-        "acidity": {
-         "he": "בינונית",
-         "en": "Medium"
-        },
-        "body": {
-         "he": "בינוני",
-         "en": "Medium"
-        },
+        "sweetness": "",
+        "acidity": "",
+        "body": "",
         "fruit": {
          "he": "משמש מיובש, תה",
          "en": "Dried apricot, tea"
         },
-        "minerality": {
-         "he": "גבוהה",
-         "en": "High"
-        },
+        "minerality": "",
         "pairings": {
          "he": "ארטישוק, פיצה ביאנקה",
          "en": "Artichoke, pizza bianca"
@@ -1460,27 +1433,12 @@
        },
        "color": "sparkling",
        "notes": {
-        "sweetness": {
-         "he": "יבש מאוד",
-         "en": "Very dry"
-        },
-        "acidity": {
-         "he": "גבוהה",
-         "en": "High"
-        },
-        "body": {
-         "he": "קל",
-         "en": "Light"
-        },
-        "fruit": {
-         "he": "אגס, פרחים לבנים",
-         "en": "Pear, white flowers"
-        },
+        "sweetness": "",
+        "acidity": "",
+        "body": "",
+        "fruit": "",
         "minerality": "",
-        "pairings": {
-         "he": "לפני הארוחה או עם הקינוח",
-         "en": "Before the meal, with dessert"
-        }
+        "pairings": ""
        }
       }
      },
