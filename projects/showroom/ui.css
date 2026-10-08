@@ -1,46 +1,99 @@
 @font-face { font-family: 'Heebo'; src: url('fonts/heebo-hebrew-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
 @font-face { font-family: 'Heebo'; src: url('fonts/heebo-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Jost'; src: url('fonts/jost-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0041-005A, U+0061-007A, U+00C0-00FF; }
-/* Halom 3D showroom overlay. The brand block (fonts, colours) is written in front of this file by the build. */
+/* Halom 3D showroom overlay, glass skin (a brand with skin: 'glass'). The brand block (fonts, colours) is written in front of this file by the build.
+   One material for everything that floats over the room: smoked glass that blurs and darkens what is behind it, a bright hairline on its top edge,
+   a soft highlight under that edge, and a warm rim of the accent colour (--ember) on its lower edge and on whatever is active.
+   Layouts of the car's controls (#panel): a plate beside the car on a wide window, a dock under the car on an upright phone, a small dock in the
+   corner on a phone held on its side. main.js reads which one is in use from --lay. */
 :root {
-  --accent: #d5001c; --accent-ink: #fff;
-  --plate: #f6f3ee; --ink: #17181a; --soft: #5d5a56; --rule: rgba(23, 24, 26, 0.14);
-  --glass: rgba(14, 15, 17, 0.58); --on-glass: #f6f3ee;
+  --accent: #e8b36a; --accent-ink: #000; --ember: #efa156; --line: #b08851;
+  --plaster: #f4f1ea; --plaster-2: rgba(244, 241, 234, 0.94); --plaster-3: rgba(244, 241, 234, 0.6);
+  /* How the glass is set. One rule fixes its upper end: plaster text keeps 4.5 to 1 even with plain white behind the glass (a white car, a ceiling
+     light), so white may come out no brighter than about 93 of 255. Under that, the smoke is a mid grey and not a black: in a dark room the pane
+     comes out as bright as the floor around it and is seen by its edges, as clear glass is; in a bright room it darkens what is behind it.
+     out = (1 - tint) x brightness x in + tint x grey = 0.27 x in + 24. The rest is the blur, the room's colour pushed up, the hairline, the warm light from below. */
+  --tint: rgba(46, 48, 54, 0.5); --tint-strong: rgba(34, 36, 41, 0.64);
+  --blur: blur(18px) saturate(1.8) brightness(0.54);
+  --hair: rgba(255, 255, 255, 0.09); --edge: rgba(255, 255, 255, 0.34); --rule: rgba(244, 241, 234, 0.15);
+  --hairline: linear-gradient(90deg, rgba(255, 255, 255, 0) 7%, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0.62) 50%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 93%);
+  --streak: linear-gradient(118deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)); /* (only the larger panes carry the streak: see below) */
+  --sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012) 30%, rgba(255, 255, 255, 0) 50%);
   --sans: Arial, sans-serif; --dw: 800; --mark-w: 800; --mark-track: 0.14em; --h1-track: 0;
-  --pad: clamp(14px, 2.2vw, 28px);
+  --pad: clamp(14px, 2.2vw, 28px); --lay: side;
   --safe-b: env(safe-area-inset-bottom, 0px); --safe-l: env(safe-area-inset-left, 0px); --safe-r: env(safe-area-inset-right, 0px);
+  /* the old names, for anything the brand block still sets */
+  --plate: #17181c; --ink: var(--plaster); --soft: var(--plaster-2); --glass: var(--tint); --on-glass: var(--plaster);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; background: #0c0c0d; color: var(--on-glass); font-family: var(--sans); -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
+html, body { height: 100%; overflow: hidden; background: #0c0c0d; color: var(--plaster); font-family: var(--sans); -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
 #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
 #ui { position: fixed; inset: 0; pointer-events: none; }
-#ui button, #panel, #modal, #fail { pointer-events: auto; }
-button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-button:focus-visible, h2:focus-visible, a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55); }
+#ui button, #ui a, #panel, #modal, #fail { pointer-events: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, h2:focus-visible { outline: 2px solid var(--plaster); outline-offset: 3px; box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 [hidden] { display: none !important; }
 svg { width: 20px; height: 20px; flex: none; }
 
-/* top: the concept ribbon (always on screen) and the bar under it, on a scrim so they read over any ceiling */
+/* ---- the material ---- */
+#ribbon, .seg, .ic, #top .id, #hint, #fhint, #notice, #lineup button, #labels .tag, #panel, .nav, #nav .cap, #fback, #modal .card, .btn {
+  /* from the top down: a bright hairline along the top edge that fades towards the corners, a streak of light from the upper corner, a soft
+     sheen under the edge, the smoke itself */
+  background: var(--hairline) top / 100% 1px no-repeat, var(--streak), var(--sheen), var(--tint);
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  box-shadow: inset 0 1px 0 var(--edge), inset 0 0 0 1px var(--hair), 0 14px 38px -12px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 0 var(--edge), inset 0 0 0 1px var(--hair), inset 0 -1px 0 color-mix(in srgb, var(--ember) 55%, transparent), inset 0 -12px 16px -14px color-mix(in srgb, var(--ember) 60%, transparent), 0 14px 38px -12px rgba(0, 0, 0, 0.6), 0 12px 28px -18px var(--ember);
+  color: var(--plaster);
+}
+/* where glass cannot blur (an old browser), and on a device that has had to shed effects: plain dark, still see-through a little */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { :root { --tint: rgba(18, 19, 23, 0.86); --tint-strong: rgba(18, 19, 23, 0.9); } }
+body.noblur { --tint: rgba(18, 19, 23, 0.86); --tint-strong: rgba(18, 19, 23, 0.9); --blur: none; }
+/* what is switched on: lit from below by the accent */
+.seg button[aria-pressed='true'], .tab[aria-pressed='true'], .tool[aria-pressed='true'], .views button[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.07);
+  background: radial-gradient(120% 90% at 50% 122%, color-mix(in srgb, var(--ember) 58%, transparent), color-mix(in srgb, var(--ember) 14%, transparent) 52%, transparent 76%), rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px color-mix(in srgb, var(--ember) 66%, transparent), 0 6px 18px -8px var(--ember);
+  color: #fff; font-weight: 600;
+}
+/* under a finger: the same warm light comes up for as long as the press lasts */
+.seg button:active, .tab:active, .tool:active, .views button:active, #panel .grab:active, #panel .ghost:active {
+  background-image: radial-gradient(120% 90% at 50% 122%, rgba(239, 161, 86, 0.5), transparent 74%);
+  background-image: radial-gradient(120% 90% at 50% 122%, color-mix(in srgb, var(--ember) 62%, transparent), transparent 74%);
+}
+#fback:active, .nav:active, .nav.down, #lineup button:enabled:active { --sheen: radial-gradient(120% 90% at 50% 122%, rgba(239, 161, 86, 0.5), transparent 74%); }
+/* the dock and the plate hold the most text and the smallest letters: they are the thicker glass, as the dialog and the credit line are. (With plain
+   white behind it the thinner glass left the open tab's name, lit from below, at 4.26 to 1.) */
+#panel { --tint: var(--tint-strong); }
+/* the larger panes: a streak of light from the upper corner */
+#panel, #modal .card, #lineup button { --streak: linear-gradient(118deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012) 22%, rgba(255, 255, 255, 0) 34%); }
+
+/* ---- top: the credit line (always on screen) and the bar under it ---- */
 #bar { position: absolute; top: 0; inset-inline: 0; z-index: 6; }
-#bar::before { content: ''; position: absolute; inset: 0 0 auto; height: 150px; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0)); pointer-events: none; transition: opacity 0.6s; }
-#ribbon { position: relative; text-align: center; font-size: 12.5px; line-height: 1.35; padding: 6px max(12px, var(--safe-r)) 6px max(12px, var(--safe-l)); background: rgba(8, 8, 9, 0.74); color: #e9e5df; text-wrap: balance; }
+#bar::before { content: ''; position: absolute; inset: 0 0 auto; height: 150px; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.24) 55%, rgba(0, 0, 0, 0)); pointer-events: none; transition: opacity 0.6s; }
+#ribbon { position: relative; text-align: center; font-size: 12.5px; line-height: 1.35; padding: 6px max(12px, var(--safe-r)) 6px max(12px, var(--safe-l)); text-wrap: balance; --tint: var(--tint-strong); box-shadow: inset 0 -1px 0 var(--hair), 0 10px 26px -18px var(--ember); border-radius: 0; }
+#ribbon.links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 7px; padding-block: 1px; }
+#ribbon .rl { font: inherit; color: inherit; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.42); text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 28px; padding: 0 3px; border-radius: 4px; cursor: pointer; }
+#ribbon .rl:hover { color: #fff; text-decoration-color: currentColor; } #ribbon .rl:focus-visible { outline-offset: -1px; box-shadow: none; }
+#ribbon .dot { opacity: 0.5; } #ribbon .say .short { display: none; }
+@media (max-width: 520px) { #ribbon .note, #ribbon .note + .dot { display: none; } }
+@media (max-width: 560px) { #ribbon .say .long { display: none; } #ribbon .say .short { display: inline; } }
 #top { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px max(var(--pad), var(--safe-r)) 12px max(var(--pad), var(--safe-l)); transition: opacity 0.6s; }
-#top .id { display: flex; align-items: baseline; gap: 12px; min-width: 0; text-shadow: 0 1px 14px rgba(0, 0, 0, 0.6); }
+#top .id { display: flex; align-items: baseline; gap: 12px; min-width: 0; padding: 7px 16px 8px; border-radius: 13px; } /* the name stands on a plate of the same glass, with a sign's corners and not a button's: bare on the room it was lost against the ceiling's lights by day */
 #top .id strong { font-weight: var(--mark-w); font-size: 21px; letter-spacing: var(--mark-track); direction: ltr; white-space: nowrap; }
+#top .id strong.fit { min-width: 0; overflow: hidden; text-overflow: ellipsis; padding-block: 2px; } #top .id strong.fit.he { direction: rtl; }
 #top .id span { font-size: 15px; opacity: 0.9; white-space: nowrap; }
 #top .tools { display: flex; gap: 8px; align-items: center; flex: none; }
-.seg { display: flex; background: var(--glass); border-radius: 999px; padding: 3px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.seg button { padding: 7px 15px; border-radius: 999px; font-size: 14px; min-height: 38px; }
-.seg button[aria-pressed='true'] { background: #f6f3ee; color: #111214; font-weight: 600; }
-.ic { width: 44px; height: 44px; border-radius: 50%; background: var(--glass); display: grid; place-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.seg { display: flex; border-radius: 999px; padding: 3px; }
+.seg button { padding: 7px 15px; border-radius: 999px; font-size: 14px; min-height: 38px; color: var(--plaster-2); transition: background 0.2s, color 0.2s; }
+.seg button:hover { color: #fff; }
+.ic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; }
+#top .lbl { display: grid; place-items: center; opacity: 0.65; padding-inline: 11px 3px; } #top .lbl svg { width: 17px; height: 17px; }
 body[data-state='loading'] #top, body[data-state='intro'] #top { opacity: 0; }
 body[data-state='intro'] #bar::before, body[data-state='loading'] #bar::before { opacity: 0; }
-body[data-state='focus'] #bar::before { background: linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.42) 55%, rgba(0, 0, 0, 0)); }
-#top .lbl { display: grid; place-items: center; opacity: 0.65; padding-inline: 11px 3px; } #top .lbl svg { width: 17px; height: 17px; } /* a ceiling lamp, not a word (a word in the row read as a fourth choice) and not a sun (beside "יום" it read as that button's own icon) */
 
-/* entrance: the building is the picture, the words sit on the paving under it */
+/* ---- entrance ---- */
 #intro { position: absolute; inset-inline: 0; bottom: 0; padding: 150px var(--pad) calc(clamp(26px, 6vh, 64px) + var(--safe-b)); text-align: center; display: grid; justify-items: center; gap: 12px; opacity: 0; transition: opacity 0.8s; background: linear-gradient(to top, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.42) 45%, rgba(0, 0, 0, 0)); }
 body[data-state='intro'] #intro { opacity: 1; }
 #intro .copy { display: grid; gap: 10px; justify-items: center; }
@@ -48,218 +101,262 @@ body[data-state='intro'] #intro { opacity: 1; }
 #intro h1 span { display: block; }
 #intro .sub { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.5; max-width: 36em; opacity: 0.92; text-wrap: pretty; }
 #intro .wait { font-size: 14px; color: #c9c5be; font-variant-numeric: tabular-nums; min-height: 1.4em; }
-.btn { background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 16px; padding: 13px 30px; border-radius: 999px; min-height: 48px; transition: transform 0.15s, filter 0.15s, opacity 0.3s; }
-.btn:hover { filter: brightness(1.08); } .btn:active { transform: scale(0.98); }
-.btn:disabled { opacity: 0.45; cursor: progress; filter: none; }
 #intro .btn { margin-top: 6px; }
 
-/* lobby */
-#ui::after { content: ''; position: absolute; inset: auto 0 0; height: 190px; background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.22) 50%, rgba(0, 0, 0, 0)); pointer-events: none; opacity: 0; transition: opacity 0.6s; z-index: -1; }
+/* ---- the hot button: glass lit by the accent. The entrance's button and the contact button share it; only the contact button moves ---- */
+.btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 28px; border-radius: 999px; min-height: 48px; transition: transform 0.15s, filter 0.15s, opacity 0.3s;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 46%), var(--tint-strong);
+  background: radial-gradient(120% 130% at 50% 128%, color-mix(in srgb, var(--ember) 78%, transparent), color-mix(in srgb, var(--ember) 22%, transparent) 48%, transparent 76%), linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 46%), var(--tint-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36), inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 14px 34px -14px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px color-mix(in srgb, var(--ember) 72%, transparent), inset 0 -10px 16px -10px color-mix(in srgb, var(--ember) 55%, transparent), 0 14px 34px -14px rgba(0, 0, 0, 0.7), 0 6px 24px -6px color-mix(in srgb, var(--ember) 70%, transparent); }
+.btn:hover { filter: brightness(1.12); } .btn:active { transform: scale(0.975); filter: brightness(0.94); }
+.btn:disabled { opacity: 0.5; cursor: progress; filter: none; }
+.btn:focus-visible { outline-offset: 3px; }
+/* The contact button: the one lit thing on the page. A bar of amber glass, ember at one end and brass at the other, lit from inside, with dark
+   ink on it; a green speech bubble (our own drawing) in a dark well says "message". A link's colour takes the place of the amber: main.js then
+   sets --hot-a, --hot-b, --hot-c and --hot-ink (and a gentler gloss where the ink is white). */
+.btn.wa { --hot-a: #f28a3a; --hot-b: #ecb163; --hot-c: #f5d294; --hot-ink: #1b1207;
+  --hot-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0) 54%, rgba(70, 24, 0, 0.14) 100%);
+  justify-content: flex-start; gap: 10px; padding-block: 5px; padding-inline: 7px 16px; text-align: start; line-height: 1.15; color: var(--hot-ink);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 9%, rgba(255, 255, 255, 0.92) 32%, rgba(255, 255, 255, 0.92) 68%, rgba(255, 255, 255, 0) 91%) top / 100% 1px no-repeat, var(--hot-gloss), linear-gradient(100deg, var(--hot-a), var(--hot-b) 56%, var(--hot-c));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34), inset 0 -9px 14px -9px rgba(120, 44, 0, 0.55), 0 0 0 1px rgba(239, 161, 86, 0.5), 0 10px 26px -8px rgba(239, 161, 86, 0.75), 0 0 30px -6px rgba(239, 161, 86, 0.6), 0 14px 30px -16px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34), inset 0 -9px 14px -9px color-mix(in srgb, var(--hot-a) 60%, #5a1c00), 0 0 0 1px color-mix(in srgb, var(--ember) 55%, transparent), 0 10px 26px -8px color-mix(in srgb, var(--ember) 78%, transparent), 0 0 30px -6px color-mix(in srgb, var(--ember) 62%, transparent), 0 14px 30px -16px rgba(0, 0, 0, 0.7); }
+.btn.wa:hover { filter: brightness(1.06); } .btn.wa:active { transform: scale(0.975); filter: brightness(0.94); }
+.btn.wa .gl { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 30%, #17603a, #0a2616 72%); box-shadow: inset 0 1px 0 rgba(170, 255, 200, 0.4), inset 0 0 0 1px rgba(111, 220, 140, 0.55), 0 1px 4px rgba(0, 0, 0, 0.45), 0 0 10px -1px rgba(46, 190, 100, 0.6); color: #8ff3ad; }
+.btn.wa .gl svg { width: 21px; height: 21px; }
+.btn.wa .tx { display: grid; gap: 1px; min-width: 0; }
+.btn.wa .tx b { font-weight: 700; font-size: 15.5px; color: var(--hot-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn.wa .tx > span { font-weight: 600; font-size: 12.5px; color: var(--hot-ink); white-space: nowrap; }
+.btn.wa .tx .s2, .btn.wa .tx .brief { display: none; }
+.btn.wa .go { flex: none; margin-inline-start: auto; opacity: 0.8; display: grid; } .btn.wa .go svg { width: 17px; height: 17px; }
+html[dir='rtl'] .btn.wa .go svg { transform: scaleX(-1); }
+/* a slow sheen across the contact button, and once in a while a soft swell of its glow. Not for a visitor who asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .btn.wa::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 64%); transform: translateX(-120%); animation: sheen 8s ease-in-out 2.5s infinite; pointer-events: none; }
+  .btn.wa { animation: swell 21s ease-in-out 8s infinite; }
+  @keyframes sheen { 0%, 70% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+  @keyframes swell { 0%, 88%, 100% { filter: none; } 94% { filter: brightness(1.07) drop-shadow(0 0 10px var(--ember)); } }
+}
+
+/* ---- lobby: the hint, the cars' cards, the contact button ---- */
+#ui::after { content: ''; position: absolute; inset: auto 0 0; height: 190px; background: linear-gradient(to top, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0)); pointer-events: none; opacity: 0; transition: opacity 0.6s; z-index: -1; }
 body[data-state='lobby'] #ui::after { opacity: 1; }
-#hint, #fhint { position: absolute; inset-inline: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 32px); text-align: center; font-size: 14.5px; background: var(--glass); padding: 9px 18px; border-radius: 999px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.6s; }
-#hint { bottom: calc(112px + var(--safe-b)); }
-#fhint { bottom: calc(22px + var(--safe-b)); }
+#hint, #fhint { position: absolute; inset-inline: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 32px); text-align: center; font-size: 14px; padding: 7px 16px; border-radius: 999px; opacity: 0; transition: opacity 0.6s; pointer-events: none; }
+#hint .short { display: none; }
+#hint { bottom: calc(112px + var(--safe-b)); } #fhint { bottom: calc(22px + var(--safe-b)); }
 body[data-state='lobby'] #hint, body[data-state='focus'] #fhint { opacity: 1; }
 #hint.gone, #fhint.gone { opacity: 0 !important; }
 #lineup { position: absolute; bottom: calc(18px + var(--safe-b)); inset-inline: 0; display: flex; justify-content: safe center; gap: 10px; padding-block: 4px; padding-inline: max(var(--pad), var(--safe-r)) max(var(--pad), var(--safe-l)); opacity: 0; transform: translateY(14px); transition: opacity 0.6s, transform 0.6s; overflow-x: auto; scrollbar-width: none; }
 #lineup::-webkit-scrollbar { display: none; }
 body[data-state='lobby'] #lineup { opacity: 1; transform: none; }
-#lineup button { flex: 0 1 auto; display: grid; grid-template-columns: 96px minmax(0, auto); grid-template-rows: auto auto; column-gap: 12px; align-items: center; text-align: start; background: var(--glass); color: var(--on-glass); border-radius: 8px; padding-block: 6px; padding-inline: 6px 18px; min-width: 0; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: inset 0 -3px 0 transparent; transition: box-shadow 0.2s, transform 0.2s, background 0.2s; }
-#lineup button img, #lineup button .ph { grid-row: 1 / 3; width: 96px; height: 60px; object-fit: cover; border-radius: 5px; background: #1b1c1f; display: block; }
-#lineup button b { font-weight: 700; font-size: 16px; align-self: end; direction: ltr; text-align: right; white-space: nowrap; }
-#lineup button .ty { font-size: 13px; opacity: 0.78; align-self: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#lineup button { flex: 0 1 auto; display: grid; grid-template-columns: 96px minmax(0, auto); grid-template-rows: auto auto; column-gap: 12px; align-items: center; text-align: start; border-radius: 12px; padding-block: 6px; padding-inline: 6px 18px; min-width: 0; transition: transform 0.2s, filter 0.2s; }
+#lineup button img, #lineup button .ph { grid-row: 1 / 3; width: 96px; height: 60px; object-fit: cover; border-radius: 8px; background: #1b1c1f; display: block; }
+#lineup button b { font-weight: 600; font-size: 16px; align-self: end; direction: ltr; text-align: right; white-space: nowrap; }
+#lineup button .ty { font-size: 13px; color: var(--plaster-2); align-self: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 940px) and (min-width: 761px) { #lineup button .ty { display: none; } #lineup button b { grid-row: 1 / 3; align-self: center; } }
 #lineup button:disabled { opacity: 0.5; cursor: progress; }
-#lineup button:enabled:hover, #lineup button.hot, #lineup button:focus-visible { box-shadow: inset 0 -3px 0 var(--line, var(--accent)); transform: translateY(-3px); background: rgba(14, 15, 17, 0.74); }
+#lineup button:enabled:hover, #lineup button.hot, #lineup button:focus-visible { transform: translateY(-3px); filter: brightness(1.14); box-shadow: inset 0 1px 0 var(--edge), inset 0 0 0 1px var(--hair), inset 0 -2px 0 var(--ember), 0 14px 38px -12px rgba(0, 0, 0, 0.6), 0 12px 26px -14px var(--ember); }
+#lineup button[aria-current='true'] { box-shadow: inset 0 1px 0 var(--edge), inset 0 0 0 1px var(--hair), inset 0 -2px 0 var(--ember), 0 14px 38px -12px rgba(0, 0, 0, 0.6); }
+#lcta { position: absolute; bottom: calc(22px + var(--safe-b)); inset-inline-end: max(var(--pad), var(--safe-l)); opacity: 0; transform: translateY(14px); transition: opacity 0.6s, transform 0.6s; z-index: 5; }
+body[data-state='lobby'] #lcta { opacity: 1; transform: none; }
+body:not([data-state='lobby']) #lcta { visibility: hidden; }
+@media (max-width: 1219px) and (min-width: 761px) { #lcta { inset-inline: 0; margin-inline: auto; width: max-content; bottom: calc(104px + var(--safe-b)); } #hint { bottom: calc(166px + var(--safe-b)); } }
+#labels .tag { position: absolute; top: 0; left: 0; display: grid; justify-items: center; padding: 6px 14px 7px; border-radius: 10px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; will-change: transform; }
+#labels .tag b { font-size: 15px; font-weight: 600; direction: ltr; } #labels .tag span { font-size: 12.5px; color: var(--plaster-2); } #labels .tag.on { opacity: 1; }
 
-/* name tag over the car under the pointer */
-#labels .tag { position: absolute; top: 0; left: 0; display: grid; justify-items: center; padding: 6px 14px 7px; background: var(--plate); color: var(--ink); border-radius: 6px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; will-change: transform; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
-#labels .tag b { font-size: 15px; font-weight: 700; direction: ltr; }
-#labels .tag span { font-size: 12.5px; color: var(--soft); }
-#labels .tag.on { opacity: 1; }
+/* ---- round glass buttons: the next and the previous car, the way back ---- */
+.nav { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; transition: transform 0.12s, filter 0.15s, box-shadow 0.2s; }
+.nav svg { width: 22px; height: 22px; }
+.nav:hover { filter: brightness(1.2); }
+.nav:active, .nav.down { transform: scale(0.92); filter: brightness(0.86); box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55), inset 0 0 0 1px var(--hair); }
+.nav.queued { box-shadow: inset 0 1px 0 var(--edge), inset 0 0 0 1.5px var(--ember), 0 0 16px -2px var(--ember); }
+.nav:disabled { opacity: 0.4; cursor: default; }
+.stepper { display: flex; align-items: center; gap: 8px; direction: ltr; }
+.count { font-size: 13px; color: var(--plaster-2); font-variant-numeric: tabular-nums; direction: ltr; padding-inline: 2px; min-width: 2.6em; text-align: center; }
+#nav, #fback { display: none; }
 
-/* the plate: the spec stand beside the staged car */
-#panel { position: absolute; z-index: 7; inset-block: 96px 22px; inset-inline-start: max(var(--pad), var(--safe-r)); width: min(348px, 34vw); margin-block: auto; height: max-content; max-height: calc(100% - 118px); overflow: auto; overscroll-behavior: contain; background: var(--plate); color: var(--ink); border-top: 4px solid var(--line, var(--accent)); border-radius: 4px; padding: 12px 22px 0; display: grid; gap: 10px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45); animation: plate 0.6s 0.25s both cubic-bezier(0.2, 0.7, 0.2, 1); }
+/* ---- the plate beside the staged car (a wide window) ---- */
+#panel { position: absolute; z-index: 7; inset-block: 96px 22px; right: max(var(--pad), var(--safe-r)); width: min(348px, 34vw); margin-block: auto; height: max-content; max-height: calc(100% - 118px); overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.25) transparent; border-radius: 18px; padding: 12px 20px 0; display: grid; gap: 10px; animation: plate 0.6s 0.25s both cubic-bezier(0.2, 0.7, 0.2, 1); }
 @keyframes plate { from { opacity: 0; transform: translateX(26px); } }
-#ui #panel.arming, #ui #panel.arming button { pointer-events: none; }
-#panel .head { display: flex; justify-content: space-between; align-items: center; margin-inline: -8px; }
-#panel .ghost { display: inline-flex; align-items: center; gap: 4px; font-size: 14.5px; padding: 8px; min-height: 44px; border-radius: 6px; color: var(--soft); }
-#panel .ghost:hover { color: var(--ink); }
-#panel .count { font-size: 13px; color: var(--soft); font-variant-numeric: tabular-nums; direction: ltr; padding-inline: 6px; }
+#ui #panel.arming, #ui #panel.arming button, #ui #panel.arming a { pointer-events: none; }
+#panel .head { display: flex; justify-content: space-between; align-items: center; margin-inline: -6px; }
+#panel .ghost { display: inline-flex; align-items: center; gap: 4px; font-size: 14.5px; padding: 8px; min-height: 44px; border-radius: 10px; color: var(--plaster-2); }
+#panel .ghost:hover { color: #fff; }
 #panel .title { display: grid; gap: 2px; }
 #panel h2 { font-weight: var(--dw); font-size: clamp(26px, 2.6vw, 36px); line-height: 1.08; direction: ltr; text-align: right; letter-spacing: var(--h1-track); outline-offset: 4px; }
-#panel h2:focus-visible { outline-color: var(--line, var(--accent)); box-shadow: none; }
-#panel .type { font-size: 16px; color: var(--soft); }
-#panel .morebtn { display: none; } #panel .morebtn svg { transition: transform 0.2s; } #panel.open .morebtn svg { transform: rotate(180deg); }
+#panel .type { font-size: 16px; color: var(--plaster-2); }
+#panel .morebtn, #panel .tabs, #panel .grab, #panel .cap, #panel .tool.info { display: none; }
 #panel .more { display: grid; gap: 10px; }
 #panel .desc { font-size: 15.5px; line-height: 1.55; text-wrap: pretty; min-height: 3.1em; }
 .specs { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--rule); }
-.specs div { padding: 8px 0; padding-inline-end: 8px; }
-.specs div + div { border-inline-start: 1px solid var(--rule); padding-inline-start: 12px; }
-.specs dt { font-size: 12.5px; color: var(--soft); }
-.specs dd { font-size: 15px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.specs div { padding: 8px 0; padding-inline-end: 8px; } .specs div + div { border-inline-start: 1px solid var(--rule); padding-inline-start: 12px; }
+.specs dt { font-size: 12.5px; color: var(--plaster-2); } .specs dd { font-size: 15px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.fine { font-size: 12.5px; line-height: 1.5; color: var(--plaster-2); }
 #panel .group { display: grid; gap: 7px; }
-#panel .more + .group { padding-top: 0; }
-#panel h3 { font-size: 13.5px; font-weight: 500; color: var(--soft); }
+#panel h3 { font-size: 13.5px; font-weight: 500; color: var(--plaster-2); } #panel h3 .swname { color: var(--plaster); font-weight: 600; }
+#panel .opts { grid-template-columns: 1fr 1fr; column-gap: 14px; } #panel .opt { display: grid; gap: 7px; align-content: start; }
+/* a swatch: the hit area is the button, the dot of colour sits inside it; the chosen one wears a ring */
+.swatches { display: flex; gap: 2px; margin-inline: -4px; }
+.swatches button { position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%; scroll-snap-align: center; }
+.swatches button::before { content: ''; position: absolute; inset: 6px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34), inset 0 6px 10px -6px rgba(255, 255, 255, 0.5), 0 2px 6px rgba(0, 0, 0, 0.45); transition: transform 0.15s; }
+.swatches button:hover::before { transform: scale(1.08); }
+.swatches button[aria-pressed='true']::after { content: ''; position: absolute; inset: 1px; border-radius: 50%; border: 1.5px solid var(--plaster); box-shadow: 0 0 3px 0 var(--ember), inset 0 0 6px 0 var(--ember); } /* (the glow stays inside the button: the row it stands in scrolls, and would cut a wider one) */
+.swatches button[aria-pressed='true'] { background: radial-gradient(closest-side, rgba(239, 161, 86, 0.34), rgba(239, 161, 86, 0) 100%); background: radial-gradient(closest-side, color-mix(in srgb, var(--ember) 38%, transparent), transparent); }
+.swatches button:active::before { transform: scale(0.92); }
+.swatches.sm button { width: 40px; height: 40px; } .swatches.sm button::before { inset: 5px; }
+.swatches.rim button::before { background: radial-gradient(circle, #15161a 0 19%, var(--sw) 21% 57%, #15161a 59% 100%); }
+.swatches.trim button::before, .swatches.trim button[aria-pressed='true']::after { border-radius: 11px; }
 .views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
-.views button, .tool { min-width: 0; font-size: 14px; padding: 6px 2px; min-height: 42px; border: 1px solid var(--rule); border-radius: 6px; white-space: nowrap; }
-.views button:hover, .tool:hover { border-color: var(--ink); }
-.views button[aria-pressed='true'] { border-color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); font-weight: 600; }
-#panel .tools { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px; gap: 5px; }
-.tool { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
-.tool svg { width: 18px; height: 18px; }
-.tool[aria-pressed='true'] { background: var(--ink); color: var(--plate); border-color: var(--ink); }
-.tool.photo { border-color: transparent; } .tool.photo span { display: none; } .tool.photo svg { width: 21px; height: 21px; } .tool.photo:hover { border-color: transparent; background: var(--rule); } /* an action, not a switch: it does not look like the two beside it */
-#panel .cta { position: sticky; bottom: 0; background: var(--plate); padding-block: 8px 16px; margin-top: -2px; }
+.views.icons { grid-template-columns: repeat(6, minmax(0, 1fr)); } .views.icons.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } .views.icons.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.views button, .tool { min-width: 0; font-size: 14px; padding: 6px 2px; min-height: 42px; border-radius: 12px; white-space: nowrap; color: var(--plaster-2); background: rgba(255, 255, 255, 0.045); box-shadow: inset 0 0 0 1px var(--hair); transition: background 0.2s, color 0.2s, box-shadow 0.2s; }
+.views button:hover, .tool:hover { color: #fff; background: rgba(255, 255, 255, 0.09); }
+.views.icons button { display: grid; place-items: center; padding: 6px 0; } .views.icons button svg { width: 21px; height: 21px; }
+#panel .tools { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 44px; gap: 5px; }
+.tool { display: inline-flex; align-items: center; justify-content: center; gap: 6px; } .tool svg { width: 18px; height: 18px; }
+.tool.photo span { display: none; } .tool.photo svg { width: 21px; height: 21px; }
+#panel .cta { position: sticky; bottom: 0; padding-block: 8px 16px; margin-top: -2px; margin-inline: -20px; padding-inline: 20px; background: linear-gradient(to top, rgba(20, 21, 25, 0.92) 62%, rgba(20, 21, 25, 0)); border-radius: 0 0 18px 18px; }
 #panel .btn { width: 100%; }
-#panel button:focus-visible { outline-color: var(--line, var(--accent)); box-shadow: none; }
-#lineup button:focus-visible { outline-color: #fff; }
-.fine { font-size: 12.5px; line-height: 1.5; color: var(--soft); }
-.stepper { display: flex; align-items: center; gap: 2px; }
-.stepper button { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: var(--soft); }
-.stepper button:hover { color: var(--ink); background: var(--rule); }
-.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
-.swatches button { width: 40px; height: 40px; border-radius: 50%; background: var(--sw); border: 1px solid rgba(128, 128, 128, 0.55); border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent); /* the plain grey first, for browsers without color-mix (Safari before 16.2): a white swatch on a white plate needs its edge */ box-shadow: inset 0 0 0 2px var(--plate); position: relative; }
-.swatches button::after { content: ''; position: absolute; inset: -3px; } /* 46px touch area around a 40px dot */
-.swatches button[aria-pressed='true'] { outline: 2px solid var(--ink); outline-offset: 2px; }
-#panel h3 .swname { color: var(--ink); font-weight: 600; }
+@media (max-height: 880px) and (orientation: landscape) { #panel .fine { display: none; } #panel .desc { font-size: 14.5px; } }
+@media (max-height: 800px) and (orientation: landscape) { #panel .desc { display: none; } #panel { gap: 8px; } }
+@media (max-height: 640px) and (orientation: landscape) { #panel { inset-block: 84px 10px; max-height: calc(100% - 94px); padding-top: 6px; gap: 6px; } #panel .cta { padding-block: 6px 10px; } #panel .specs { display: none; } }
 
-/* dialog, notices, failure */
-#modal { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.62); display: grid; place-items: center; padding: 20px; z-index: 30; }
-#modal .card { background: var(--plate); color: var(--ink); border-top: 4px solid var(--line, var(--accent)); border-radius: 4px; padding: 24px 26px; width: min(430px, 100%); display: grid; gap: 12px; }
+/* ---- dialog, notices, failure ---- */
+#modal { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); display: grid; place-items: center; padding: 20px; z-index: 30; }
+#modal .card { --tint: var(--tint-strong); border-radius: 18px; padding: 24px 26px; width: min(430px, 100%); display: grid; gap: 12px; max-height: 100%; overflow: auto; overscroll-behavior: contain; }
 #modal h2 { font-size: 24px; font-weight: var(--dw); } #modal p { font-size: 16px; line-height: 1.55; } #modal .btn { justify-self: start; }
-#modal button:focus-visible, #modal a:focus-visible, #panel a:focus-visible { outline-color: var(--line, var(--accent)); box-shadow: none; }
-#modal .body { display: grid; gap: 12px; }
-#notice { position: absolute; top: 108px; inset-inline: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 32px); background: rgba(10, 10, 11, 0.86); padding: 10px 18px; border-radius: 8px; font-size: 15px; z-index: 25; }
+#modal .body { display: grid; gap: 12px; } #modal .body .type { color: var(--plaster-2); margin-top: -8px; }
+#modal[data-kind='about'] .card, #modal[data-kind='details'] .card { width: min(480px, 100%); } #modal[data-kind='about'] p, #modal[data-kind='details'] p { font-size: 15.5px; }
+#modal .out a, #modal .credit a { color: var(--plaster); font-weight: 600; text-underline-offset: 3px; } #modal .credit a { font-weight: 400; }
+#modal .fine { font-size: 13px; }
+#notice { position: absolute; top: 108px; inset-inline: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 32px); padding: 10px 18px; border-radius: 12px; font-size: 15px; z-index: 25; --tint: var(--tint-strong); }
 #fail { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 16px; padding: 24px; text-align: center; background: #0c0c0d; font-size: 17px; line-height: 1.6; z-index: 40; }
 #fail p { max-width: 30em; }
 
-/* narrow windows: the bar tightens */
+/* ---- narrow windows: the bar tightens, the cards become a rail ---- */
 @media (max-width: 760px) {
   #ribbon { font-size: 11px; padding-block: 5px; }
-  #top { padding-block: 8px; } #top .id span { display: none; } #top .id strong { font-size: 16px; letter-spacing: calc(var(--mark-track) * 0.6); }
-  .seg button { padding: 6px 12px; font-size: 13.5px; min-height: 44px; } #top .lbl { display: none; }
-  #top .fs { display: none; }
-  /* four small cards across: a photo with the name under it */
-  #lineup { gap: 6px; padding-inline: max(8px, var(--safe-r)) max(8px, var(--safe-l)); }
-  #lineup button { flex: 1 1 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; row-gap: 4px; padding: 4px 4px 6px; text-align: center; }
-  #lineup button img, #lineup button .ph { grid-row: auto; width: 100%; height: auto; aspect-ratio: 16 / 10; }
+  #top { padding-block: 8px; } #top .id span { display: none; } #top .id strong { font-size: 16px; letter-spacing: calc(var(--mark-track) * 0.6); } #top .id { padding: 7px 12px; border-radius: 12px; }
+  .seg button { padding: 6px 12px; font-size: 13.5px; min-height: 44px; } #top .lbl { display: none; } #top .fs { display: none; }
+  #lineup { gap: 6px; padding-inline: max(8px, var(--safe-r)) max(8px, var(--safe-l)); bottom: calc(60px + var(--safe-b)); }
+  #lineup button { flex: 1 1 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; row-gap: 3px; padding: 4px 4px 5px; text-align: center; border-radius: 12px; }
+  #lineup button img, #lineup button .ph { grid-row: auto; width: 100%; height: auto; aspect-ratio: 2 / 1; }
   #lineup button b { font-size: 13.5px; text-align: center; align-self: center; overflow: hidden; text-overflow: ellipsis; }
   #lineup button .ty { display: none; }
-  #hint { bottom: calc(62.5vw / var(--cards, 4) + 58px + var(--safe-b)); font-size: 13.5px; white-space: normal; border-radius: 14px; } /* the cards grow with the window, and with fewer cards across: the hint stays above them (four cards: 15.625vw) */
+  #lcta { inset-inline: 8px; bottom: calc(8px + var(--safe-b)); } #lcta .btn { width: 100%; }
+  #hint { bottom: calc(50vw / var(--cards, 4) + 92px + var(--safe-b)); font-size: 12.5px; line-height: 1.2; padding: 5px 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } /* one light line above the cards (which grow with the window and with fewer cards across); it goes at the first touch */
+  #hint .long { display: none; } #hint .short { display: inline; }
   #notice { top: 92px; }
 }
-/* SHEET: an upright phone or tablet. The plate becomes a sheet under the car: what you play with stays in reach, the words open
-   on demand. The same rule is in main.js (sheet()). */
+@media (max-width: 430px) { #top .id strong { font-size: 14.5px; letter-spacing: calc(var(--mark-track) * 0.25); } #top .id { padding-inline: 10px; } #top { gap: 8px; } } /* a phone: "YOUR SHOWROOM" whole on its plate beside the light switch */
+@media (max-width: 380px) { .seg button { padding-inline: 8px; min-width: 40px; } #top { gap: 6px; } #top .id { padding-inline: 9px; } #top .id strong { font-size: 14px; } .btn.wa { gap: 8px; padding-inline: 6px 12px; } .btn.wa .tx b { font-size: 14.5px; } .btn.wa .go { display: none; } }
+@media (max-width: 340px) { .btn.wa .go { display: none; } .btn.wa .full { display: none; } .btn.wa .brief { display: inline; } }
+
+/* ---- DOCK: an upright phone or tablet. The car is the picture; its controls are a low dock under it: one row of tabs, one row of
+   whatever the open tab holds, and the contact button. Shut, the dock is the contact button and its handle. (The same rule is in main.js: sheet().) ---- */
 @media (max-width: 760px) and (orientation: portrait), (max-aspect-ratio: 4/5) and (max-width: 1100px) {
+  :root { --lay: dock; }
   #fhint { display: none; }
-  #panel { inset-block: auto calc(8px + var(--safe-b)); inset-inline: 0; margin-inline: auto; width: min(620px, 100% - 16px); max-height: min(56vh, 100% - 100px); padding: 6px 14px 0; gap: 8px; animation-name: sheet; }
-  @keyframes sheet { from { opacity: 0; transform: translateY(26px); } }
-  #panel .head { margin-inline: -6px; }
-  #panel .title { grid-template-columns: 1fr auto; align-items: end; column-gap: 10px; }
-  #panel h2 { font-size: 24px; grid-column: 1; } #panel .type { font-size: 14.5px; grid-column: 1; }
-  #panel .morebtn { display: inline-flex; align-items: center; gap: 2px; grid-column: 2; grid-row: 1 / 3; font-size: 14px; color: var(--soft); min-height: 44px; padding-inline: 8px 2px; }
-  #panel.open { max-height: min(72vh, 100% - 100px); }
-  #panel .more { display: none; } #panel.open .more { display: grid; }
-  #panel.open .fine, #panel.open > .angle { display: none; } /* with the words open, the angles make room: colours, tools and the button stay whole */
-  #panel .desc { font-size: 14.5px; min-height: 0; }
-  #panel h3 { display: none; }
-  #panel { grid-template-columns: minmax(0, 1fr) auto; column-gap: 10px; }
-  #panel > * { grid-column: 1 / -1; }
-  #panel > .color { grid-column: 1; align-self: center; order: 1; } #panel > .tools { grid-column: 2; grid-template-columns: repeat(3, 44px); order: 1; } #panel > .angle { order: 2; } #panel > .cta { order: 3; } /* colours and tools share a row, above the angles */
-  .tool span { display: none; } .tool { min-height: 44px; }
-  .views button { min-height: 44px; }
-  #panel .cta { padding-block: 4px 12px; }
+  #panel { inset-block: auto calc(8px + var(--safe-b)); right: 0; left: 0; margin-inline: auto; width: min(560px, 100% - 16px); height: auto; max-height: none; overflow: visible; border-radius: 22px; padding: 8px 10px 10px; display: grid; grid-template-columns: minmax(0, 1fr) 40px; grid-template-areas: 'tabs grab' 'body body' 'cta cta'; gap: 6px 4px; animation-name: dock; }
+  @keyframes dock { from { opacity: 0; transform: translateY(26px); } }
+  #panel > .head, #panel > .title, #panel > .more, #panel h3 { display: none; }
+  #panel > .tabs { grid-area: tabs; display: flex; align-items: center; gap: 2px; min-width: 0; height: 44px; }
+  /* each tab: its icon with its name under it, so nobody has to guess; the open one is lit from below */
+  .tab { flex: 1 1 0; height: 44px; min-width: 44px; padding: 4px 2px 3px; border-radius: 14px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10.5px; line-height: 1.15; letter-spacing: 0.01em; color: var(--plaster-2); white-space: nowrap; transition: background 0.2s, color 0.2s; }
+  .tab svg { width: 19px; height: 19px; } .tab span { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  #panel > .grab { grid-area: grab; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: var(--plaster-2); background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px var(--hair); align-self: center; }
+  #panel > .grab svg { transition: transform 0.25s; }
+  #panel > .group, #panel > .tools { grid-area: body; display: none; height: 46px; align-items: center; gap: 4px; min-width: 0; }
+  #panel[data-tab='paint'] > .color, #panel[data-tab='rim'] > .opts, #panel[data-tab='trim'] > .opts, #panel[data-tab='view'] > .angle, #panel[data-tab='more'] > .tools { display: flex; }
+  #panel > .opts .opt { display: none; flex: 1 1 auto; min-width: 0; align-items: center; gap: 4px; }
+  #panel[data-tab='rim'] > .opts .opt.rim, #panel[data-tab='trim'] > .opts .opt.trim { display: flex; }
+  /* one row that scrolls sideways and snaps; the name of what is chosen stands beside it */
+  #panel .swatches { flex: 0 1 auto; min-width: 0; margin: 0; gap: 0; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; padding-block: 3px; } #panel .swatches::-webkit-scrollbar { display: none; }
+  #panel .swatches button, #panel .swatches.sm button { width: 40px; height: 40px; } #panel .swatches button::before, #panel .swatches.sm button::before { inset: 5px; } #panel .swatches button[aria-pressed='true']::after { inset: 0.5px; }
+  #panel .cap { display: block; flex: 1 1 0; min-width: 3.5em; font-size: 13.5px; color: var(--plaster); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-inline: 8px 2px; }
+  #panel .views, #panel .views.icons { flex: 1 1 auto; display: flex; gap: 4px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; } #panel .views::-webkit-scrollbar { display: none; }
+  #panel .views button { flex: 1 0 44px; min-height: 40px; height: 40px; scroll-snap-align: center; }
+  #panel > .tools { gap: 4px; } #panel .tool, #panel .tool.info { display: inline-flex; flex: 1 1 0; min-height: 40px; height: 40px; padding: 0 8px; } #panel .tool span { font-size: 13px; overflow: hidden; text-overflow: ellipsis; } #panel .tool.photo, #panel .tool.info { flex: 0 0 44px; } #panel .tool.info span { display: none; }
+  #panel > .cta { grid-area: cta; position: static; margin: 0; padding: 0; background: none; border-radius: 0; }
+  #panel .btn { min-height: 48px; height: 48px; }
+  /* shut: the contact button and the handle, nothing else (the button's first line in its shorter form) */
+  #panel.shut { grid-template-areas: 'cta grab'; padding: 8px 10px; }
+  #panel.shut .btn.wa .full { display: none; } #panel.shut .btn.wa .brief { display: inline; }
+  #panel.shut > .tabs, #panel.shut > .group, #panel.shut > .tools { display: none !important; }
+  #panel.shut > .grab svg { transform: rotate(180deg); }
+  /* the next and the previous car: two round buttons at the edges, just above the dock, the car's name between them */
+  #nav { display: flex; position: absolute; z-index: 7; left: max(8px, var(--safe-l)); right: max(8px, var(--safe-r)); bottom: calc(184px + var(--safe-b)); direction: ltr; align-items: center; justify-content: space-between; animation: dock 0.6s 0.3s both cubic-bezier(0.2, 0.7, 0.2, 1); }
+  #panel.shut ~ #nav { bottom: calc(80px + var(--safe-b)); }
+  #nav .cap { direction: rtl; display: inline-flex; align-items: baseline; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: 13.5px; max-width: calc(100% - 120px); white-space: nowrap; }
+  html[lang='en'] #nav .cap { direction: ltr; }
+  #nav .cap b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; } #nav .cap .count { padding: 0; min-width: 0; font-size: 12.5px; }
+  /* the way back to the room: under the bar, at the start of the line */
+  #fback { display: inline-flex; position: relative; margin-inline-start: max(8px, var(--safe-r)); margin-top: 0; align-items: center; gap: 4px; height: 40px; padding: 0 14px 0 8px; border-radius: 999px; font-size: 13.5px; color: var(--plaster); }
+  html[dir='rtl'] #fback { padding: 0 8px 0 14px; }
+  #fback svg { width: 20px; height: 20px; }
+  #top { padding-bottom: 6px; }
 }
-@media (max-width: 380px) { .seg button { padding-inline: 9px; min-width: 40px; } #top { gap: 6px; } .views button { font-size: 13px; } .swatches { gap: 6px; flex-wrap: nowrap; } .swatches button { width: 38px; height: 38px; } #panel > .tools { grid-template-columns: repeat(3, 40px); gap: 4px; } #panel { column-gap: 6px; } }
-@media (max-width: 340px) { #panel { padding-inline: 10px; column-gap: 3px; } .swatches { gap: 3px; } #panel > .tools { grid-template-columns: repeat(3, 38px); gap: 3px; } }
-/* short and wide (a small laptop, a phone on its side): the plate stays beside the car, keeps its controls and drops the prose */
-@media (max-height: 760px) and (orientation: landscape) { #panel .fine { display: none; } #panel .desc { font-size: 14.5px; } }
-@media (max-height: 690px) and (orientation: landscape) { #panel .desc { display: none; } #panel { gap: 8px; } }
-@media (max-height: 600px) and (orientation: landscape) { #panel { inset-block: 84px 10px; max-height: calc(100% - 94px); padding-top: 6px; gap: 6px; } #panel .cta { padding-block: 6px 10px; } }
-@media (max-height: 600px) and (orientation: landscape) and (min-width: 761px) { #hint { bottom: calc(96px + var(--safe-b)); } }
-/* a phone on its side: a compact plate (colours and tools on one row), a line-up of names without photos */
+/* a short upright window: the dock tightens a little */
+@media (max-width: 760px) and (orientation: portrait) and (max-height: 700px) { #panel { gap: 4px 4px; padding: 6px 10px 8px; } #panel > .group, #panel > .tools { height: 44px; } #nav { bottom: calc(174px + var(--safe-b)); } #panel.shut { padding: 8px 10px; } }
+@media (max-width: 350px) { .tab { min-width: 40px; font-size: 10px; } #panel { padding-inline: 8px; } }
+
+/* ---- CORNER DOCK: a phone on its side. The same dock, narrow, in the lower corner; the car has the rest of the screen ---- */
 @media (max-height: 500px) and (orientation: landscape) {
-  #panel { inset-block: 62px 6px; max-height: calc(100% - 68px); width: min(330px, 46vw); padding: 2px 12px 0; gap: 5px; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; }
-  #panel > * { grid-column: 1 / -1; }
-  #panel .more, #panel h3 { display: none; } #panel h2 { font-size: 21px; } #panel .type { font-size: 13.5px; }
-  #panel .title { grid-template-columns: 1fr auto; align-items: end; column-gap: 8px; } #panel h2, #panel .type { grid-column: 1; }
-  #panel .morebtn { display: inline-flex; align-items: center; gap: 2px; grid-column: 2; grid-row: 1 / 3; font-size: 13.5px; color: var(--soft); min-height: 40px; padding-inline: 6px 2px; }
-  #panel.open .more { display: grid; gap: 6px; } #panel.open .desc { display: block; font-size: 13.5px; min-height: 0; } #panel.open .fine, #panel.open > .angle, #panel.open > .color, #panel.open > .tools { display: none; } /* the words take the place of the controls while they are open */
-  body[data-state='lobby'] #top .id strong { visibility: hidden; } /* the wall behind already carries the name at this size */
-  .seg button { padding-inline: 8px; min-width: 40px; } /* and the switch ends short of that name */
-  #panel .head { margin-block: -4px; } #panel .ghost { min-height: 40px; } .stepper button { width: 40px; height: 40px; }
-  #panel > .color { grid-column: 1; align-self: center; } #panel > .tools { grid-column: 2; grid-template-columns: repeat(3, 40px); gap: 4px; }
-  .swatches { gap: 6px; flex-wrap: nowrap; } .swatches button { width: 38px; height: 38px; }
-  .tool span { display: none; } .tool, .views button { min-height: 40px; }
-  #panel .cta { padding-block: 3px 8px; } #panel .btn { min-height: 44px; padding-block: 9px; }
+  :root { --lay: corner; }
   #top { padding-block: 5px; } #fhint { display: none; }
+  body[data-state='lobby'] #top .id { visibility: hidden; } /* the wall behind already carries the name at this size (the plate goes with the letters) */
+  .seg button { padding-inline: 8px; min-width: 40px; min-height: 40px; }
   #intro { padding-top: 40px; gap: 6px; } #intro p.sub { display: none; }
-  #lineup { bottom: calc(8px + var(--safe-b)); gap: 6px; }
-  #lineup button { flex: 0 1 auto; display: block; padding: 9px 14px; min-height: 40px; text-align: center; }
+  #lineup { bottom: calc(8px + var(--safe-b)); gap: 6px; justify-content: flex-start; padding-inline: max(10px, var(--safe-r)) calc(max(10px, var(--safe-l)) + 250px); }
+  #lineup button { flex: 0 1 auto; display: block; padding: 9px 14px; min-height: 40px; text-align: center; border-radius: 999px; }
   #lineup button img, #lineup button .ph, #lineup button .ty { display: none; }
   #lineup button b { font-size: 14px; }
   #hint { bottom: calc(58px + var(--safe-b)); font-size: 13px; padding: 6px 14px; }
+  #lcta { bottom: calc(8px + var(--safe-b)); inset-inline: auto max(10px, var(--safe-l)); margin: 0; width: auto; } #lcta .btn { min-height: 40px; height: 40px; padding-block: 2px; } #lcta .btn .tx b { display: none; } #lcta .btn .tx .s1 { font-size: 13.5px; font-weight: 700; } #lcta .btn .gl { width: 30px; height: 30px; } #lcta .btn .gl svg { width: 18px; height: 18px; }
+  #panel { inset-block: auto calc(6px + var(--safe-b)); right: max(8px, var(--safe-r)); left: auto; width: min(336px, 44vw); margin: 0; height: auto; max-height: none; overflow: visible; border-radius: 20px; padding: 6px 8px 8px; display: grid; grid-template-columns: minmax(0, 1fr) 40px; grid-template-areas: 'tabs grab' 'body body' 'cta cta'; gap: 4px 4px; animation-name: dock; }
+  @keyframes dock { from { opacity: 0; transform: translateY(26px); } }
+  #panel > .head, #panel > .title, #panel > .more, #panel h3 { display: none; }
+  #panel > .tabs { grid-area: tabs; display: flex; align-items: center; gap: 1px; min-width: 0; height: 42px; }
+  .tab { flex: 1 1 0; height: 42px; min-width: 40px; padding: 3px 2px; border-radius: 13px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10.5px; line-height: 1.15; color: var(--plaster-2); white-space: nowrap; }
+  .tab svg { width: 18px; height: 18px; } .tab span { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  #panel > .grab { grid-area: grab; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: var(--plaster-2); background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px var(--hair); align-self: center; }
+  #panel > .grab svg { transition: transform 0.25s; }
+  #panel > .group, #panel > .tools { grid-area: body; display: none; height: 44px; align-items: center; gap: 4px; min-width: 0; }
+  #panel[data-tab='paint'] > .color, #panel[data-tab='rim'] > .opts, #panel[data-tab='trim'] > .opts, #panel[data-tab='view'] > .angle, #panel[data-tab='more'] > .tools { display: flex; }
+  #panel > .opts .opt { display: none; flex: 1 1 auto; min-width: 0; align-items: center; gap: 4px; }
+  #panel[data-tab='rim'] > .opts .opt.rim, #panel[data-tab='trim'] > .opts .opt.trim { display: flex; }
+  #panel .swatches { flex: 0 1 auto; min-width: 0; margin: 0; gap: 0; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; padding-block: 2px; } #panel .swatches::-webkit-scrollbar { display: none; }
+  #panel .swatches button, #panel .swatches.sm button { width: 40px; height: 40px; } #panel .swatches button::before, #panel .swatches.sm button::before { inset: 5px; } #panel .swatches button[aria-pressed='true']::after { inset: 0.5px; }
+  #panel .cap { display: block; flex: 1 1 0; min-width: 3em; font-size: 13px; color: var(--plaster); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-inline: 6px 2px; }
+  #panel .views, #panel .views.icons { flex: 1 1 auto; display: flex; gap: 3px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; } #panel .views::-webkit-scrollbar { display: none; }
+  #panel .views button { flex: 1 0 42px; min-height: 40px; height: 40px; scroll-snap-align: center; }
+  #panel > .tools { gap: 3px; } #panel .tool, #panel .tool.info { display: inline-flex; flex: 1 1 0; min-height: 40px; height: 40px; padding: 0 6px; } #panel .tool span { display: none; } #panel .tool.photo, #panel .tool.info { flex: 1 1 0; }
+  #panel > .cta { grid-area: cta; position: static; margin: 0; padding: 0; background: none; border-radius: 0; }
+  #panel .btn { min-height: 44px; height: 44px; padding-block: 4px; } #panel .btn .gl { width: 30px; height: 30px; }
+  #panel.shut { grid-template-areas: 'cta grab'; }
+  #panel.shut > .tabs, #panel.shut > .group, #panel.shut > .tools { display: none !important; }
+  #panel.shut > .grab svg { transform: rotate(180deg); }
+  #panel .btn.wa .full { display: none; } #panel .btn.wa .brief { display: inline; } #panel .btn.wa .go { display: none; }
+  /* next and previous: at the foot of the car's part of the screen */
+  #nav { display: flex; position: absolute; z-index: 7; left: max(10px, var(--safe-l)); right: calc(min(336px, 44vw) + max(8px, var(--safe-r)) + 12px); bottom: calc(8px + var(--safe-b)); direction: ltr; align-items: center; justify-content: space-between; animation: dock 0.6s 0.3s both cubic-bezier(0.2, 0.7, 0.2, 1); }
+  #nav .cap { direction: rtl; display: inline-flex; align-items: baseline; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: 13.5px; white-space: nowrap; }
+  html[lang='en'] #nav .cap { direction: ltr; }
+  #nav .cap b { font-weight: 600; } #nav .cap .count { padding: 0; min-width: 0; font-size: 12.5px; }
+  #fback { display: inline-flex; position: relative; margin-inline-start: max(8px, var(--safe-r)); align-items: center; gap: 4px; height: 38px; padding: 0 8px 0 14px; border-radius: 999px; font-size: 13px; color: var(--plaster); }
+  html[lang='en'] #fback { padding: 0 14px 0 8px; }
+  #fback svg { width: 20px; height: 20px; }
 }
-@media (prefers-reduced-motion: reduce) { * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }
 
-/* ---- what only some brands use ---- */
-/* a second face for names and headlines (--display is set by a brand that has one; without it these are the text face, as before) */
-#top .id strong, #intro h1, #panel h2, #modal h2, #lineup button b, #labels .tag b { font-family: var(--display, var(--sans)); }
-/* the label with links in it: who made the page, its "about" words, its other language */
-#ribbon.links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 7px; padding-block: 1px; }
-#ribbon .rl { pointer-events: auto; font: inherit; color: inherit; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.42); text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 28px; padding: 0 3px; border-radius: 4px; cursor: pointer; }
-#ribbon .rl:hover { color: #fff; text-decoration-color: currentColor; }
-#ribbon .rl:focus-visible { outline-offset: -1px; box-shadow: none; }
-#ribbon .dot { opacity: 0.5; }
-@media (max-width: 520px) { #ribbon .note, #ribbon .note + .dot { display: none; } } /* a phone keeps what must always be said (who made it, that the cars are AI-made) and the links; the rest is in "about" */
-/* a note in the label that has a short form for a narrow phone */
-#ribbon .say .short { display: none; }
-@media (max-width: 560px) { #ribbon .say .long { display: none; } #ribbon .say .short { display: inline; } }
-/* a name that came from a link: it may be long (cut with an ellipsis, never wrapped, never under the lighting switch) and it may be Hebrew */
-#top .id strong.fit { min-width: 0; overflow: hidden; text-overflow: ellipsis; padding-block: 2px; }
-#top .id strong.fit.he { direction: rtl; }
-/* the plate's button as a link out */
-a.btn { display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
-/* the "about" card: longer words, so it may scroll on a small phone; its link is the page's ink */
-#modal[data-kind='about'] .card { max-height: 100%; overflow: auto; overscroll-behavior: contain; width: min(480px, 100%); }
-#modal[data-kind='about'] p { font-size: 15.5px; }
-#modal .out a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+/* a second face for names and headlines (--display is set by a brand that has one) */
+#top .id strong, #intro h1, #panel h2, #modal h2, #lineup button b, #labels .tag b, #nav .cap b { font-family: var(--display, var(--sans)); }
 
-/* ---- a real model on the stage (#panel.real): its views as icons, its wheels and its trim as small swatches, a doors switch ---- */
-.views.icons { grid-template-columns: repeat(6, minmax(0, 1fr)); } .views.icons.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } .views.icons.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.views.icons button { display: grid; place-items: center; padding: 6px 0; } .views.icons button svg { width: 21px; height: 21px; }
-.views.icons button[aria-pressed='true'] { background: var(--ink); color: var(--plate); border-color: var(--ink); box-shadow: none; }
-#panel .opts { grid-template-columns: 1fr 1fr; column-gap: 14px; } #panel .opt { display: grid; gap: 7px; align-content: start; }
-.swatches.sm { gap: 8px; flex-wrap: nowrap; } .swatches.sm button { width: 32px; height: 32px; } .swatches.sm button::after { inset: -6px -4px; }
-.swatches.rim button { background: radial-gradient(circle, #15161a 0 19%, var(--sw) 21% 57%, #15161a 59% 100%); box-shadow: none; } /* a small wheel in that finish */
-.swatches.trim button { border-radius: 10px; } /* a small seat in that colour */
-#panel.real .tools { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 44px; }
-#panel.real .swatches:not(.sm) { flex-wrap: nowrap; gap: 9px; } #panel.real .swatches:not(.sm) button { width: 38px; height: 38px; }
-@media (max-height: 880px) and (orientation: landscape) { #panel.real .fine { display: none; } }
-@media (max-height: 800px) and (orientation: landscape) { #panel.real .desc { display: none; } }
-#modal .credit a { color: var(--ink); text-underline-offset: 2px; }
-/* on a sheet and on a phone held sideways: the colours on a row of their own; wheels and trim share a row with the lamps and the doors; the views share one with the turntable and the photo */
-@media (max-width: 760px) and (orientation: portrait), (max-aspect-ratio: 4/5) and (max-width: 1100px), (max-height: 500px) and (orientation: landscape) {
-  #panel.real { grid-template-columns: minmax(0, 1fr) 40px 40px; column-gap: 4px; }
-  #panel.real > .tools { display: contents; }
-  #panel.real > .color { grid-column: 1 / -1; order: 1; } #panel.real .swatches:not(.sm) { justify-content: space-between; gap: 4px; }
-  #panel.real > .opts { grid-column: 1; order: 2; display: flex; gap: 12px; align-items: center; } #panel.real .swatches.sm { gap: 6px; } #panel.real .swatches.sm button { width: 30px; height: 30px; }
-  #panel.real .tool.lamps { grid-column: 2; order: 2; } #panel.real .tool.doors { grid-column: 3; order: 2; }
-  #panel.real > .angle { grid-column: 1; order: 3; } #panel.real .tool.auto { grid-column: 2; order: 3; } #panel.real .tool.photo { grid-column: 3; order: 3; }
-  #panel.real > .cta { order: 4; } #panel.real .views.icons { gap: 3px; } #panel.real .tool { min-width: 0; padding: 0; }
-  #panel.real.open > .opts, #panel.real.open .tool { display: none; }
-}
-
-/* ---- English (a brand that offers it): the page reads left to right; the room does not change, so whatever follows the room keeps its side ---- */
-html[lang='en'] #panel { inset-inline-start: auto; inset-inline-end: max(var(--pad), var(--safe-r)); } /* the plate stays on the right: the staged car is framed to its left */
-@media (max-width: 760px) and (orientation: portrait), (max-aspect-ratio: 4/5) and (max-width: 1100px) { html[lang='en'] #panel { inset-inline: 0; } }
-html[lang='en'] #lineup, html[lang='en'] .stepper { flex-direction: row-reverse; } /* the first car stands on the right of the room, and so does its card; "previous" stays the car to the right */
+/* ---- English: the page reads left to right; the room does not change, so whatever follows the room keeps its side ---- */
+html[lang='en'] #lineup { flex-direction: row-reverse; } /* the first car stands on the right of the room, and so does its card */
 html[lang='en'] #panel h2 { text-align: left; }
 @media (min-width: 761px) { html[lang='en'] #lineup button b { text-align: left; } }
-html[lang='en'] #panel .ghost svg { transform: scaleX(-1); }
+html[lang='en'] #panel .ghost svg, html[lang='en'] #fback svg { transform: scaleX(-1); }
 html[lang='en'] #boot .bar i { transform-origin: left; }
+@media (max-height: 500px) and (orientation: landscape) { html[lang='en'] #lineup { justify-content: flex-end; } }
 
 /* brand */
-:root { --sans: 'Heebo', Arial, sans-serif; --display: 'Jost', 'Heebo', Arial, sans-serif; --dw: 300; --mark-w: 500; --mark-track: 0.2em; --h1-track: 0; --h1w: 400; --accent: #e8b36a; --accent-ink: #000000; --line: #b08851; --plate: #faf8f5; --ink: #131416; --soft: #63605b; --rule: rgba(19,20,22,0.13); --glass: rgba(14,15,17,0.6); }
-@media (max-height: 600px) and (max-width: 760px) and (orientation: portrait) { #panel { row-gap: 5px; padding-top: 2px; } #panel .head { margin-block: -3px; } #panel h2 { font-size: 21px; } #panel .type { font-size: 13.5px; } #panel .cta { padding-block: 2px 9px; } #panel .btn { min-height: 44px; padding-block: 9px; } }
+:root { --sans: 'Heebo', Arial, sans-serif; --display: 'Jost', 'Heebo', Arial, sans-serif; --dw: 300; --mark-w: 500; --mark-track: 0.2em; --h1-track: 0; --h1w: 400; --accent: #e8b36a; --accent-ink: #000000; --line: #b08851; --plate: #17181c; --ink: #f4f1ea; --soft: rgba(244,241,234,0.84); --rule: rgba(244,241,234,0.15); --glass: rgba(18,19,23,0.58); }
