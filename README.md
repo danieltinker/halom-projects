@@ -9,6 +9,7 @@ without redeploying the main site.
   affiliated with the restaurants and that the dish images are AI-generated previews; `noindex`). Needs the `3d-menu` lines below in the halom.io `vercel.json`.
 - `projects/menus/<slug>/` — one restaurant's own hologram menu, written here by Menu Studio (Halom OS) when a menu is published. Needs the `menus` lines below, once.
 - `projects/selva-resort/landing-v5/` — Selva Resort v5 preview: Selva's own photographs shown in 3D, one smooth tour per villa. Not routed from halom.io; if it becomes the pitch build, publish it over `landing/`.
+- `projects/agency/` — Halom Agency site (the remaster of 8–9 Oct 2026): one page, English / Hebrew / French, light and dark. Built from the prototype sources; `noindex` until it moves to its final address.
 
 ## One-time setup
 

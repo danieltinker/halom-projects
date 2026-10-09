@@ -1,0 +1,2280 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Halom · Brands you can step inside</title>
+<meta name="description" content="Halom is a creative studio in Tel Aviv. Identity, site, 3D and film, made as one world.">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0E0D0C">
+<link rel="icon" type="image/png" href="media/ring.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://halom.io/projects/agency/">
+<meta property="og:title" content="Halom · Brands you can step inside">
+<meta property="og:description" content="Identity, site, 3D and film, made as one world.">
+<meta property="og:image" content="https://halom.io/projects/agency/media/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&display=swap">
+<script>document.documentElement.classList.add('load');</script>
+<style>
+/* Layout: a fixed sky behind everything; the hero and the outro are windows onto it,
+   the sections between are solid ground with large round cream cards. */
+:root {
+  --bg: #0E0D0C; --bg-2: #181614; --ink: #FCF8F6; --muted: #A69E93; --line: #2B2824;
+  --card: #F2EADB; --card-ink: #12100E; --card-muted: #5F584E; --card-line: #D9CEBB;
+  --accent: #FFC9B6; --on-accent: #12100E; --glass: rgba(18, 16, 14, .52); --glass-line: rgba(252, 248, 246, .16);
+  --danger: #8A2A12; --field: #FCF8F6;
+  --sans: "Fredoka", "Varela Round", "Arial Rounded MT Bold", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --clay: #B4583B; --em: var(--accent);
+  --gut: clamp(16px, 4vw, 56px);
+  --r-card: clamp(26px, 2.6vw, 36px); --r-media: clamp(18px, 1.9vw, 26px); --r-ctl: 14px;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FBF6EE; --bg-2: #F4EBDD; --ink: #171411; --muted: #6B6358; --line: #E6DBC9;
+    --card: #EFE3CF; --card-ink: #171411; --card-muted: #5E564B; --card-line: #D8CAB1;
+    --accent: #FFC9B6; --on-accent: #171411; --glass: rgba(251, 246, 238, .58); --glass-line: rgba(23, 20, 17, .14);
+    --danger: #8A2A12; --field: #FFFDF9; --em: var(--clay);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #FBF6EE; --bg-2: #F4EBDD; --ink: #171411; --muted: #6B6358; --line: #E6DBC9;
+  --card: #EFE3CF; --card-ink: #171411; --card-muted: #5E564B; --card-line: #D8CAB1;
+  --accent: #FFC9B6; --on-accent: #171411; --glass: rgba(251, 246, 238, .58); --glass-line: rgba(23, 20, 17, .14);
+  --danger: #8A2A12; --field: #FFFDF9; --em: var(--clay);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.55; font-weight: 400;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: clip;
+}
+body.locked { overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+img, video { display: block; max-width: 100%; }
+h1, h2, h3, p { margin: 0; }
+em { font-style: normal; font-weight: inherit; color: var(--em); }
+.card-in, .on-card { --em: var(--clay); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.on-card :focus-visible, .card :focus-visible { outline-color: var(--card-ink); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; background: var(--bg); }
+.sky-fallback { position: fixed; inset: 0; z-index: 0; background:
+  radial-gradient(60% 50% at 70% 12%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%),
+  radial-gradient(90% 60% at 30% 100%, color-mix(in srgb, var(--card) 30%, transparent), transparent 70%), var(--bg); }
+.grain { position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+main { position: relative; z-index: 1; }
+.wrap { width: 100%; max-width: 1472px; margin-inline: auto; padding-inline: var(--gut); }
+.solid { background: var(--bg); }
+#work { background: linear-gradient(to bottom, transparent, var(--bg) 300px); padding-block-start: clamp(120px, 14vw, 220px); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 12px 26px; background: transparent; color: inherit;
+  border-radius: 999px; border: 1px solid transparent; font-size: 16px; line-height: 1.2; white-space: nowrap;
+  transition: transform .5s var(--ease), background-color .3s, color .3s, border-color .3s; }
+.btn:active { transform: scale(.97); }
+.btn-solid { background: var(--ink); color: var(--bg); }
+.btn-solid:hover { background: var(--accent); color: var(--on-accent); }
+.btn-ghost { border-color: var(--glass-line); background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-card { background: var(--card-ink); color: var(--card); }
+.btn-card:hover { background: var(--accent); color: var(--on-accent); }
+.btn-line { border-color: var(--card-ink); color: var(--card-ink); }
+.btn-line:hover { background: var(--card-ink); color: var(--card); }
+.pill { display: inline-flex; align-items: center; border: 1px solid currentColor; border-radius: 999px; padding: 5px 13px;
+  font-size: 12.5px; font-weight: 500; line-height: 1.3; letter-spacing: .01em; }
+
+/* Navigation */
+.nav { position: fixed; z-index: 40; inset-block-start: env(safe-area-inset-top, 0px); inset-inline: 0; padding-block: 14px; pointer-events: none; }
+.nav-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; pointer-events: auto;
+  padding: 8px 10px 8px 18px; border-radius: 999px; border: 1px solid transparent; transition: background-color .5s, border-color .5s; }
+[dir="rtl"] .nav-in { padding: 8px 18px 8px 10px; }
+.nav.is-stuck .nav-in { background: var(--glass); border-color: var(--glass-line); -webkit-backdrop-filter: blur(18px) saturate(1.2); backdrop-filter: blur(18px) saturate(1.2); }
+.brand { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.brand img { width: 34px; height: auto; }
+.brand svg { width: 104px; height: auto; display: block; }
+.nav-links { display: flex; gap: clamp(18px, 2.4vw, 38px); font-size: 15px; }
+.nav-links a { min-height: 44px; display: inline-flex; align-items: center; opacity: .86; transition: opacity .3s; }
+.nav-links a:hover { opacity: 1; }
+.nav-tools { display: flex; align-items: center; gap: 8px; }
+.lang { display: flex; border: 1px solid var(--glass-line); border-radius: 999px; padding: 3px; background: var(--glass);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.lang button { min-width: 40px; min-height: 38px; padding: 0 10px; border: 0; border-radius: 999px; background: transparent; font-size: 13px; font-weight: 500; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.theme { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 999px; border: 1px solid var(--glass-line);
+  background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.theme svg { width: 19px; height: 19px; }
+.theme .moon { display: none; }
+:root[data-theme="light"] .theme .sun { display: none; }
+:root[data-theme="light"] .theme .moon { display: block; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .theme .sun { display: none; } :root:not([data-theme="dark"]) .theme .moon { display: block; } }
+.nav-cta { min-height: 46px; padding: 10px 22px; font-size: 15px; }
+
+/* Hero */
+.hero { position: relative; min-height: max(100svh, 640px); display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto; column-gap: clamp(24px, 4vw, 72px); padding-block: 110px clamp(28px, 5vh, 56px); }
+.hero h1 { grid-column: 1; grid-row: 2; align-self: end; font-size: clamp(52px, 7.7vw, 126px); line-height: .93; font-weight: 300;
+  letter-spacing: -.05em; text-wrap: balance; }
+[lang="he"] .hero h1 { letter-spacing: -.02em; line-height: 1.02; font-weight: 300; }
+.hero-right { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: clamp(16px, 2.4vh, 28px); min-width: 0; }
+.ring-anchor { width: min(100%, 46vh, 430px); aspect-ratio: 1; flex: 0 0 auto; margin-block: auto 0; }
+.form-chip { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 16px; border-radius: 999px; font-size: 13.5px;
+  background: var(--glass); border: 1px solid var(--glass-line); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); max-width: 100%; }
+.form-chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: 0 0 auto; }
+.form-chip > span { transition: opacity .3s; }
+.form-chip { cursor: pointer; transition: background-color .45s, color .45s, border-color .45s, box-shadow .6s, transform .6s var(--ease); }
+.form-chip.swap #formLabel, .form-chip.swap .form-to { opacity: 0; }
+.form-chip i { position: relative; }
+.form-chip i::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--accent); opacity: 0; animation: ping 2.6s var(--ease) infinite; }
+@keyframes ping { 0% { transform: scale(.4); opacity: .9; } 70%, 100% { transform: scale(1.5); opacity: 0; } }
+.form-to { display: inline-flex; align-items: center; max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .7s var(--ease), opacity .4s; }
+.form-to::before { content: ""; width: 1px; height: 14px; background: currentColor; opacity: .35; margin-inline: 2px 10px; flex: 0 0 auto; }
+.form-arr { display: inline-flex; margin-inline-start: -4px; transition: transform .5s var(--ease); }
+.form-chip:hover, .form-chip:focus-visible, .ring-hot .form-chip { background: var(--accent); color: var(--on-accent); border-color: transparent; transform: translateY(-3px);
+  box-shadow: 0 12px 44px color-mix(in srgb, var(--accent) 50%, transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.form-chip:hover i, .ring-hot .form-chip i { background: var(--on-accent); }
+.form-chip:hover .form-to, .form-chip:focus-visible .form-to, .ring-hot .form-to { max-width: 17em; opacity: 1; }
+.form-chip:hover .form-arr, .ring-hot .form-arr { transform: translateX(4px); }
+[dir="rtl"] .form-chip:hover .form-arr, [dir="rtl"] .ring-hot .form-arr { transform: translateX(-4px); }
+@media (hover: none) { .form-to { max-width: 17em; opacity: 1; } }
+.ring-anchor { cursor: pointer; }
+.hero-side { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+.hero-side p { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; letter-spacing: -.01em; max-width: 26em; text-wrap: balance; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.scroll-cue { position: absolute; inset-block-end: 14px; inset-inline-start: 50%; transform: translateX(-50%); font-size: 12.5px; color: var(--ink); opacity: .7;
+  display: none; }
+.veil { height: 22vh; }
+.load .hero h1, .load .hero-right > *, .load .nav-in { opacity: 0; transform: translateY(26px); }
+.hero h1, .hero-right > *, .nav-in { transition: opacity 1.4s var(--ease), transform 1.4s var(--ease), background-color .5s, border-color .5s; }
+.hero-right > :nth-child(2) { transition-delay: .15s; } .hero-right > :nth-child(3) { transition-delay: .28s; }
+.load #sky { opacity: 0; } #sky { transition: opacity 1.8s ease; }
+
+/* Section heads */
+.sec { padding-block: clamp(64px, 7.4vw, 124px); }
+.head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px clamp(24px, 4vw, 72px); align-items: end; margin-block-end: clamp(32px, 4vw, 64px); }
+.head h2 { font-size: clamp(42px, 6.2vw, 104px); line-height: .96; font-weight: 300; letter-spacing: -.045em; text-wrap: balance; }
+[lang="he"] .head h2 { letter-spacing: -.02em; line-height: 1.04; }
+.head p { color: var(--muted); max-width: 32em; font-size: 17px; }
+.rise { opacity: 0; transform: translateY(34px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+.rise.in { opacity: 1; transform: none; }
+
+/* Collab cards */
+.stack { display: grid; gap: clamp(20px, 2.4vw, 32px); }
+.card { position: relative; }
+.card-box { position: relative; transform-origin: 50% 0; will-change: transform; }
+.card-in { display: block; background: var(--card); color: var(--card-ink); border-radius: var(--r-card); padding: clamp(8px, .9vw, 12px); cursor: pointer; }
+.card-site { position: absolute; z-index: 4; inset-block-start: calc(clamp(8px, .9vw, 12px) + 12px); inset-inline-end: calc(clamp(8px, .9vw, 12px) + 12px);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 500; color: #FCF8F6;
+  background: rgba(18, 16, 14, .46); border: 1px solid rgba(252, 248, 246, .28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  transition: background-color .35s, color .35s, border-color .35s, transform .5s var(--ease); }
+.card-site:hover { background: var(--accent); color: var(--on-accent); border-color: transparent; transform: translateY(-2px); }
+.card-site .out, .case-visit .out, .foot-link .out { transition: transform .5s var(--ease); }
+.card-site:hover .out, .case-visit:hover .out, .foot-link:hover .out { transform: translate(2px, -2px); }
+.card-media { position: relative; overflow: hidden; border-radius: var(--r-media); height: min(60vh, 620px); min-height: 260px; background: #12100E; isolation: isolate; container-type: size; }
+.slides, .slide { position: absolute; inset: 0; }
+.slide { opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility 0s .6s; }
+.slide.on { opacity: 1; visibility: visible; z-index: 1; transition-delay: 0s; }
+.scrub .slide { transition-duration: .28s, 0s; }
+.slide > video, .slide > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.card-in:hover .slide > video, .card-in:hover .slide > img { transform: scale(1.035); }
+.card-media::after { content: ""; position: absolute; z-index: 2; inset: 0; background: linear-gradient(180deg, rgba(14, 13, 12, .34), transparent 30%, transparent 78%, rgba(14, 13, 12, .30)); pointer-events: none; }
+.card-label, .slide-cap { position: absolute; z-index: 3; inset-inline-start: 16px; color: #FCF8F6; background: rgba(18, 16, 14, .46);
+  border-color: rgba(252, 248, 246, .28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.card-label { inset-block-start: 16px; }
+.slide-cap { inset-block-end: 16px; }
+.ticks { position: absolute; z-index: 3; inset-inline-end: 18px; inset-block-end: 27px; display: flex; gap: 6px; pointer-events: none; }
+.ticks i { display: block; width: 22px; height: 3px; border-radius: 3px; background: rgba(252, 248, 246, .36); transition: width .5s var(--ease), background-color .3s; }
+.ticks i.on { width: 46px; background: #FCF8F6; }
+.stage { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
+.stage-back { position: absolute; inset: -6%; width: 112%; height: 112%; max-width: none; object-fit: cover; filter: blur(26px) brightness(.62) saturate(1.05); }
+.win { position: relative; border-radius: clamp(10px, 1.1vw, 16px); overflow: hidden; background: #0E0D0C; border: 1px solid rgba(252, 248, 246, .16);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .5); }
+.win-bar { height: clamp(22px, 2.1vw, 30px); display: flex; align-items: center; gap: 6px; padding-inline: 12px; background: #1C1A18; direction: ltr; }
+.win-bar i { width: 8px; height: 8px; border-radius: 50%; background: rgba(252, 248, 246, .24); flex: 0 0 auto; }
+.win-url { flex: 1; text-align: center; font-size: 11.5px; line-height: 1; color: rgba(252, 248, 246, .62); letter-spacing: .03em; padding-inline-end: 36px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win-body { position: relative; aspect-ratio: 16 / 10; }
+.win-body video, .win-body img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.stage .win { width: min(90cqw, 126cqh); }
+.phone { position: relative; height: 90%; aspect-ratio: 468 / 1012; border-radius: clamp(20px, 2.2vw, 34px); overflow: hidden; border: 5px solid #0E0D0C;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .5); background: #0E0D0C; }
+.phone video, .phone img { width: 100%; height: 100%; object-fit: cover; }
+.card-info { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto; gap: 16px clamp(20px, 3vw, 48px); align-items: end;
+  padding: clamp(18px, 2vw, 28px) clamp(10px, 1.4vw, 20px) clamp(10px, 1.2vw, 16px); }
+.card-info h3 { font-size: clamp(30px, 4vw, 62px); line-height: 1; font-weight: 300; letter-spacing: -.04em; text-wrap: balance; }
+[lang="he"] .card-info h3 { letter-spacing: -.02em; line-height: 1.08; }
+.card-meta { display: block; margin-block-start: 12px; font-size: 14px; color: var(--card-muted); }
+.card-line { font-size: clamp(16px, 1.25vw, 19px); line-height: 1.45; max-width: 30em; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 14px; }
+.go { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: var(--card-ink); color: var(--card); flex: 0 0 auto;
+  transition: background-color .3s, color .3s, transform .6s var(--ease); }
+.go svg { width: 22px; height: 22px; }
+[dir="rtl"] .go svg, [dir="rtl"] .flip { transform: scaleX(-1); }
+.card-in:hover .go { background: var(--accent); color: var(--on-accent); transform: rotate(-45deg); }
+[dir="rtl"] .card-in:hover .go { transform: rotate(45deg); }
+@media (min-width: 900px) and (min-height: 700px) {
+  .card { position: sticky; top: calc(86px + var(--i) * 14px); }
+}
+
+/* More work */
+.rows { margin-block-start: clamp(56px, 6vw, 96px); }
+.rows h3 { font-size: 14px; font-weight: 500; color: var(--muted); margin-block-end: 14px; }
+.row { display: grid; grid-template-columns: 150px minmax(0, 1.4fr) minmax(0, 1fr) 132px; gap: 12px 28px; align-items: center; padding-block: 22px; border-block-start: 1px solid var(--line); }
+.row:last-child { border-block-end: 1px solid var(--line); }
+.row-label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.row-title { font-size: clamp(24px, 2.7vw, 42px); line-height: 1.04; font-weight: 300; letter-spacing: -.035em; }
+[lang="he"] .row-title { letter-spacing: -.01em; }
+.row-line { color: var(--muted); font-size: 16px; }
+.row-line small { display: block; font-size: 13px; margin-block-start: 4px; opacity: .85; }
+.row-thumb { width: 132px; height: 88px; border-radius: 18px; overflow: hidden; background: var(--bg-2); display: grid; place-items: center; }
+.row-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.row-thumb img.is-ring { width: 54px; height: auto; object-fit: contain; }
+
+/* Services */
+.svc { border-block-start: 1px solid var(--line); }
+.svc-row { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .8fr); gap: 10px 28px; align-items: baseline;
+  padding-block: clamp(20px, 2.4vw, 36px); border-block-end: 1px solid var(--line); transition: padding .6s var(--ease), color .3s; }
+.svc-row h3 { font-size: clamp(34px, 5vw, 80px); line-height: 1; font-weight: 300; letter-spacing: -.045em; transition: transform .7s var(--ease); }
+[lang="he"] .svc-row h3 { letter-spacing: -.02em; }
+.svc-row p { font-size: clamp(16px, 1.3vw, 20px); line-height: 1.45; }
+.svc-row small { font-size: 14px; color: var(--muted); }
+.svc-thumb { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .svc:hover .svc-row { color: var(--muted); }
+  .svc:hover .svc-row:hover { color: var(--ink); }
+  .svc-row:hover h3 { transform: translateX(18px); }
+  [dir="rtl"] .svc-row:hover h3 { transform: translateX(-18px); }
+}
+.peek { position: fixed; z-index: 30; inset-block-start: 0; inset-inline-start: 0; width: min(30vw, 420px); aspect-ratio: 16 / 10; border-radius: 24px; overflow: hidden;
+  pointer-events: none; opacity: 0; transform: translate3d(0, 0, 0) scale(.9); transition: opacity .35s, scale .5s var(--ease); background: var(--bg-2);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
+.peek.on { opacity: 1; }
+.peek img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s; }
+.peek img.on { opacity: 1; }
+
+/* How we work */
+.how-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 4vw, 72px) clamp(24px, 4vw, 72px); }
+.how-item { padding-block-start: 22px; border-block-start: 1px solid var(--line); }
+.how-item h3 { font-size: clamp(24px, 2.5vw, 38px); line-height: 1.08; font-weight: 300; letter-spacing: -.03em; margin-block-end: 12px; }
+[lang="he"] .how-item h3 { letter-spacing: -.01em; }
+.how-item p { color: var(--muted); max-width: 32em; }
+
+/* Laboratory */
+.lab-card { position: relative; overflow: hidden; border-radius: var(--r-card); background: var(--bg-2); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  min-height: min(72vh, 640px); }
+.lab-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 22px; padding: clamp(24px, 4vw, 64px); }
+.lab-copy > span { font-size: 14px; font-weight: 500; color: var(--muted); }
+.lab-copy h2 { font-size: clamp(36px, 4.6vw, 76px); line-height: .98; font-weight: 300; letter-spacing: -.045em; text-wrap: balance; }
+[lang="he"] .lab-copy h2 { letter-spacing: -.02em; line-height: 1.06; }
+.lab-copy p { color: var(--muted); max-width: 30em; }
+.lab-pic { position: relative; overflow: hidden; margin: clamp(8px, .9vw, 12px); border-radius: var(--r-media); min-height: 280px; display: grid; place-items: center;
+  padding: clamp(18px, 3vw, 48px); background: radial-gradient(110% 90% at 72% 8%, color-mix(in srgb, var(--accent) 46%, var(--bg-2)), color-mix(in srgb, var(--accent) 8%, var(--bg)) 70%); }
+.lab-pic { place-items: center start; padding-inline-end: 0; }
+.lab-pic .win { width: 132%; max-width: none; will-change: transform; transition: scale .9s var(--ease); transform-origin: 0 50%; }
+[dir="rtl"] .lab-pic .win { transform-origin: 100% 50%; }
+.lab-pic:hover .win { scale: 1.02; }
+.lab-pic .win-body { aspect-ratio: 16 / 9; }
+
+/* Outro: contact over the clouds, then the footer */
+.outro { position: relative; padding-block: clamp(90px, 16vh, 200px) 0; }
+.contact { background: var(--card); color: var(--card-ink); border-radius: var(--r-card); padding: clamp(28px, 5vw, 88px);
+  display: flex; flex-direction: column; align-items: flex-start; gap: clamp(20px, 2.4vw, 32px); }
+.contact h2 { font-size: clamp(48px, 8.2vw, 136px); line-height: .93; font-weight: 300; letter-spacing: -.05em; text-wrap: balance; }
+[lang="he"] .contact h2 { letter-spacing: -.02em; line-height: 1.03; }
+.contact p { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; }
+.contact .btns { justify-content: flex-start; }
+.wa-num { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.foot { padding-block: clamp(72px, 14vh, 180px) 22px; display: grid; gap: clamp(32px, 5vw, 72px); }
+.foot-mark svg { width: 100%; height: auto; display: block; overflow: visible; }
+.foot-mark path, .foot-mark circle { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.6s var(--ease); }
+.foot-mark.in path, .foot-mark.in circle { stroke-dashoffset: 0; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)); gap: 36px clamp(24px, 4vw, 64px); align-items: start; }
+.foot-about { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.foot-tag { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.1; font-weight: 430; font-stretch: 108%; letter-spacing: -.02em; }
+.foot-tag [lang="he"] { color: var(--em); }
+.foot-blurb { color: var(--muted); max-width: 26em; }
+.foot-cta { margin-block-start: 8px; }
+.foot-cta .flip { display: inline-flex; transition: transform .5s var(--ease); }
+.foot-cta:hover .flip { transform: translateX(4px); }
+[dir="rtl"] .foot-cta:hover .flip { transform: scaleX(-1) translateX(4px); }
+.foot-col { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.foot-col h3 { font-size: 13px; font-weight: 500; color: var(--muted); margin-block-end: 10px; }
+.foot-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: 16.5px; text-align: start;
+  transition: color .3s, transform .5s var(--ease); }
+.foot-link small { font-size: 13px; color: var(--muted); margin-inline-start: 4px; transition: color .3s; }
+.foot-link svg { flex: 0 0 auto; }
+.foot-link:hover { color: var(--em); transform: translateX(4px); }
+[dir="rtl"] .foot-link:hover { transform: translateX(-4px); }
+.foot-plain { min-height: 44px; display: inline-flex; align-items: center; color: var(--muted); font-size: 16.5px; }
+.foot-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px; font-size: 14px; color: var(--muted); padding-block-start: 18px; border-block-start: 1px solid var(--line); }
+.foot-row a { min-height: 44px; display: inline-flex; align-items: center; }
+.foot-row a:hover { color: var(--ink); }
+
+/* Case study: a card, opened */
+.case { position: fixed; inset: 0; z-index: 50; background: var(--bg); color: var(--ink); overflow-y: auto; overscroll-behavior: contain;
+  clip-path: inset(var(--ct, 0px) var(--cr, 0px) var(--cb, 0px) var(--cl, 0px) round var(--crad, 0px)); transition: clip-path .9s var(--ease); }
+.case-bar { position: sticky; top: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 14px; pointer-events: none; }
+.case-bar > * { pointer-events: auto; }
+.case-top { background: var(--card); color: var(--card-ink); border-radius: var(--r-card); padding: clamp(10px, 1vw, 14px); margin-block-start: 6px; }
+.case-top header { display: grid; gap: 18px; justify-items: start; padding: clamp(18px, 3vw, 44px) clamp(10px, 2.6vw, 40px) clamp(22px, 3vw, 44px); }
+.case-top h1 { font-size: clamp(46px, 8.4vw, 140px); line-height: .93; font-weight: 300; letter-spacing: -.05em; text-wrap: balance; }
+[lang="he"] .case-top h1 { letter-spacing: -.02em; line-height: 1.04; }
+.case-sub { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; width: 100%; }
+.case-sub .card-tags { margin: 0; }
+.case-sub > span { font-size: 14px; color: var(--card-muted); }
+.case-film { position: relative; overflow: hidden; border-radius: var(--r-media); aspect-ratio: 16 / 9; background: #12100E; }
+.case-film video { width: 100%; height: 100%; object-fit: cover; }
+.case-film.is-tall { display: grid; place-items: center; }
+.case-film.is-tall .phone { height: 92%; }
+.case-meta { margin-inline-end: auto; }
+.case-visit { min-height: 46px; padding: 10px 22px; font-size: 15px; }
+.case-brief { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: 20px clamp(24px, 5vw, 96px); padding-block: clamp(56px, 8vw, 128px); }
+.case-brief h2, .case-made > h2 { font-size: clamp(30px, 3.4vw, 54px); line-height: 1; font-weight: 300; letter-spacing: -.04em; }
+[lang="he"] .case-brief h2, [lang="he"] .case-made > h2 { letter-spacing: -.01em; }
+.case-brief p:first-of-type { font-size: clamp(22px, 2.5vw, 38px); line-height: 1.18; letter-spacing: -.025em; font-weight: 300; text-wrap: pretty; }
+.case-brief p + p { margin-block-start: 22px; color: var(--muted); max-width: 34em; font-size: 18px; }
+.case-made > h2 { margin-block-end: clamp(24px, 3vw, 44px); }
+.made { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 28px); }
+.made-item { grid-column: span 6; background: var(--bg-2); border-radius: var(--r-card); padding: clamp(8px, .9vw, 12px); display: flex; flex-direction: column; }
+.made-item.wide { grid-column: span 12; flex-direction: row; }
+.made-item.wide .made-pic { flex: 1.5 1 0; aspect-ratio: 16 / 9; }
+.made-item.wide .made-txt { flex: 1 1 0; justify-content: flex-end; }
+.made-item.tall { grid-row: span 2; }
+.made-item.tall .made-pic { aspect-ratio: 9 / 13; }
+.made-pic { position: relative; overflow: hidden; border-radius: var(--r-media); aspect-ratio: 16 / 10; background: #12100E; }
+.made-pic img, .made-pic video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.made-txt { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: clamp(18px, 2.2vw, 32px) clamp(12px, 1.8vw, 26px) clamp(16px, 2vw, 26px); flex: 1; }
+.made-txt .pill { color: var(--muted); }
+.made-txt h3 { font-size: clamp(24px, 2.4vw, 38px); line-height: 1.06; font-weight: 300; letter-spacing: -.035em; text-wrap: balance; }
+[lang="he"] .made-txt h3 { letter-spacing: -.01em; }
+.made-txt p { color: var(--muted); max-width: 36em; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; background: var(--card); color: var(--card-ink); border-radius: var(--r-card);
+  padding: clamp(28px, 4vw, 64px); margin-block-start: clamp(14px, 1.8vw, 28px); }
+.facts b { display: block; font-size: clamp(44px, 5.4vw, 88px); line-height: 1; font-weight: 300; letter-spacing: -.045em; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+.facts span { display: block; margin-block-start: 10px; font-size: 14.5px; color: var(--card-muted); }
+.credit { margin-block-start: 22px; font-size: 13.5px; color: var(--muted); max-width: 60em; }
+.case-next { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; text-align: start; border: 0; background: var(--card); color: var(--card-ink);
+  border-radius: var(--r-card); padding: clamp(24px, 4vw, 56px); margin-block: clamp(56px, 8vw, 128px) clamp(28px, 4vw, 56px); }
+.case-next small { display: block; font-size: 14px; color: var(--card-muted); margin-block-end: 10px; }
+.case-next strong { display: block; font-size: clamp(32px, 5vw, 80px); line-height: 1; font-weight: 300; letter-spacing: -.045em; }
+[lang="he"] .case-next strong { letter-spacing: -.02em; }
+.case-next:hover .go { background: var(--accent); color: var(--on-accent); }
+
+/* Brief */
+.brief { position: fixed; inset: 0; z-index: 55; display: grid; place-items: center; padding: max(12px, env(safe-area-inset-top, 0px)) 12px 12px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+  opacity: 0; transition: opacity .45s; }
+.brief.on { opacity: 1; }
+.brief-card { width: min(100%, 980px); max-height: 100%; overflow-y: auto; background: var(--card); color: var(--card-ink); border-radius: var(--r-card);
+  padding: clamp(22px, 4vw, 56px); display: flex; flex-direction: column; gap: clamp(22px, 3vw, 36px); transform: translateY(30px) scale(.98); transition: transform .7s var(--ease); min-height: min(640px, 100%); }
+.brief.on .brief-card { transform: none; }
+.brief-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brief-top > span { font-size: 14px; font-weight: 500; color: var(--card-muted); }
+.brief-prog { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--card-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.brief-prog span { direction: ltr; unicode-bidi: isolate; }
+.brief-prog i { display: block; width: 28px; height: 6px; border-radius: 99px; background: var(--card-line); transition: background-color .4s; }
+.brief-prog i.on { background: var(--card-ink); }
+.x { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--card-ink); background: transparent; display: grid; place-items: center; flex: 0 0 auto; }
+.x svg { width: 16px; height: 16px; }
+.brief h2 { font-size: clamp(36px, 5.2vw, 72px); line-height: .98; font-weight: 300; letter-spacing: -.045em; }
+[lang="he"] .brief h2 { letter-spacing: -.02em; line-height: 1.05; }
+.brief-step { display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 28px); flex: 1; animation: stepin .7s var(--ease) both; }
+@keyframes stepin { from { opacity: 0; transform: translateY(18px); } }
+.brief-step > p { color: var(--card-muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { min-height: 50px; padding: 10px 22px; border-radius: 999px; border: 1px solid var(--card-ink); background: transparent; color: var(--card-ink); font-size: 17px;
+  transition: background-color .25s, color .25s, transform .4s var(--ease); }
+.chip:active { transform: scale(.96); }
+.chip[aria-pressed="true"] { background: var(--card-ink); color: var(--card); }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label, .grp > span { font-size: 14px; color: var(--card-muted); }
+.field input, .field textarea { min-height: 54px; padding: 13px 16px; border-radius: var(--r-ctl); border: 1px solid var(--card-ink); background: var(--field); color: #171411;
+  font: inherit; font-size: 18px; width: 100%; }
+.field textarea { resize: vertical; line-height: 1.45; }
+.grp { display: flex; flex-direction: column; gap: 10px; }
+.brief-err { color: var(--danger); font-size: 14.5px; min-height: 1.4em; margin: 0; }
+.brief-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sum { margin: 0; display: grid; }
+.sum div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding-block: 11px; border-block-start: 1px solid var(--card-line); }
+.sum dt { font-size: 14px; color: var(--card-muted); } .sum dd { margin: 0; overflow-wrap: anywhere; }
+.sum dd.ltr { direction: ltr; unicode-bidi: isolate; text-align: end; }
+[dir="rtl"] .sum dd.ltr { text-align: right; }
+
+[dir="rtl"] .facts b { text-align: right; }
+
+/* Theme switch: the new sky opens from the button */
+html.theming::view-transition-old(root) { animation: none; }
+html.theming::view-transition-new(root) { animation: skyopen 1s cubic-bezier(.2, .7, .1, 1) both; }
+@keyframes skyopen { from { clip-path: circle(0 at var(--vx, 90%) var(--vy, 40px)); } to { clip-path: circle(150vmax at var(--vx, 90%) var(--vy, 40px)); } }
+
+/* Cursor */
+.cursor { position: fixed; z-index: 45; inset-block-start: 0; inset-inline-start: 0; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 14px; font-weight: 500; pointer-events: none;
+  opacity: 0; scale: .3; transition: opacity .3s, scale .5s var(--ease); }
+.cursor.on { opacity: 1; scale: 1; }
+
+/* Narrow screens */
+@media (max-width: 899px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .brand svg { width: 88px; }
+  .hero { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 18px; padding-block: 92px 30px; text-align: center; }
+  .hero-right { display: contents; }
+  .ring-anchor { order: 1; width: min(62vw, 34vh, 290px); margin-block: auto 0; }
+  .form-chip { order: 2; }
+  .hero h1 { order: 3; font-size: clamp(46px, 13.2vw, 92px); margin-block-start: 6px; }
+  .hero-side { order: 4; }
+  .head { grid-template-columns: minmax(0, 1fr); }
+  .card-info { grid-template-columns: minmax(0, 1fr) auto; }
+  .card-info > div:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .card-info .go { grid-column: 2; grid-row: 1; width: 52px; height: 52px; }
+  .card-media { height: min(56vh, 460px); }
+  .row { grid-template-columns: minmax(0, 1fr) 96px; }
+  .row-label { grid-column: 1 / -1; }
+  .row-line { grid-column: 1; }
+  .row-thumb { grid-column: 2; grid-row: 2 / span 2; width: 96px; height: 72px; }
+  .svc-row { grid-template-columns: minmax(0, 1fr) 84px; align-items: center; }
+  .svc-row h3 { grid-column: 1; } .svc-row p { grid-column: 1; } .svc-row small { grid-column: 1; }
+  .svc-thumb { display: block; grid-column: 2; grid-row: 1 / span 3; width: 84px; height: 84px; border-radius: 18px; object-fit: cover; }
+  .how-grid { grid-template-columns: minmax(0, 1fr); }
+  .lab-card { grid-template-columns: minmax(0, 1fr); }
+  .lab-pic { order: -1; min-height: 240px; }
+  .case-brief { grid-template-columns: minmax(0, 1fr); }
+  .made-item, .made-item.wide { grid-column: span 12; flex-direction: column; }
+  .made-item.wide .made-pic, .made-item.wide .made-txt { flex: none; }
+  .made-item.tall .made-pic { aspect-ratio: 4 / 5; }
+  .lab-copy { order: 2; }
+  .sum div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .brief-top > span:first-child { display: none; }
+  .brief-card { min-height: 0; }
+  .cursor, .peek { display: none; }
+}
+@media (min-width: 900px) { .scroll-cue { display: block; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .rise { opacity: 1; transform: none; }
+  .card { position: relative !important; top: auto !important; }
+}
+
+/* Display type: one round, soft face throughout */
+.hero h1, .head h2, .card-info h3, .row-title, .svc-row h3, .how-item h3, .lab-copy h2, .contact h2, .case-top h1, .case-brief h2, .case-made > h2,
+.made-txt h3, .facts b, .case-next strong, .brief h2, .sys-head h2, .sys-cap h3 { font-weight: 430; font-stretch: 108%; letter-spacing: -.028em; }
+.hero h1 { font-size: clamp(50px, 7.2vw, 118px); line-height: .96; }
+.case-brief p:first-of-type { font-weight: 300; letter-spacing: -.02em; }
+[lang="he"] .hero h1, [lang="he"] .head h2, [lang="he"] .card-info h3, [lang="he"] .contact h2, [lang="he"] .case-top h1, [lang="he"] .sys-head h2 { letter-spacing: -.012em; }
+
+/* Hero trail */
+.trail { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.trail-img { position: absolute; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 26px; opacity: 0; max-width: none; box-shadow: 0 26px 70px rgba(0, 0, 0, .34); will-change: transform, opacity, filter; }
+.hero > h1, .hero-right { position: relative; z-index: 1; }
+.scroll-cue { z-index: 1; }
+
+/* Case study: the system, tab by tab */
+.sys { padding-block-end: clamp(56px, 8vw, 128px); }
+.sys-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px clamp(24px, 4vw, 72px); align-items: end; margin-block-end: clamp(24px, 3vw, 44px); }
+.sys-head h2 { font-size: clamp(38px, 5.6vw, 92px); line-height: .98; text-wrap: balance; }
+.sys-head p { color: var(--muted); max-width: 34em; }
+.sys-stage { background: var(--bg-2); border-radius: var(--r-card); padding: clamp(8px, .9vw, 12px); }
+.sys-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.sys-tabs::-webkit-scrollbar { display: none; }
+.sys-tab { position: relative; flex: 1 0 auto; display: flex; align-items: baseline; gap: 10px; min-height: 54px; padding: 13px 18px 16px; border: 0; border-radius: 18px;
+  background: transparent; color: var(--muted); text-align: start; font-size: 16px; white-space: nowrap; transition: color .3s, background-color .3s; }
+.sys-tab small { font-size: 12px; font-variant-numeric: tabular-nums; opacity: .7; direction: ltr; }
+.sys-tab:hover { color: var(--ink); }
+.sys-tab[aria-selected="true"] { color: var(--ink); background: color-mix(in srgb, var(--ink) 9%, transparent); }
+.sys-tab i { position: absolute; inset-inline: 18px; inset-block-end: 8px; height: 2px; border-radius: 2px; background: var(--em); transform: scaleX(0); transform-origin: 0 50%; opacity: 0; }
+[dir="rtl"] .sys-tab i { transform-origin: 100% 50%; }
+.sys-tab[aria-selected="true"] i { opacity: 1; }
+.sys-main { display: grid; grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr); margin-block-start: 8px; }
+.sys-view { position: relative; border-radius: var(--r-media); overflow: hidden; aspect-ratio: 16 / 10.9; container-type: size;
+  background: radial-gradient(90% 100% at 50% 0%, #3A2A24, #151210 62%, #0C0B0A); }
+.sys-pane { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; visibility: hidden; transition: opacity .55s var(--ease), visibility 0s .55s, transform .8s var(--ease); transform: scale(.985); }
+.sys-pane.on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.sys-pane .win { width: min(94cqw, 142cqh); }
+.sys-pane .phone { height: 92%; }
+.sys-cap { display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; padding: clamp(18px, 2.2vw, 34px) clamp(16px, 2.2vw, 34px) clamp(14px, 1.6vw, 24px); }
+.sys-cap small { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; align-self: flex-start; }
+.sys-cap h3 { font-size: clamp(24px, 2.5vw, 38px); line-height: 1.06; text-wrap: balance; }
+.sys-cap p { color: var(--muted); font-size: 16px; }
+.flow { margin-block-start: clamp(36px, 5vw, 72px); }
+.flow h3 { font-size: 14px; font-weight: 500; color: var(--muted); margin-block-end: 30px; }
+.flow ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.flow li { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 26px 20px 0 0; border-block-start: 1px solid var(--line); }
+[dir="rtl"] .flow li { padding: 26px 0 0 20px; }
+.flow li b { position: absolute; inset-block-start: -15px; inset-inline-start: 0; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card); color: var(--card-ink); font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.flow li strong { font-weight: 400; font-size: clamp(17px, 1.45vw, 22px); line-height: 1.2; letter-spacing: -.015em; }
+.flow li span { color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.made-item.has-reels { flex-direction: row; }
+.reels { flex: 1.5 1 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(6px, .8vw, 12px); }
+.reel { position: relative; aspect-ratio: 9 / 16; border-radius: var(--r-media); overflow: hidden; background: #12100E; }
+.reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.made-item.has-reels .made-txt { flex: 1 1 0; justify-content: flex-end; }
+@media (max-width: 899px) {
+  .made-item.has-reels { flex-direction: column; }
+  .ticks { inset-block-end: 26px; gap: 4px; } .ticks i { width: 12px; } .ticks i.on { width: 26px; }
+  .sys-head { grid-template-columns: minmax(0, 1fr); }
+  .sys-main { grid-template-columns: minmax(0, 1fr); }
+  .sys-view { aspect-ratio: 16 / 11.6; }
+  .sys-pane .win { width: 96cqw; }
+  .sys-cap { min-height: 13.5em; justify-content: flex-start; }
+  .flow ol { grid-template-columns: minmax(0, 1fr); }
+  .flow li { border-block-start: 0; border-inline-start: 1px solid var(--line); padding: 0 0 22px 28px; }
+  [dir="rtl"] .flow li { padding: 0 28px 22px 0; }
+  .flow li b { inset-block-start: 0; inset-inline-start: -15px; }
+  .flow li strong { margin-block-start: 3px; }
+  .made-item.has-reels .reels { flex: none; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lab-pic { min-height: 0; padding: 14px; } .lab-pic .win { width: 100%; }
+}
+
+/* Tags: a soft spell on hover */
+.card-tags .pill { position: relative; overflow: hidden; isolation: isolate; transition: color .35s, border-color .35s, transform .5s var(--ease), box-shadow .5s; }
+.card-tags .pill::before { content: ""; position: absolute; z-index: -1; inset: -1px; border-radius: inherit; opacity: 0;
+  background: linear-gradient(110deg, #FFC9B6 0%, #FFE9D6 28%, #FFFFFF 46%, #E9D8FF 62%, #FFC9B6 100%); background-size: 240% 100%; background-position: 100% 0; transition: opacity .35s; }
+.card-tags .pill::after { content: "✦"; position: absolute; inset-block-start: -7px; inset-inline-end: 3px; font-size: 11px; line-height: 1; color: #fff; opacity: 0; transform: scale(.2) rotate(-40deg);
+  text-shadow: 0 0 8px #fff, 0 0 16px #FFC9B6; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .card-tags .pill:hover { color: #171411; border-color: transparent; transform: translateY(-3px) scale(1.05); overflow: visible;
+    box-shadow: 0 0 0 4px color-mix(in srgb, #FFC9B6 34%, transparent), 0 10px 28px color-mix(in srgb, #FFC9B6 60%, transparent); }
+  .card-tags .pill:hover::before { opacity: 1; animation: shimmer 1.5s linear infinite; }
+  .card-tags .pill:hover::after { opacity: 1; animation: twinkle 1.1s var(--ease) infinite alternate; }
+  .card-tags .pill[data-s] { cursor: pointer; }
+}
+@keyframes shimmer { to { background-position: -140% 0; } }
+@keyframes twinkle { from { transform: scale(.5) rotate(-30deg); opacity: .5; } to { transform: scale(1.25) rotate(20deg); opacity: 1; } }
+
+.trio { position: relative; display: flex; gap: 1.6cqw; height: min(84cqh, 38cqw); }
+.trio img { height: 100%; width: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: clamp(10px, 1.2vw, 18px); box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
+.trio img:nth-child(odd) { transform: translateY(3%); } .trio img:nth-child(even) { transform: translateY(-3%); }
+
+@media (max-width: 899px) {
+  .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .foot-about { grid-column: 1 / -1; }
+  .foot-col:nth-child(2) { grid-column: 1 / -1; }
+  .wa-num { white-space: nowrap; }
+  .card-site { min-height: 36px; padding: 6px 13px; font-size: 12.5px; }
+  .case-film.is-tall { aspect-ratio: 4 / 5; }
+}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap"><div class="nav-in">
+    <a class="brand" href="#top" aria-label="Halom">
+      <img src="media/ring.png" alt="" width="382" height="364">
+      <svg viewBox="-4 -4 678 108" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="6.4" stroke-miterlimit="12"><path d="M2.1 0V100M75.9 0V100M2.1 50H75.9"/><path d="M136 100L182 .42L228 100"/><path d="M288.1 0V97.9H346"/><circle cx="454" cy="50" r="47.9"/><path d="M564.1 100V.42L616 94L667.9 .42V100"/></g></svg>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#work" data-t="nav.work">Work</a>
+      <a href="#services" data-t="nav.services">Services</a>
+      <a href="#lab" data-t="nav.lab">Laboratory</a>
+    </nav>
+    <div class="nav-tools">
+      <div class="lang" role="group" id="lang" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" data-lang="he" aria-pressed="false" lang="he">עב</button>
+        <button type="button" data-lang="fr" aria-pressed="false" lang="fr">FR</button>
+      </div>
+      <button type="button" class="theme" id="themeBtn" aria-label="Switch between light and dark">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2z"/></svg>
+      </button>
+      <button type="button" class="btn btn-solid nav-cta" data-brief data-t="nav.start">Start a project</button>
+    </div>
+  </div></div>
+</header>
+
+<main>
+  <section class="hero wrap" id="top">
+    <div class="trail" id="trail" aria-hidden="true"></div>
+    <h1 data-h="hero.h">Brands you can <em>step inside.</em></h1>
+    <div class="hero-right">
+      <div class="ring-anchor" id="ringAnchor" aria-hidden="true"></div>
+      <a class="form-chip" id="formChip" href="#work"><i></i><span id="formLabel">The ring</span><span class="form-to"><span id="formTo">See the work</span></span><span class="form-arr flip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <div class="hero-side">
+        <p data-t="hero.lead">Identity, site, 3D and film, made as one world.</p>
+        <div class="btns">
+          <button type="button" class="btn btn-solid" data-brief data-t="hero.cta1">Tell us what you're building</button>
+          <a class="btn btn-ghost" href="#work" data-t="hero.cta2">See the work</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue" data-t="hero.scroll" aria-hidden="true">Scroll into the cloud</div>
+  </section>
+  <div class="veil" aria-hidden="true"></div>
+
+  <section class="solid sec" id="work">
+    <div class="wrap">
+      <div class="head rise"><h2 data-h="work.h">Work</h2><p data-t="work.sub"></p></div>
+      <div class="stack" id="stack"></div>
+    </div>
+  </section>
+
+  <section class="solid sec" id="services">
+    <div class="wrap">
+      <div class="head rise"><h2 data-h="services.h"></h2><p data-t="services.sub"></p></div>
+      <div class="svc" id="svc"></div>
+    </div>
+  </section>
+
+  <section class="solid sec" id="how">
+    <div class="wrap">
+      <div class="head rise"><h2 data-h="how.h"></h2><span></span></div>
+      <div class="how-grid" id="howGrid"></div>
+    </div>
+  </section>
+
+  <section class="solid sec" id="lab">
+    <div class="wrap">
+      <div class="lab-card">
+        <div class="lab-copy">
+          <span data-t="lab.label"></span>
+          <h2 data-h="lab.h"></h2>
+          <p data-t="lab.p"></p>
+          <a class="btn btn-solid" data-lab href="https://halom.io" target="_blank" rel="noopener"><span data-t="lab.cta"></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+        <a class="lab-pic" data-lab href="https://halom.io" target="_blank" rel="noopener" aria-label="halom.io">
+          <div class="win" id="labImg"><div class="win-bar"><i></i><i></i><i></i><span class="win-url" data-t="lab.url">halom.io</span></div>
+          <div class="win-body"><img src="media/lab-site.jpg" alt="The Laboratory's site: a painted garden with a pond and a bridge" loading="lazy" width="1280" height="720"></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="outro" id="contact">
+    <div class="wrap">
+      <div class="contact on-card">
+        <h2 data-h="contact.h"></h2>
+        <p data-t="contact.p"></p>
+        <div class="btns">
+          <button type="button" class="btn btn-card" data-brief data-t="contact.cta"></button>
+          <a class="btn btn-line" href="https://wa.me/972542022269" target="_blank" rel="noopener"><span data-t="contact.wa">WhatsApp</span> <span class="wa-num">+972 54 202 2269</span></a>
+        </div>
+      </div>
+      <footer class="foot">
+        <div class="foot-mark" id="footMark" aria-hidden="true">
+          <svg viewBox="-3 -3 676 106"><g fill="none" stroke="currentColor" stroke-width=".8" stroke-miterlimit="12"><path pathLength="1" d="M2.1 0V100M75.9 0V100M2.1 50H75.9"/><path pathLength="1" d="M136 100L182 .42L228 100"/><path pathLength="1" d="M288.1 0V97.9H346"/><circle pathLength="1" cx="454" cy="50" r="47.9"/><path pathLength="1" d="M564.1 100V.42L616 94L667.9 .42V100"/></g></svg>
+        </div>
+        <div class="foot-grid">
+          <div class="foot-about">
+            <p class="foot-tag"><span data-t="footer.tag">Dreams, realized.</span> <span lang="he" dir="rtl" id="footHe">חלומות מתגשמים</span></p>
+            <p class="foot-blurb" data-t="footer.blurb"></p>
+            <button type="button" class="btn btn-solid foot-cta" data-brief><span data-t="footer.contact">Contact us</span><span class="flip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          </div>
+          <div class="foot-col">
+            <h3 data-t="footer.contactH">Contact</h3>
+            <a class="foot-link" href="https://wa.me/972542022269" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 19z"/><path d="M9 9.5c.4 2.4 2.1 4.3 4.8 5.2"/></svg><span><span data-t="contact.wa">WhatsApp</span> <span class="wa-num">+972 54 202 2269</span></span></a>
+            <button type="button" class="foot-link" data-brief><span class="flip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span data-t="contact.cta">Start the brief</span></button>
+            <a class="foot-link" href="mailto:halom.studio@gmail.com"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="M4.5 7.5l7.5 5.5 7.5-5.5"/></svg><span dir="ltr">halom.studio@gmail.com</span></a>
+            <span class="foot-plain" data-t="footer.city">Tel Aviv</span>
+          </div>
+          <div class="foot-col">
+            <h3 data-t="footer.socialH">Follow</h3>
+            <a class="foot-link" href="https://instagram.com/halom.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg><span>Instagram <small dir="ltr">@halom.io</small></span></a>
+            <a class="foot-link" href="https://www.tiktok.com/@halom.agency" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.4 2.6 2 4.2 4.5 4.5"/></svg><span>TikTok <small dir="ltr">@halom.agency</small></span></a>
+            <a class="foot-link" href="https://x.com/HalomAgency" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span>X <small dir="ltr">@HalomAgency</small></span></a>
+          </div>
+          <nav class="foot-col" aria-label="Footer">
+            <h3 data-t="footer.siteH">Site</h3>
+            <a class="foot-link" href="#work"><span data-t="nav.work">Work</span></a>
+            <a class="foot-link" href="#services"><span data-t="nav.services">Services</span></a>
+            <a class="foot-link" data-lab href="https://halom.io" target="_blank" rel="noopener"><span data-t="nav.lab">Laboratory</span><svg class="out" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          </nav>
+        </div>
+        <div class="foot-row">
+          <span data-t="footer.rights">© 2026 Halom</span>
+          <a href="#top" data-t="footer.top">Back to top</a>
+        </div>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<div class="peek" id="peek" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span data-t="work.open">Open</span></div>
+<div class="case" id="case" role="dialog" aria-modal="true" aria-labelledby="caseTitle" hidden></div>
+<div class="brief" id="brief" role="dialog" aria-modal="true" aria-labelledby="briefTitle" hidden></div>
+
+<script>
+/* All copy, in English, Hebrew and French. */
+window.HALOM_COPY = {
+  en: {
+    dir: "ltr",
+    nav: { work: "Work", services: "Services", lab: "Laboratory", start: "Start a project", theme: "Switch between light and dark", lang: "Language" },
+    hero: {
+      h: "Brands you can <em>step inside.</em>",
+      lead: "Identity, site, 3D and film, made as one world.",
+      cta1: "Tell us what you're building",
+      cta2: "See the work",
+            scroll: "Scroll into the cloud"
+    },
+    forms: [["The ring", "See the work"], ["Shirt", "Halom × Shevatim"], ["Dish", "Halom × Mana"], ["Formula 1 car", "The showroom"], ["Hospitality", "See the work"], ["Palette", "See the work"], ["Cloud", "The Laboratory"], ["Tiger", "Our film"], ["Video camera", "Halom × Zoaretz"], ["3D model", "The street"], ["Astronaut", "Start a project"], ["Spaceship", "Start a project"]],
+    work: {
+      h: "Work",
+      sub: "Two collaborations, one venture of our own, and concepts we built to show what we do. Client names appear when clients say yes.",
+      open: "Open",
+      also: "Also in the studio"
+    },
+    labels: { collab: "Collaboration", venture: "A Halom venture", concept: "Concept", own: "Our own" },
+    cs: { brief: "The brief", made: "What we <em>made</em>", close: "Close", next: "Next", back: "All work", visit: "Visit the site" },
+    projects: {
+      shevatim: {
+        title: "Halom × <em>Shevatim</em>", plain: "Halom × Shevatim", meta: "Streetwear, Store, back office and brand, 2026",
+        line: "A streetwear label's whole online system: the store in Hebrew, English and French, the back office behind it, and the brand around it.",
+        tags: ["Online store", "Back office", "UX/UI", "3D cloth", "Product imagery", "Brand management", "Marketing and socials"],
+        slides: ["The campaign", "The storefront", "The shop", "A product, in 3D", "The back office", "On a phone"],
+        sys: {
+          h: "One system, <em>front to back.</em>",
+          p: "The store shoppers see and the office the owner works in are one build on one database. These are recordings of the real thing.",
+          tabs: [
+            { name: "Storefront", path: "shevatim / en", title: "The brand's front door", body: "A film from the desert, the current collection, the categories, the twelve tribes with their verses, pictures from the shoot, and how reserving works. Every page in Hebrew, English and French, in a light and a dark mode." },
+            { name: "Shop", path: "shevatim / en / shop", title: "Sixty-one pieces, filtered by tribe", body: "Six categories and twelve tribes. Pick a tribe and the shop narrows to its pieces. A price shows once the owner sets it. Until then the page says it is confirmed on contact." },
+            { name: "Product", path: "shevatim / en / item", title: "Every piece has its own page", body: "Pictures, a size for adults and one for kids, the tribe the piece belongs to with its verse, and the cloth in 3D. One tap adds it to the reservation." },
+            { name: "Reserve", path: "shevatim / en / reserve", title: "A bag, a name, a phone number", body: "The shopper sends a reservation and receives a code. Nothing is charged online. The brand confirms size, price and delivery by phone." },
+            { name: "Back office", path: "shevatim / admin", title: "Where the owner runs it", body: "Reservations sorted by status, each with a call button and a WhatsApp button. Items with names in three languages, prices, sizes, pictures and a coming-soon switch. A collection is a board of the twelve tribes. Stock is counted per piece and size, with a history of every change. Settings hold the contact details, the announcement line and the switch that opens and closes reservations." },
+            { name: "On a phone", path: "", title: "The same store, in the hand", body: "Right to left in Hebrew, with the same film, the same tribes and the same cloth. On a phone a sideways drag grabs the cloth and a vertical swipe scrolls the page." }
+          ],
+          flowH: "How a reservation travels",
+          flow: [
+            { t: "A visitor picks pieces", b: "By tribe or by category, in any of the three languages." },
+            { t: "Leaves a name and a phone", b: "Nothing is charged." },
+            { t: "Receives a code", b: "It stays on the confirmation page." },
+            { t: "The owner sees it", b: "In the back office, under Waiting for you." },
+            { t: "They talk, and it moves on", b: "To In progress, then to Finished." }
+          ],
+          note: "Screen recordings of the shop running on a studio machine, with reservations open as they will be at launch. The back office is shown with demo reservations."
+        },
+        brief: ["Shevatim makes tzitziyot as streetwear. Each collection is twelve small collections, one for each tribe.", "People were already asking to reserve pieces, and there was no store. The brand needed one that works in three languages, feels like the clothes, and lets the owner run every drop himself."],
+        made: [
+          { tag: "3D cloth", title: "A garment you can pull", body: "Each tzitzit is simulated cloth on a mesh cut to its shape, with the fringe, the tassels and the strings as separate threads. Drag it and it stretches. Let go and it settles back." },
+          { tag: "Product imagery", title: "The piece, and nothing else", body: "Product pictures were cut from the brand's own fitting-room photographs, so each shows the clean item. Every tzitzit also has three 3D renderings, and the page says they are renderings." },
+          { tag: "UX/UI", title: "Twelve tribes, twelve verses", body: "A slider introduces each tribe with its own verse, and every tribe has its own page. Each verse was compared with the source letter by letter before it went on the site." },
+          { tag: "Brand management", title: "One voice, in three languages", body: "We look after how the brand appears wherever it appears: the names of the pieces, the tribe pages, the announcement line and the pictures, in Hebrew, English and French." },
+          { tag: "Marketing and socials", title: "One desert shoot, cut for every screen", body: "The brand's desert footage, cut wide for the film that opens the store and vertical for phones and social feeds." }
+        ],
+        facts: [{ n: "3", l: "languages: Hebrew, English, French" }, { n: "61", l: "pieces in the store at launch" }, { n: "12 × 5", l: "tribes and pieces in the first collection" }, { n: "32", l: "verses checked against the source" }]
+      },
+      zoaretz: {
+        title: "Halom × <em>Zoaretz</em>", plain: "Halom × Zoaretz", meta: "Real estate, Tel Aviv, 2026",
+        line: "A thirty-second launch film for a boutique residential building in Tel Aviv, made with AI and directed in the studio.",
+        tags: ["AI video art", "Creative"],
+        slides: ["The film", "Four moments"],
+        brief: ["The Zoaretz group was launching a boutique residential building on Jabotinsky Street in Tel Aviv.", "It needed a short vertical film for phones that shows the life around the building, and then the apartment."],
+        made: [
+          { tag: "Creative", title: "One day, from the sea to the balcony", body: "The film follows one day: the seafront in the morning, the street and its café, a seventh-floor apartment, and its balcony at dusk. The details of the apartment appear on screen as the day arrives there." },
+          { tag: "AI video art", title: "Thirty seconds, made with AI", body: "The shots were generated with AI video tools and directed in the studio, then cut to thirty seconds in 9:16 for phones and social feeds." }
+        ],
+        facts: [{ n: "30 s", l: "film" }, { n: "9:16", l: "vertical, for phones" }]
+      },
+      mana: {
+        title: "Halom × <em>Mana</em>", plain: "Halom × Mana", meta: "Restaurants, Tel Aviv, 2026",
+        line: "A menu guests can pick up. The owner photographs each dish. Guests lift it and turn it on their phone, with no app.",
+        tags: ["Product", "Branding", "Web app", "3D relief", "Film"],
+        slides: ["The guest menu", "The film", "On a wide screen", "The identity"],
+        brief: ["A menu is a list of words, and guests order from it without seeing the food.", "We wanted a menu that shows the dish as it arrives at the table, that any restaurant owner can make alone from a phone, and that costs nothing to produce per dish."],
+        made: [
+          { tag: "3D relief", title: "One photograph becomes a dish you can lift", body: "The owner takes one photo of each dish. Mana turns it into a relief in the owner's own browser, in seconds, with no studio and no upload to a paid service." },
+          { tag: "Web app", title: "Three screens to a live menu", body: "Menu, Pictures, Publish. One job and one button on each screen. Publishing gives a permanent link, a QR code and a printable card for the table." },
+          { tag: "UX/UI", title: "A table instead of a list", body: "Guests open the link with no app. The dishes lie on one table that fills the screen. A swipe brings the next dish, a tap lifts it, and it turns under the finger. In Hebrew and English." },
+          { tag: "Branding", title: "A name that means the dish", body: "Mana is Hebrew for a dish, a portion. We named the product, drew its identity and wrote how it speaks to owners and to guests." },
+          { tag: "Product", title: "The owner sees what guests opened", body: "After publishing, the home screen becomes a dashboard: views this week, the dishes opened most, and the busy hours." },
+          { tag: "Film", title: "Forty-one seconds", body: "A film that shows the product from the printed menu to the table, in Hebrew and English, wide and vertical." }
+        ],
+        facts: [{ n: "1", l: "photograph per dish" }, { n: "3", l: "screens from sign-up to a live menu" }, { n: "2", l: "languages: Hebrew, English" }, { n: "41 s", l: "film, in two languages" }]
+      },
+      showroom: {
+        title: "A showroom you can <em>walk into</em>", plain: "A showroom you can walk into", meta: "Car dealerships, 2026",
+        line: "A dealership's showroom, open on a phone. Walk in from the street, change the paint, sit in the driver's seat.",
+        tags: ["3D experience", "UX/UI", "Film"],
+        slides: ["The reel", "The room"],
+        brief: ["A dealership sells from a room most buyers never visit. They choose online, from flat pictures.", "We built the room itself for the phone: one link a dealership can send, carrying its own name and colour."],
+        made: [
+          { tag: "3D experience", title: "Walk in from the street", body: "A paved forecourt, a door, and a room with one car on the stage and two in the bays. Choose a bay car and the three trade places." },
+          { tag: "UX/UI", title: "Make it yours", body: "Six paints, three wheel finishes, three interior colours. Lamps on and off, doors open and shut, a turntable, and a photo to keep. On a phone the controls sit in a low dock under the car." },
+          { tag: "3D experience", title: "Sit in the driver's seat", body: "Move around the car, stop at the wheel, the head lamp, the cabin and the rear, then look around from behind the wheel. Three lights: day, evening and studio." },
+          { tag: "UX/UI", title: "One link for each dealership", body: "The link carries the dealership's name and colour. The name goes on the building, the flags and the plate, and the car on the stage arrives painted in that colour." },
+          { tag: "Film", title: "A reel for the wall", body: "A twenty-second reel plays on the showroom's wall screen, with the dealership's name drawn over it." }
+        ],
+        facts: [{ n: "3", l: "cars on the floor" }, { n: "6", l: "paints to try" }, { n: "3", l: "lights: day, evening, studio" }, { n: "2", l: "languages: Hebrew, English" }],
+        credit: "The demo shows a freely licensed concept car: CarConcept by Eric Chadwick, Khronos glTF Sample Assets, CC BY 4.0. A client's showroom is built from their own models."
+      },
+      quarter: {
+        title: "A street you can walk <em>before it is built</em>", plain: "A street you can walk before it is built", meta: "Architecture, 2026",
+        line: "Seven new buildings in a historic quarter, modelled from the city's own 3D survey and running live in the browser.",
+        tags: ["3D experience", "Film"],
+        brief: ["An architecture firm is designing seven new buildings inside a historic quarter.", "Drawings show a building alone. Neighbours, buyers and the city want to see how it sits in the street they know."],
+        made: [
+          { tag: "3D experience", title: "The real quarter", body: "The old city is modelled from the municipal 3D survey, so every existing building stands where it really stands." },
+          { tag: "3D experience", title: "Seven buildings, in place", body: "Each new building is set on its own plot. Pick one to see it from the street and from above, live, on a phone." },
+          { tag: "Film", title: "A film of the walk", body: "A short film takes the viewer from the air down to the street and past each building." }
+        ],
+        facts: []
+      }
+    },
+    rows: [
+      { label: "concept", title: "A resort you can <em>walk through</em>", line: "See the villa. Then book it.", tags: "3D modelling, Website, Film", img: "resort" },
+      { label: "concept", title: "A sculptor's <em>gallery</em>", line: "The work, and how it is made.", tags: "Website, 3D experience, Film", img: "" },
+      { label: "own", title: "Halom × <em>Halom</em>", line: "The studio as its own first client.", tags: "Branding, Website, UX/UI, 3D experience", img: "ring" }
+    ],
+    services: {
+      h: "Five things, <em>one hand.</em>",
+      sub: "Brand, site and film come from the same people, so they match. Take one, or all five.",
+      items: [
+        { name: "Branding", line: "The name, the identity and the voice. Then keeping them alive: brand management, marketing and socials.", seen: "Seen in Mana, Halom × Shevatim and Halom × Halom" },
+        { name: "Website", line: "Sites, online stores and the back office behind them, designed and built in the studio.", seen: "Seen in Halom × Shevatim" },
+        { name: "UX/UI", line: "How it works in the hand, for the visitor and for the owner behind it.", seen: "Seen in the Shevatim back office and the Mana owner app" },
+        { name: "3D experience", line: "Rooms, products and places that run live in the browser, on a phone.", seen: "Seen in the showroom, the street and the Shevatim cloth" },
+        { name: "Film", line: "Brand films, launch films and AI video art, directed in the studio.", seen: "Seen in Halom × Zoaretz, the Mana film and the showroom reel" }
+      ]
+    },
+    how: {
+      h: "How we <em>work</em>",
+      items: [
+        { t: "One art direction", b: "The brand, the site and the film are made by the same people, under one eye. Nothing has to be explained twice." },
+        { t: "Made with AI, directed by people", b: "A named director answers for every project. Anything generated is labelled as generated." },
+        { t: "Real first", b: "We start from the real place, the real product and real footage, and build from there." },
+        { t: "We stay after launch", b: "A monthly plan keeps the site alive and the content coming, for clients who want it." }
+      ]
+    },
+    lab: {
+      label: "Halom Laboratory",
+      h: "Where the techniques <em>come from.</em>",
+      p: "Cloth that moves, dishes that lift, rooms that open. Each began as an experiment in our Laboratory, the studio's own space for art and film. Its site is a garden you walk through.",
+      cta: "Visit the Laboratory", url: "halom.io"
+    },
+    contact: { h: "Tell us what you're <em>building.</em>", p: "Four short questions, then we talk on WhatsApp.", cta: "Start the brief", wa: "WhatsApp" },
+    footer: { tag: "Dreams, realized.", rights: "© 2026 Halom", blurb: "A studio for brands you can step inside. Identity, site, 3D and film, made as one world.", contactH: "Contact", contact: "Contact us", city: "Tel Aviv", socialH: "Follow", siteH: "Site", top: "Back to top" },
+    brief: {
+      title: "Tell us what you're building", next: "Next", back: "Back", send: "Send brief", close: "Close",
+      s1: { h: "What do you <em>need?</em>", p: "Pick everything that fits. You can change it when we talk." },
+      s2: { h: "Tell us about <em>you.</em>", name: "Your name", business: "Your business", link: "A link, if you have one: your site or Instagram" },
+      s3: { h: "When, and <em>how big?</em>", when: "When do you want to go live?", budget: "A budget, if you have one in mind" },
+      s4: { h: "How do we <em>reach you?</em>", phone: "Phone or WhatsApp number", note: "Anything else we should know? You can leave this empty." },
+      s5: { h: "Your brief is <em>ready.</em>", p: "Send it to us on WhatsApp and we'll take it from there.", wa: "Continue on WhatsApp", done: "Back to the site" },
+      needs: ["Branding", "Website", "UX/UI", "3D experience", "Film", "Not sure yet"],
+      whens: ["As soon as possible", "Next month", "In two or three months", "Just exploring"],
+      budgets: ["Under ₪25,000", "₪25,000 to ₪60,000", "₪60,000 to ₪150,000", "Over ₪150,000", "Not sure yet"],
+      err: ["Pick at least one. Not sure yet counts.", "Add your name and your business.", "Pick when you want to go live.", "Add a phone number we can reach you on."],
+      sum: { need: "You need", from: "From", link: "Link", when: "Going live", budget: "Budget", phone: "Reach you on", note: "Note" },
+      hello: "Hi Halom, here is my brief."
+    }
+  },
+
+  he: {
+    dir: "rtl",
+    nav: { work: "עבודות", services: "שירותים", lab: "המעבדה", start: "מתחילים פרויקט", theme: "מעבר בין מצב בהיר לכהה", lang: "שפה" },
+    hero: {
+      h: "מותגים שאפשר <em>להיכנס אליהם.</em>",
+      lead: "זהות, אתר, תלת־ממד וסרט, כעולם אחד.",
+      cta1: "ספרו לנו מה אתם בונים",
+      cta2: "לעבודות",
+            scroll: "גללו אל תוך הענן"
+    },
+    forms: [["הטבעת", "לעבודות"], ["חולצה", "Halom × שבטים"], ["מנה", "Halom × Mana"], ["מכונית פורמולה 1", "אולם התצוגה"], ["אירוח", "לעבודות"], ["פלטת צבעים", "לעבודות"], ["ענן", "המעבדה"], ["נמר", "הסרט שלנו"], ["מצלמת וידאו", "Halom × זוארץ"], ["מודל תלת־ממד", "הרחוב"], ["אסטרונאוט", "מתחילים פרויקט"], ["חללית", "מתחילים פרויקט"]],
+    work: {
+      h: "עבודות",
+      sub: "שני שיתופי פעולה, מיזם אחד משלנו, וקונספטים שבנינו כדי להראות מה אנחנו עושים. שמות לקוחות מופיעים רק באישורם.",
+      open: "לפתוח",
+      also: "עוד בסטודיו"
+    },
+    labels: { collab: "שיתוף פעולה", venture: "מיזם של Halom", concept: "קונספט", own: "משלנו" },
+    cs: { brief: "הבריף", made: "מה <em>יצרנו</em>", close: "סגירה", next: "הבא", back: "כל העבודות", visit: "לאתר" },
+    projects: {
+      shevatim: {
+        title: "Halom × <em>שבטים</em>", plain: "Halom × שבטים", meta: "אופנת רחוב, חנות, ממשק ניהול ומותג, 2026",
+        line: "כל המערכת המקוונת של מותג אופנת רחוב: החנות בעברית, באנגלית ובצרפתית, ממשק הניהול שמאחוריה, והמותג שסביבה.",
+        tags: ["חנות אונליין", "ממשק ניהול", "UX/UI", "בד בתלת־ממד", "צילומי מוצר", "ניהול מותג", "שיווק ורשתות"],
+        slides: ["הקמפיין", "חזית החנות", "החנות", "מוצר, בתלת־ממד", "ממשק הניהול", "בטלפון"],
+        sys: {
+          h: "מערכת אחת, <em>מהחזית ועד הקלעים.</em>",
+          p: "החנות שהקונים רואים והמשרד שבו הבעלים עובד הם בנייה אחת על מסד נתונים אחד. אלה הקלטות של הדבר האמיתי.",
+          tabs: [
+            { name: "חזית החנות", path: "shevatim / en", title: "דלת הכניסה של המותג", body: "סרט מהמדבר, הקולקציה הנוכחית, הקטגוריות, שנים־עשר השבטים עם הפסוקים שלהם, תמונות מהצילומים, והסבר איך משריינים. כל עמוד בעברית, באנגלית ובצרפתית, במצב בהיר ובמצב כהה." },
+            { name: "החנות", path: "shevatim / en / shop", title: "שישים ואחד פריטים, מסוננים לפי שבט", body: "שש קטגוריות ושנים־עשר שבטים. בוחרים שבט והחנות מצטמצמת לפריטים שלו. מחיר מופיע ברגע שהבעלים קובע אותו. עד אז העמוד אומר שהמחיר יאושר כשניצור קשר." },
+            { name: "מוצר", path: "shevatim / en / item", title: "לכל פריט עמוד משלו", body: "תמונות, מידה למבוגרים ומידה לילדים, השבט שהפריט שייך אליו עם הפסוק שלו, והבד בתלת־ממד. נגיעה אחת מוסיפה אותו לשריון." },
+            { name: "שריון", path: "shevatim / en / reserve", title: "סל, שם ומספר טלפון", body: "הקונה שולח שריון ומקבל קוד. אין חיוב באתר. המותג מאשר מידה, מחיר ומשלוח בטלפון." },
+            { name: "ממשק הניהול", path: "shevatim / admin", title: "מכאן הבעלים מנהל הכול", body: "שריונים ממוינים לפי סטטוס, ולכל אחד כפתור חיוג וכפתור וואטסאפ. פריטים עם שמות בשלוש שפות, מחירים, מידות, תמונות ומתג ״בקרוב״. קולקציה היא לוח של שנים־עשר השבטים. המלאי נספר לכל פריט ומידה, עם היסטוריה של כל שינוי. בהגדרות נמצאים פרטי הקשר, שורת ההודעה והמתג שפותח וסוגר את השריונים." },
+            { name: "בטלפון", path: "", title: "אותה חנות, ביד", body: "מימין לשמאל בעברית, עם אותו סרט, אותם שבטים ואותו בד. בטלפון גרירה לצדדים תופסת את הבד, והחלקה למעלה ולמטה גוללת את העמוד." }
+          ],
+          flowH: "המסלול של שריון",
+          flow: [
+            { t: "מבקר בוחר פריטים", b: "לפי שבט או לפי קטגוריה, בכל אחת משלוש השפות." },
+            { t: "משאיר שם וטלפון", b: "אין חיוב." },
+            { t: "מקבל קוד", b: "הקוד נשאר בעמוד האישור." },
+            { t: "הבעלים רואה אותו", b: "בממשק הניהול, תחת ״מחכים לטיפול״." },
+            { t: "מדברים, והשריון מתקדם", b: "ל״בתהליך״, ואז ל״הסתיימו״." }
+          ],
+          note: "הקלטות מסך של החנות כשהיא רצה על מחשב בסטודיו, עם שריונים פתוחים כפי שיהיו בהשקה. ממשק הניהול מוצג עם שריונים לדוגמה."
+        },
+        brief: ["שבטים יוצרים ציציות כאופנת רחוב. כל קולקציה היא שתים־עשרה קולקציות קטנות, אחת לכל שבט.", "אנשים כבר ביקשו לשריין פריטים, ולא הייתה חנות. המותג היה צריך חנות שעובדת בשלוש שפות, מרגישה כמו הבגדים, ומאפשרת לבעלים לנהל כל השקה בעצמו."],
+        made: [
+          { tag: "בד בתלת־ממד", title: "בגד שאפשר למשוך", body: "כל ציצית היא סימולציית בד על רשת שנגזרה לפי הגזרה שלה, והפרנזים, הגדילים והחוטים הם חוטים נפרדים. גוררים והיא נמתחת. משחררים והיא חוזרת למקומה." },
+          { tag: "צילומי מוצר", title: "הפריט, ורק הוא", body: "תמונות המוצר נגזרו מצילומי חדר המדידה של המותג, כך שכל תמונה מציגה את הפריט נקי. לכל ציצית יש גם שלוש הדמיות תלת־ממד, והעמוד מציין שאלה הדמיות." },
+          { tag: "UX/UI", title: "שנים־עשר שבטים, שנים־עשר פסוקים", body: "סליידר מציג כל שבט עם הפסוק שלו, ולכל שבט יש עמוד משלו. כל פסוק הושווה למקור אות באות לפני שעלה לאתר." },
+          { tag: "ניהול מותג", title: "קול אחד, בשלוש שפות", body: "אנחנו שומרים על האופן שבו המותג מופיע בכל מקום שבו הוא מופיע: שמות הפריטים, עמודי השבטים, שורת ההודעה והתמונות, בעברית, באנגלית ובצרפתית." },
+          { tag: "שיווק ורשתות", title: "צילום אחד במדבר, ערוך לכל מסך", body: "צילומי המדבר של המותג, ערוכים לרוחב עבור הסרט שפותח את החנות ולאורך עבור טלפונים ורשתות חברתיות." }
+        ],
+        facts: [{ n: "3", l: "שפות: עברית, אנגלית, צרפתית" }, { n: "61", l: "פריטים בחנות בהשקה" }, { n: "12 × 5", l: "שבטים ופריטים בקולקציה הראשונה" }, { n: "32", l: "פסוקים שנבדקו מול המקור" }]
+      },
+      zoaretz: {
+        title: "Halom × <em>זוארץ</em>", plain: "Halom × זוארץ", meta: "נדל״ן, תל אביב, 2026",
+        line: "סרט השקה של שלושים שניות לבניין מגורים בוטיק בתל אביב, שנוצר ב־AI ובוים בסטודיו.",
+        tags: ["וידאו ארט ב־AI", "קריאייטיב"],
+        slides: ["הסרט", "ארבעה רגעים"],
+        brief: ["קבוצת זוארץ השיקה בניין מגורים בוטיק ברחוב ז׳בוטינסקי בתל אביב.", "היה צריך סרט קצר לאורך, לטלפונים, שמראה את החיים שסביב הבניין, ואז את הדירה."],
+        made: [
+          { tag: "קריאייטיב", title: "יום אחד, מהים ועד המרפסת", body: "הסרט עוקב אחרי יום אחד: הטיילת בבוקר, הרחוב ובית הקפה שלו, דירה בקומה השביעית והמרפסת שלה בשקיעה. פרטי הדירה מופיעים על המסך כשהיום מגיע אליה." },
+          { tag: "וידאו ארט ב־AI", title: "שלושים שניות, נוצרו ב־AI", body: "השוטים נוצרו בכלי וידאו של AI ובוימו בסטודיו, ואז נערכו לשלושים שניות ביחס 9:16, לטלפונים ולרשתות החברתיות." }
+        ],
+        facts: [{ n: "30 ש׳", l: "סרט" }, { n: "9:16", l: "לאורך, לטלפונים" }]
+      },
+      mana: {
+        title: "Halom × <em>Mana</em>", plain: "Halom × Mana", meta: "מסעדות, תל אביב, 2026",
+        line: "תפריט שאפשר להרים. בעל המסעדה מצלם כל מנה. האורחים מרימים ומסובבים אותה בטלפון, בלי אפליקציה.",
+        tags: ["מוצר", "מיתוג", "אפליקציית רשת", "תבליט תלת־ממד", "סרט"],
+        slides: ["התפריט של האורחים", "הסרט", "על מסך רחב", "הזהות"],
+        brief: ["תפריט הוא רשימה של מילים, והאורחים מזמינים ממנו בלי לראות את האוכל.", "רצינו תפריט שמראה את המנה כפי שהיא מגיעה לשולחן, שכל בעל מסעדה יכול להכין לבד מהטלפון, ושאין לו עלות הפקה למנה."],
+        made: [
+          { tag: "תבליט תלת־ממד", title: "צילום אחד הופך למנה שאפשר להרים", body: "בעל המסעדה מצלם תמונה אחת לכל מנה. Mana הופכת אותה לתבליט בדפדפן שלו, בתוך שניות, בלי סטודיו ובלי העלאה לשירות בתשלום." },
+          { tag: "אפליקציית רשת", title: "שלושה מסכים עד תפריט חי", body: "תפריט, תמונות, פרסום. משימה אחת וכפתור אחד בכל מסך. הפרסום נותן קישור קבוע, קוד QR וכרטיס להדפסה לשולחן." },
+          { tag: "UX/UI", title: "שולחן במקום רשימה", body: "האורחים פותחים את הקישור בלי אפליקציה. המנות מונחות על שולחן אחד שממלא את המסך. החלקה מביאה את המנה הבאה, נגיעה מרימה אותה, והיא מסתובבת תחת האצבע. בעברית ובאנגלית." },
+          { tag: "מיתוג", title: "שם שהוא המנה עצמה", body: "נתנו למוצר את שמו, ציירנו את הזהות שלו וכתבנו איך הוא מדבר עם בעלי מסעדות ועם אורחים." },
+          { tag: "מוצר", title: "הבעלים רואה מה האורחים פתחו", body: "אחרי הפרסום מסך הבית הופך ללוח בקרה: צפיות השבוע, המנות שנפתחו הכי הרבה ושעות העומס." },
+          { tag: "סרט", title: "ארבעים ואחת שניות", body: "סרט שמציג את המוצר מהתפריט המודפס ועד השולחן, בעברית ובאנגלית, לרוחב ולאורך." }
+        ],
+        facts: [{ n: "1", l: "צילום לכל מנה" }, { n: "3", l: "מסכים מההרשמה ועד תפריט חי" }, { n: "2", l: "שפות: עברית, אנגלית" }, { n: "41 ש׳", l: "סרט, בשתי שפות" }]
+      },
+      showroom: {
+        title: "אולם תצוגה שאפשר <em>להיכנס אליו</em>", plain: "אולם תצוגה שאפשר להיכנס אליו", meta: "סוכנויות רכב, 2026",
+        line: "אולם התצוגה של הסוכנות, פתוח בטלפון. נכנסים מהרחוב, מחליפים צבע, יושבים במושב הנהג.",
+        tags: ["חוויית תלת־ממד", "UX/UI", "סרט"],
+        slides: ["הסרטון", "האולם"],
+        brief: ["סוכנות רכב מוכרת מתוך אולם שרוב הקונים לא מגיעים אליו. הם בוחרים ברשת, מתמונות שטוחות.", "בנינו את האולם עצמו לטלפון: קישור אחד שהסוכנות שולחת, עם השם והצבע שלה."],
+        made: [
+          { tag: "חוויית תלת־ממד", title: "נכנסים מהרחוב", body: "רחבה מרוצפת, דלת, ואולם עם רכב אחד על הבמה ושניים בעמדות. בוחרים רכב מהעמדה והשלושה מתחלפים." },
+          { tag: "UX/UI", title: "להפוך אותו לשלכם", body: "שישה צבעים, שלושה גימורי חישוקים, שלושה צבעי פנים. אורות, דלתות, במה מסתובבת ותמונה למזכרת. בטלפון הפקדים יושבים במעגן נמוך מתחת לרכב." },
+          { tag: "חוויית תלת־ממד", title: "יושבים במושב הנהג", body: "מקיפים את הרכב, עוצרים ליד הגלגל, הפנס, תא הנוסעים והחלק האחורי, ואז מביטים סביב מאחורי ההגה. שלוש תאורות: יום, ערב וסטודיו." },
+          { tag: "UX/UI", title: "קישור לכל סוכנות", body: "הקישור נושא את שם הסוכנות ואת הצבע שלה. השם מופיע על הבניין, על הדגלים ועל לוחית הרישוי, והרכב שעל הבמה מגיע צבוע בצבע הזה." },
+          { tag: "סרט", title: "סרטון למסך הקיר", body: "סרטון של עשרים שניות מוקרן על מסך הקיר באולם, ושם הסוכנות מופיע עליו." }
+        ],
+        facts: [{ n: "3", l: "רכבים באולם" }, { n: "6", l: "צבעים לנסות" }, { n: "3", l: "תאורות: יום, ערב, סטודיו" }, { n: "2", l: "שפות: עברית, אנגלית" }],
+        credit: "ההדגמה מציגה רכב קונספט ברישיון חופשי: CarConcept מאת Eric Chadwick, Khronos glTF Sample Assets, CC BY 4.0. אולם של לקוח נבנה מהדגמים שלו."
+      },
+      quarter: {
+        title: "רחוב שאפשר ללכת בו <em>לפני שנבנה</em>", plain: "רחוב שאפשר ללכת בו לפני שנבנה", meta: "אדריכלות, 2026",
+        line: "שבעה בניינים חדשים ברובע היסטורי, ממודלים מסקר התלת־ממד של העירייה ורצים חי בדפדפן.",
+        tags: ["חוויית תלת־ממד", "סרט"],
+        brief: ["משרד אדריכלים מתכנן שבעה בניינים חדשים בתוך רובע היסטורי.", "שרטוטים מציגים בניין לבדו. השכנים, הקונים והעירייה רוצים לראות איך הוא יושב ברחוב שהם מכירים."],
+        made: [
+          { tag: "חוויית תלת־ממד", title: "הרובע האמיתי", body: "העיר העתיקה ממודלת מסקר התלת־ממד העירוני, כך שכל בניין קיים עומד בדיוק במקומו." },
+          { tag: "חוויית תלת־ממד", title: "שבעה בניינים, במקומם", body: "כל בניין חדש מוצב במגרש שלו. בוחרים אחד ורואים אותו מהרחוב ומלמעלה, חי, בטלפון." },
+          { tag: "סרט", title: "סרט של ההליכה", body: "סרט קצר לוקח את הצופה מהאוויר אל הרחוב וחולף על פני כל בניין." }
+        ],
+        facts: []
+      }
+    },
+    rows: [
+      { label: "concept", title: "אתר נופש שאפשר <em>לטייל בו</em>", line: "רואים את הווילה. ואז מזמינים.", tags: "מידול תלת־ממד, אתר, סרט", img: "resort" },
+      { label: "concept", title: "גלריה של <em>פסל</em>", line: "היצירה, והדרך אליה.", tags: "אתר, חוויית תלת־ממד, סרט", img: "" },
+      { label: "own", title: "Halom × <em>Halom</em>", line: "הסטודיו כלקוח הראשון של עצמו.", tags: "מיתוג, אתר, UX/UI, חוויית תלת־ממד", img: "ring" }
+    ],
+    services: {
+      h: "חמישה דברים, <em>יד אחת.</em>",
+      sub: "המותג, האתר והסרט נעשים בידי אותם אנשים, ולכן הם מתאימים זה לזה. אפשר לקחת אחד, או את כל החמישה.",
+      items: [
+        { name: "מיתוג", line: "השם, הזהות והקול. ואחר כך לשמור אותם חיים: ניהול מותג, שיווק ורשתות.", seen: "רואים ב־Mana, ב־Halom × שבטים וב־Halom × Halom" },
+        { name: "אתר", line: "אתרים, חנויות אונליין וממשק הניהול שמאחוריהם, מעוצבים ונבנים בסטודיו.", seen: "רואים ב־Halom × שבטים" },
+        { name: "UX/UI", line: "איך זה עובד ביד, למבקר ולבעלים שמאחורי הקלעים.", seen: "רואים בממשק הניהול של שבטים ובאפליקציית הבעלים של Mana" },
+        { name: "חוויית תלת־ממד", line: "חדרים, מוצרים ומקומות שרצים חי בדפדפן, בטלפון.", seen: "רואים באולם התצוגה, ברחוב ובבד של שבטים" },
+        { name: "סרט", line: "סרטי מותג, סרטי השקה ווידאו ארט ב־AI, בבימוי הסטודיו.", seen: "רואים ב־Halom × זוארץ, בסרט של Mana ובסרטון האולם" }
+      ]
+    },
+    how: {
+      h: "איך אנחנו <em>עובדים</em>",
+      items: [
+        { t: "ארט דיירקשן אחד", b: "המותג, האתר והסרט נעשים בידי אותם אנשים, תחת עין אחת. לא צריך להסביר שום דבר פעמיים." },
+        { t: "נוצר עם AI, בבימוי של בני אדם", b: "במאי בשמו עומד מאחורי כל פרויקט. כל מה שנוצר ב־AI מסומן ככזה." },
+        { t: "קודם כול האמיתי", b: "מתחילים מהמקום האמיתי, מהמוצר האמיתי ומצילומים אמיתיים, ובונים משם." },
+        { t: "נשארים אחרי ההשקה", b: "תוכנית חודשית שומרת על האתר חי ועל תוכן שממשיך להגיע, למי שרוצה." }
+      ]
+    },
+    lab: {
+      label: "מעבדת Halom",
+      h: "מאיפה הטכניקות <em>מגיעות.</em>",
+      p: "בד שנע, מנות שמתרוממות, חדרים שנפתחים. כל אחד מהם התחיל כניסוי במעבדה שלנו, המרחב של הסטודיו לאמנות ולקולנוע. האתר שלה הוא גן שמטיילים בו.",
+      cta: "לביקור במעבדה", url: "halom.io"
+    },
+    contact: { h: "ספרו לנו מה אתם <em>בונים.</em>", p: "ארבע שאלות קצרות, ואז מדברים בוואטסאפ.", cta: "מתחילים בריף", wa: "וואטסאפ" },
+    footer: { tag: "חלומות מתגשמים.", rights: "© 2026 Halom", blurb: "סטודיו למותגים שאפשר להיכנס אליהם. זהות, אתר, תלת־ממד וסרט, כעולם אחד.", contactH: "יצירת קשר", contact: "צרו קשר", city: "תל אביב", socialH: "עקבו", siteH: "האתר", top: "חזרה למעלה" },
+    brief: {
+      title: "ספרו לנו מה אתם בונים", next: "הבא", back: "חזרה", send: "שליחת הבריף", close: "סגירה",
+      s1: { h: "מה אתם <em>צריכים?</em>", p: "בחרו כל מה שמתאים. אפשר לשנות כשנדבר." },
+      s2: { h: "ספרו לנו <em>עליכם.</em>", name: "השם שלכם", business: "העסק שלכם", link: "קישור, אם יש: האתר או האינסטגרם" },
+      s3: { h: "מתי, <em>ובאיזה היקף?</em>", when: "מתי תרצו לעלות לאוויר?", budget: "תקציב, אם יש לכם אחד בראש" },
+      s4: { h: "איך <em>מגיעים אליכם?</em>", phone: "מספר טלפון או וואטסאפ", note: "עוד משהו שכדאי שנדע? אפשר להשאיר ריק." },
+      s5: { h: "הבריף שלכם <em>מוכן.</em>", p: "שלחו לנו אותו בוואטסאפ ונמשיך משם.", wa: "להמשיך בוואטסאפ", done: "חזרה לאתר" },
+      needs: ["מיתוג", "אתר", "UX/UI", "חוויית תלת־ממד", "סרט", "עוד לא בטוחים"],
+      whens: ["כמה שיותר מהר", "בחודש הבא", "בעוד חודשיים־שלושה", "רק בודקים"],
+      budgets: ["עד ‏₪25,000", "‏₪25,000 עד ‏₪60,000", "‏₪60,000 עד ‏₪150,000", "מעל ‏₪150,000", "עוד לא בטוחים"],
+      err: ["בחרו לפחות אחד. גם עוד לא בטוחים נחשב.", "הוסיפו את השם ואת העסק.", "בחרו מתי תרצו לעלות לאוויר.", "הוסיפו מספר טלפון שאפשר להשיג אתכם בו."],
+      sum: { need: "מה צריך", from: "מאת", link: "קישור", when: "עלייה לאוויר", budget: "תקציב", phone: "ליצירת קשר", note: "הערה" },
+      hello: "היי Halom, הנה הבריף שלי."
+    }
+  },
+
+  fr: {
+    dir: "ltr",
+    nav: { work: "Projets", services: "Services", lab: "Laboratoire", start: "Démarrer un projet", theme: "Passer du mode clair au mode sombre", lang: "Langue" },
+    hero: {
+      h: "Des marques où l'on peut <em>entrer.</em>",
+      lead: "Identité, site, 3D et film, conçus comme un seul monde.",
+      cta1: "Dites-nous ce que vous construisez",
+      cta2: "Voir les projets",
+            scroll: "Faites défiler, entrez dans le nuage"
+    },
+    forms: [["L'anneau", "Voir les projets"], ["Chemise", "Halom × Shevatim"], ["Plat", "Halom × Mana"], ["Formule 1", "Le showroom"], ["Hospitalité", "Voir les projets"], ["Palette", "Voir les projets"], ["Nuage", "Le Laboratoire"], ["Tigre", "Notre film"], ["Caméra", "Halom × Zoaretz"], ["Maquette 3D", "La rue"], ["Astronaute", "Démarrer un projet"], ["Vaisseau", "Démarrer un projet"]],
+    work: {
+      h: "Projets",
+      sub: "Deux collaborations, un projet maison, et des concepts que nous avons construits pour montrer ce que nous faisons. Les noms des clients apparaissent quand ils disent oui.",
+      open: "Ouvrir",
+      also: "Aussi au studio"
+    },
+    labels: { collab: "Collaboration", venture: "Un projet Halom", concept: "Concept", own: "Maison" },
+    cs: { brief: "Le brief", made: "Ce que nous avons <em>fait</em>", close: "Fermer", next: "Suivant", back: "Tous les projets", visit: "Voir le site" },
+    projects: {
+      shevatim: {
+        title: "Halom × <em>Shevatim</em>", plain: "Halom × Shevatim", meta: "Streetwear, Boutique, back-office et marque, 2026",
+        line: "Tout le système en ligne d'une marque de streetwear : la boutique en hébreu, en anglais et en français, le back-office derrière elle, et la marque autour.",
+        tags: ["Boutique en ligne", "Back-office", "UX/UI", "Tissu 3D", "Images produit", "Gestion de marque", "Marketing et réseaux"],
+        slides: ["La campagne", "La vitrine", "La boutique", "Un produit, en 3D", "Le back-office", "Sur téléphone"],
+        sys: {
+          h: "Un seul système, <em>de la vitrine aux coulisses.</em>",
+          p: "La boutique que voient les clients et le bureau où travaille le fondateur sont une seule réalisation, sur une seule base de données. Voici des enregistrements du vrai site.",
+          tabs: [
+            { name: "Vitrine", path: "shevatim / en", title: "La porte d'entrée de la marque", body: "Un film tourné dans le désert, la collection du moment, les catégories, les douze tribus et leurs versets, des images du tournage, et le fonctionnement de la réservation. Chaque page en hébreu, en anglais et en français, en mode clair et en mode sombre." },
+            { name: "Boutique", path: "shevatim / en / shop", title: "Soixante et une pièces, filtrées par tribu", body: "Six catégories et douze tribus. On choisit une tribu et la boutique se resserre sur ses pièces. Un prix s'affiche dès que le fondateur le fixe. D'ici là, la page indique qu'il sera confirmé lors de la prise de contact." },
+            { name: "Produit", path: "shevatim / en / item", title: "Chaque pièce a sa page", body: "Des images, une taille adulte et une taille enfant, la tribu de la pièce avec son verset, et le tissu en 3D. Un geste l'ajoute à la réservation." },
+            { name: "Réserver", path: "shevatim / en / reserve", title: "Un panier, un nom, un numéro", body: "Le client envoie une réservation et reçoit un code. Rien n'est débité en ligne. La marque confirme la taille, le prix et la livraison par téléphone." },
+            { name: "Back-office", path: "shevatim / admin", title: "Là où le fondateur pilote tout", body: "Les réservations triées par statut, chacune avec un bouton d'appel et un bouton WhatsApp. Les pièces avec leurs noms en trois langues, leurs prix, leurs tailles, leurs images et un interrupteur « bientôt ». Une collection est un tableau des douze tribus. Le stock est compté par pièce et par taille, avec l'historique de chaque changement. Les réglages réunissent les coordonnées, la ligne d'annonce et l'interrupteur qui ouvre et ferme les réservations." },
+            { name: "Sur téléphone", path: "", title: "La même boutique, dans la main", body: "De droite à gauche en hébreu, avec le même film, les mêmes tribus et le même tissu. Sur téléphone, un glissement latéral saisit le tissu et un glissement vertical fait défiler la page." }
+          ],
+          flowH: "Le trajet d'une réservation",
+          flow: [
+            { t: "Un visiteur choisit des pièces", b: "Par tribu ou par catégorie, dans l'une des trois langues." },
+            { t: "Il laisse un nom et un numéro", b: "Rien n'est débité." },
+            { t: "Il reçoit un code", b: "Le code reste sur la page de confirmation." },
+            { t: "Le fondateur la voit", b: "Dans le back-office, parmi les réservations en attente." },
+            { t: "Ils se parlent, elle avance", b: "Elle passe en cours, puis terminée." }
+          ],
+          note: "Enregistrements d'écran de la boutique tournant sur une machine du studio, réservations ouvertes comme elles le seront au lancement. Le back-office est montré avec des réservations de démonstration."
+        },
+        brief: ["Shevatim crée des tsitsits pensés comme du streetwear. Chaque collection réunit douze petites collections, une par tribu.", "Des clients demandaient déjà à réserver des pièces, et il n'y avait pas de boutique. La marque avait besoin d'un site en trois langues, à l'image des vêtements, que son fondateur puisse gérer seul à chaque sortie."],
+        made: [
+          { tag: "Tissu 3D", title: "Un vêtement que l'on peut tirer", body: "Chaque tsitsit est un tissu simulé sur un maillage taillé à sa forme, avec les franges, les pompons et les fils comme autant de brins distincts. On le tire, il s'étire. On le lâche, il retombe." },
+          { tag: "Images produit", title: "La pièce, et rien d'autre", body: "Les images produit sont détourées à partir des photos d'essayage de la marque : chacune montre la pièce seule. Chaque tsitsit a aussi trois rendus 3D, et la page précise que ce sont des rendus." },
+          { tag: "UX/UI", title: "Douze tribus, douze versets", body: "Un carrousel présente chaque tribu avec son verset, et chaque tribu a sa propre page. Chaque verset a été comparé à la source lettre par lettre avant d'être publié." },
+          { tag: "Gestion de marque", title: "Une seule voix, en trois langues", body: "Nous veillons à la façon dont la marque apparaît partout où elle apparaît : les noms des pièces, les pages des tribus, la ligne d'annonce et les images, en hébreu, en anglais et en français." },
+          { tag: "Marketing et réseaux", title: "Un tournage dans le désert, monté pour chaque écran", body: "Les images du désert tournées par la marque, montées en large pour le film qui ouvre la boutique et en vertical pour les téléphones et les réseaux sociaux." }
+        ],
+        facts: [{ n: "3", l: "langues : hébreu, anglais, français" }, { n: "61", l: "pièces en boutique au lancement" }, { n: "12 × 5", l: "tribus et pièces dans la première collection" }, { n: "32", l: "versets vérifiés à la source" }]
+      },
+      zoaretz: {
+        title: "Halom × <em>Zoaretz</em>", plain: "Halom × Zoaretz", meta: "Immobilier, Tel-Aviv, 2026",
+        line: "Un film de lancement de trente secondes pour un petit immeuble résidentiel haut de gamme à Tel-Aviv, réalisé avec l'IA et dirigé au studio.",
+        tags: ["Art vidéo IA", "Création"],
+        slides: ["Le film", "Quatre moments"],
+        brief: ["Le groupe Zoaretz lançait un petit immeuble résidentiel haut de gamme rue Jabotinsky, à Tel-Aviv.", "Il fallait un film court et vertical, pour téléphone, qui montre la vie autour de l'immeuble, puis l'appartement."],
+        made: [
+          { tag: "Création", title: "Une journée, de la mer au balcon", body: "Le film suit une journée : le front de mer le matin, la rue et son café, un appartement au septième étage et son balcon au crépuscule. Les caractéristiques de l'appartement s'affichent quand la journée y arrive." },
+          { tag: "Art vidéo IA", title: "Trente secondes, réalisées avec l'IA", body: "Les plans ont été générés avec des outils vidéo d'IA et dirigés au studio, puis montés en trente secondes au format 9:16, pour les téléphones et les réseaux sociaux." }
+        ],
+        facts: [{ n: "30 s", l: "de film" }, { n: "9:16", l: "vertical, pour téléphone" }]
+      },
+      mana: {
+        title: "Halom × <em>Mana</em>", plain: "Halom × Mana", meta: "Restaurants, Tel-Aviv, 2026",
+        line: "Un menu que l'on peut prendre en main. Le restaurateur photographie chaque plat. Les clients le soulèvent et le font tourner sur leur téléphone, sans application.",
+        tags: ["Produit", "Identité", "Application web", "Relief 3D", "Film"],
+        slides: ["Le menu des clients", "Le film", "Sur grand écran", "L'identité"],
+        brief: ["Un menu est une liste de mots, et l'on commande sans voir le plat.", "Nous voulions un menu qui montre le plat tel qu'il arrive à table, que tout restaurateur puisse créer seul depuis son téléphone, sans aucun coût de production par plat."],
+        made: [
+          { tag: "Relief 3D", title: "Une photo devient un plat que l'on soulève", body: "Le restaurateur prend une photo par plat. Mana la transforme en relief dans son propre navigateur, en quelques secondes, sans studio et sans envoi vers un service payant." },
+          { tag: "Application web", title: "Trois écrans jusqu'au menu en ligne", body: "Menu, Photos, Publier. Une tâche et un bouton par écran. La publication donne un lien permanent, un QR code et une carte à imprimer pour la table." },
+          { tag: "UX/UI", title: "Une table plutôt qu'une liste", body: "Les clients ouvrent le lien sans application. Les plats sont posés sur une table qui remplit l'écran. Un glissement amène le plat suivant, un toucher le soulève, et il tourne sous le doigt. En hébreu et en anglais." },
+          { tag: "Identité", title: "Un nom qui veut dire le plat", body: "Mana signifie plat, portion, en hébreu. Nous avons nommé le produit, dessiné son identité et écrit sa façon de parler aux restaurateurs et aux clients." },
+          { tag: "Produit", title: "Le restaurateur voit ce que l'on a ouvert", body: "Après la publication, l'écran d'accueil devient un tableau de bord : vues de la semaine, plats les plus ouverts, heures de pointe." },
+          { tag: "Film", title: "Quarante et une secondes", body: "Un film qui montre le produit, du menu imprimé à la table, en hébreu et en anglais, en large et en vertical." }
+        ],
+        facts: [{ n: "1", l: "photo par plat" }, { n: "3", l: "écrans de l'inscription au menu en ligne" }, { n: "2", l: "langues : hébreu, anglais" }, { n: "41 s", l: "de film, en deux langues" }]
+      },
+      showroom: {
+        title: "Un showroom où l'on peut <em>entrer</em>", plain: "Un showroom où l'on peut entrer", meta: "Concessions automobiles, 2026",
+        line: "Le showroom d'une concession, ouvert sur un téléphone. On entre depuis la rue, on change la peinture, on s'assoit au volant.",
+        tags: ["Expérience 3D", "UX/UI", "Film"],
+        slides: ["Le film", "La salle"],
+        brief: ["Une concession vend depuis une salle que la plupart des acheteurs ne visitent jamais. Ils choisissent en ligne, sur des images plates.", "Nous avons construit la salle elle-même pour le téléphone : un seul lien que la concession envoie, à son nom et à sa couleur."],
+        made: [
+          { tag: "Expérience 3D", title: "Entrer depuis la rue", body: "Un parvis pavé, une porte, et une salle avec une voiture sur le podium et deux dans les alcôves. On en choisit une et les trois échangent leurs places." },
+          { tag: "UX/UI", title: "La faire sienne", body: "Six peintures, trois finitions de jantes, trois couleurs d'intérieur. Phares, portes, plateau tournant, et une photo à garder. Sur téléphone, les commandes tiennent dans un dock bas sous la voiture." },
+          { tag: "Expérience 3D", title: "S'asseoir au volant", body: "On tourne autour de la voiture, on s'arrête à la roue, au phare, à l'habitacle et à l'arrière, puis on regarde autour de soi depuis le siège conducteur. Trois lumières : jour, soir et studio." },
+          { tag: "UX/UI", title: "Un lien par concession", body: "Le lien porte le nom et la couleur de la concession. Le nom s'affiche sur le bâtiment, les drapeaux et la plaque, et la voiture du podium arrive peinte dans cette couleur." },
+          { tag: "Film", title: "Un film pour le mur", body: "Un film de vingt secondes passe sur l'écran mural du showroom, avec le nom de la concession par-dessus." }
+        ],
+        facts: [{ n: "3", l: "voitures dans la salle" }, { n: "6", l: "peintures à essayer" }, { n: "3", l: "lumières : jour, soir, studio" }, { n: "2", l: "langues : hébreu, anglais" }],
+        credit: "La démo montre une voiture concept sous licence libre : CarConcept d'Eric Chadwick, Khronos glTF Sample Assets, CC BY 4.0. Le showroom d'un client est construit à partir de ses propres modèles."
+      },
+      quarter: {
+        title: "Une rue que l'on parcourt <em>avant qu'elle existe</em>", plain: "Une rue que l'on parcourt avant qu'elle existe", meta: "Architecture, 2026",
+        line: "Sept nouveaux immeubles dans un quartier historique, modélisés à partir du relevé 3D de la ville et visibles en direct dans le navigateur.",
+        tags: ["Expérience 3D", "Film"],
+        brief: ["Une agence d'architecture conçoit sept nouveaux immeubles au cœur d'un quartier historique.", "Un plan montre un immeuble seul. Les voisins, les acheteurs et la ville veulent voir comment il s'inscrit dans la rue qu'ils connaissent."],
+        made: [
+          { tag: "Expérience 3D", title: "Le vrai quartier", body: "La vieille ville est modélisée à partir du relevé 3D municipal : chaque bâtiment existant se trouve là où il est vraiment." },
+          { tag: "Expérience 3D", title: "Sept immeubles, à leur place", body: "Chaque nouvel immeuble est posé sur sa parcelle. On en choisit un pour le voir depuis la rue et d'en haut, en direct, sur un téléphone." },
+          { tag: "Film", title: "Un film de la promenade", body: "Un court film emmène le spectateur du ciel jusqu'à la rue, devant chaque immeuble." }
+        ],
+        facts: []
+      }
+    },
+    rows: [
+      { label: "concept", title: "Un resort que l'on peut <em>parcourir</em>", line: "Voir la villa. Puis la réserver.", tags: "Modélisation 3D, Site, Film", img: "resort" },
+      { label: "concept", title: "La galerie d'un <em>sculpteur</em>", line: "L'œuvre, et la façon dont elle naît.", tags: "Site, Expérience 3D, Film", img: "" },
+      { label: "own", title: "Halom × <em>Halom</em>", line: "Le studio, son propre premier client.", tags: "Identité, Site, UX/UI, Expérience 3D", img: "ring" }
+    ],
+    services: {
+      h: "Cinq métiers, <em>une seule main.</em>",
+      sub: "La marque, le site et le film viennent des mêmes personnes : ils vont ensemble. Prenez-en un, ou les cinq.",
+      items: [
+        { name: "Identité", line: "Le nom, l'identité et la voix. Puis les faire vivre : gestion de marque, marketing et réseaux.", seen: "À voir dans Mana, Halom × Shevatim et Halom × Halom" },
+        { name: "Site", line: "Sites, boutiques en ligne et le back-office qui les fait tourner, conçus et développés au studio.", seen: "À voir dans Halom × Shevatim" },
+        { name: "UX/UI", line: "Comment cela fonctionne en main, pour le visiteur et pour celui qui gère.", seen: "À voir dans le back-office Shevatim et l'application Mana" },
+        { name: "Expérience 3D", line: "Des pièces, des produits et des lieux qui tournent en direct dans le navigateur, sur un téléphone.", seen: "À voir dans le showroom, la rue et le tissu Shevatim" },
+        { name: "Film", line: "Films de marque, films de lancement et art vidéo IA, réalisés au studio.", seen: "À voir dans Halom × Zoaretz, le film Mana et le film du showroom" }
+      ]
+    },
+    how: {
+      h: "Notre façon de <em>travailler</em>",
+      items: [
+        { t: "Une seule direction artistique", b: "La marque, le site et le film sont faits par les mêmes personnes, sous un même regard. Rien n'est à expliquer deux fois." },
+        { t: "Fait avec l'IA, dirigé par des personnes", b: "Un réalisateur nommé répond de chaque projet. Tout ce qui est généré est indiqué comme tel." },
+        { t: "Le réel d'abord", b: "Nous partons du vrai lieu, du vrai produit et de vraies images, et nous construisons à partir de là." },
+        { t: "Nous restons après le lancement", b: "Une formule mensuelle garde le site vivant et le contenu régulier, pour les clients qui le souhaitent." }
+      ]
+    },
+    lab: {
+      label: "Laboratoire Halom",
+      h: "D'où viennent <em>les techniques.</em>",
+      p: "Un tissu qui bouge, des plats qui se soulèvent, des pièces qui s'ouvrent. Chacun est né d'une expérience dans notre Laboratoire, l'espace du studio pour l'art et le film. Son site est un jardin où l'on se promène.",
+      cta: "Visiter le Laboratoire", url: "halom.io"
+    },
+    contact: { h: "Dites-nous ce que vous <em>construisez.</em>", p: "Quatre questions courtes, puis nous parlons sur WhatsApp.", cta: "Commencer le brief", wa: "WhatsApp" },
+    footer: { tag: "Des rêves, réalisés.", rights: "© 2026 Halom", blurb: "Un studio pour des marques où l'on peut entrer. Identité, site, 3D et film, conçus comme un seul monde.", contactH: "Contact", contact: "Nous contacter", city: "Tel-Aviv", socialH: "Suivre", siteH: "Site", top: "Haut de page" },
+    brief: {
+      title: "Dites-nous ce que vous construisez", next: "Suivant", back: "Retour", send: "Envoyer le brief", close: "Fermer",
+      s1: { h: "De quoi avez-vous <em>besoin ?</em>", p: "Choisissez tout ce qui convient. Vous pourrez changer quand nous parlerons." },
+      s2: { h: "Parlez-nous de <em>vous.</em>", name: "Votre nom", business: "Votre entreprise", link: "Un lien, si vous en avez un : votre site ou Instagram" },
+      s3: { h: "Quand, et de <em>quelle taille ?</em>", when: "Quand voulez-vous être en ligne ?", budget: "Un budget, si vous en avez un en tête" },
+      s4: { h: "Comment vous <em>joindre ?</em>", phone: "Numéro de téléphone ou WhatsApp", note: "Autre chose à savoir ? Vous pouvez laisser vide." },
+      s5: { h: "Votre brief est <em>prêt.</em>", p: "Envoyez-le-nous sur WhatsApp et nous prenons la suite.", wa: "Continuer sur WhatsApp", done: "Retour au site" },
+      needs: ["Identité", "Site", "UX/UI", "Expérience 3D", "Film", "Pas encore sûr"],
+      whens: ["Dès que possible", "Le mois prochain", "Dans deux ou trois mois", "Je me renseigne"],
+      budgets: ["Moins de 25 000 ₪", "25 000 à 60 000 ₪", "60 000 à 150 000 ₪", "Plus de 150 000 ₪", "Pas encore sûr"],
+      err: ["Choisissez au moins une option. Pas encore sûr compte aussi.", "Ajoutez votre nom et votre entreprise.", "Choisissez quand vous voulez être en ligne.", "Ajoutez un numéro où vous joindre."],
+      sum: { need: "Besoin", from: "De", link: "Lien", when: "Mise en ligne", budget: "Budget", phone: "Vous joindre", note: "Note" },
+      hello: "Bonjour Halom, voici mon brief."
+    }
+  }
+};
+</script>
+<script>
+/* Halom sky: real-time volumetric clouds and the liquid-glass ring that takes form.
+   Pass A marches the clouds into a small buffer. Pass B upscales it and draws the ring
+   at full resolution, refracting the clouds behind it. */
+window.HalomSky = (function () {
+  var VERT = '#version 300 es\nin vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+
+  var CLOUDS = [
+    '#version 300 es',
+    'precision highp float;',
+    'uniform sampler2D uNoise;uniform sampler2D uPrev;uniform float uBlend;uniform float uFrame;uniform float uSide;',
+    'uniform vec2 uRes;uniform float uTime;uniform vec2 uMouse;uniform float uDive;uniform float uTheme;uniform float uFog;uniform vec3 uBg;',
+    'out vec4 o;',
+    'const float YB=-3.0;',
+    'float n3(vec3 x){vec3 p=floor(x);vec3 f=fract(x);f=f*f*(3.-2.*f);',
+    ' vec2 uv=(p.xy+vec2(37.,239.)*p.z)+f.xy;',
+    ' vec2 rg=textureLod(uNoise,(uv+.5)/256.,0.).rg;return mix(rg.x,rg.y,f.z);}',
+    'float fbm(vec3 p,int oct){float a=.5,s=0.;for(int i=0;i<5;i++){if(i>=oct)break;s+=a*n3(p);p=p*2.03+vec3(1.7,9.2,3.1);a*=.5;}return s;}',
+    'float dens(vec3 p,int oct){',
+    ' vec3 w=p;w.z+=uTime*.42;w.x+=uTime*.06;',
+    ' float side=smoothstep(1.3,5.5,abs(p.x));',
+    ' float big=n3(vec3(w.xz*.085,1.3));',
+    ' float top=mix(.35,1.0+4.4*smoothstep(.34,.72,big),side);',
+    ' float h=(p.y-YB)/(top-YB);',
+    ' if(h<0.||h>1.)return 0.;',
+    ' float base=n3(w*vec3(.17,.24,.17))*.62+n3(w*vec3(.37,.50,.37)+7.3)*.38;',
+    ' float bil=0.;float a=.55;vec3 q=w*.62+vec3(3.1,0.,5.7);',
+    ' for(int i=0;i<4;i++){if(i>=oct-2)break;bil+=a*abs(2.*n3(q)-1.);q=q*2.17+vec3(1.7,9.2,3.1);a*=.52;}',
+    ' float d=base+bil*.46-(.50+.56*h*h);',
+    ' return clamp(d*7.5,0.,1.);}',
+    'float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}',
+    'void main(){',
+    ' vec2 p=(2.*gl_FragCoord.xy-uRes)/uRes.y;',
+    ' float th=uTheme;',
+    ' vec3 skyTop=mix(vec3(.012,.012,.022),vec3(.72,.79,.91),th);',
+    ' vec3 skyHor=mix(vec3(.090,.058,.082),vec3(1.,.89,.83),th);',
+    ' vec3 sunC=mix(vec3(1.,.72,.56),vec3(1.,.94,.86),th);',
+    ' vec3 litC=mix(vec3(1.26,.99,.84),vec3(1.,.99,.97),th);',
+    ' vec3 shC=mix(vec3(.036,.031,.046),vec3(.67,.64,.77),th);',
+    ' vec3 ambC=mix(vec3(.10,.10,.20),vec3(.82,.80,.90),th);',
+    ' vec3 hazeC=mix(vec3(.085,.060,.085),vec3(.99,.90,.86),th);',
+    ' vec3 sun=normalize(vec3(.45*uSide,.30,.84));',
+    ' vec3 ro=vec3(0.,1.55-uDive*2.9,0.);',
+    ' vec3 fw=normalize(vec3(uMouse.x*.07,-.085-uDive*.42+uMouse.y*.045,1.));',
+    ' vec3 rt=normalize(cross(vec3(0.,1.,0.),fw));vec3 up=cross(fw,rt);',
+    ' vec3 rd=normalize(p.x*rt+p.y*up+1.55*fw);',
+    ' float e=clamp(rd.y*1.7+.06,0.,1.);',
+    ' vec3 sky=mix(skyHor,skyTop,pow(e,.6));',
+    ' float sd=max(dot(rd,sun),0.);',
+    ' sky+=sunC*(pow(sd,1100.)*mix(1.5,.75,th)+pow(sd,110.)*mix(.30,.10,th)+pow(sd,9.)*mix(.07,.04,th));',
+    ' if(th<.5&&rd.y>0.){vec2 sp=rd.xy/(rd.z+.6)*220.;float st=hash(floor(sp));vec2 fp=fract(sp)-.5;',
+    '  sky+=vec3(1.,.93,.86)*step(.9965,st)*smoothstep(.20,.0,length(fp))*(1.-th*2.)*smoothstep(.0,.25,rd.y)*(.5+.5*sin(uTime*1.3+st*90.));}',
+    ' float tmin=0.,tmax=64.;bool hit=true;',
+    ' if(rd.y<0.){if(ro.y>5.2)tmin=(5.2-ro.y)/rd.y;tmax=min(tmax,(YB-ro.y)/rd.y);}',
+    ' else{if(ro.y<5.2)tmax=min(tmax,(5.2-ro.y)/max(rd.y,1e-4));else hit=false;}',
+    ' vec4 sum=vec4(0.);',
+    ' if(hit){',
+    '  float t=tmin+hash(gl_FragCoord.xy+fract(uFrame*.6180339)*97.)*max(.08,.030*tmin);',
+    '  for(int i=0;i<STEPS;i++){',
+    '   if(t>tmax||sum.a>.985)break;',
+    '   vec3 q=ro+rd*t;float d=dens(q,6);float dt=d>.004?max(.075,.024*t):max(.20,.060*t);',
+    '   if(d>.01){',
+    '    float sh=0.;for(int j=1;j<=5;j++){sh+=dens(q+sun*(float(j)*.34+.06*float(j*j)),3);}',
+    '    float Tl=exp(-sh*.95);Tl=Tl*(1.-.55*exp(-d*3.))+.0;',
+    '    float hg=clamp((q.y-YB)/5.,0.,1.);',
+    '    vec3 c=mix(shC,litC,Tl);',
+    '    c+=ambC*(.20+.80*hg)*(1.-Tl)*mix(.60,.34,th);',
+    '    c+=sunC*pow(sd,6.)*Tl*mix(.9,.20,th);',
+    '    c=mix(c,hazeC,1.-exp(-t*t*.0009));',
+    '    float a=clamp(d*dt*2.6,0.,1.);',
+    '    sum.rgb+=c*a*(1.-sum.a);sum.a+=a*(1.-sum.a);',
+    '   }',
+    '   t+=dt;',
+    '  }',
+    ' }',
+    ' vec3 col=sky*(1.-sum.a)+sum.rgb;',
+    ' float vy=gl_FragCoord.y/uRes.y;',
+    ' col*=mix(mix(.40,1.,smoothstep(.02,.60,vy)),1.,th);',
+    ' col=mix(col,uBg,uFog);',
+    ' col+=(hash(gl_FragCoord.xy*1.7+uFrame)-.5)/200.;',
+    ' vec3 prev=texture(uPrev,gl_FragCoord.xy/uRes).rgb;',
+    ' o=vec4(mix(prev,col,uBlend),1.);}'
+  ].join('\n');
+
+  var RING = [
+    '#version 300 es',
+    'precision highp float;',
+    'uniform sampler2D uCloud;',
+    'uniform vec2 uRes;uniform float uTime;uniform vec2 uMouse;uniform float uTheme;uniform vec3 uRing;uniform float uRingA;uniform float uGlow;',
+    'uniform int uFA;uniform int uFB;uniform float uFT;uniform float uFog;uniform vec3 uBg;uniform float uSide;',
+    'out vec4 o;',
+    'float sdSeg(vec2 p,vec2 a,vec2 b){vec2 pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*h);}',
+    'float sdRBox(vec2 p,vec2 b,float r){vec2 q=abs(p)-b+r;return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}',
+    'float arcUp(vec2 p,vec2 c,float R){vec2 q=p-c;if(q.y>0.)return abs(length(q)-R);return min(length(q-vec2(R,0.)),length(q+vec2(R,0.)));}',
+    'float smin(float a,float b,float k){float h=max(k-abs(a-b),0.)/k;return min(a,b)-h*h*k*.25;}',
+    'float dot2(vec2 v){return dot(v,v);}',
+    'float sdBez(vec2 pos,vec2 A,vec2 B,vec2 C){vec2 a=B-A;vec2 b=A-2.*B+C;vec2 c=a*2.;vec2 d=A-pos;',
+    ' float kk=1./dot(b,b);float kx=kk*dot(a,b);float ky=kk*(2.*dot(a,a)+dot(d,b))/3.;float kz=kk*dot(d,a);',
+    ' float res=0.;float p=ky-kx*kx;float p3=p*p*p;float q=kx*(2.*kx*kx-3.*ky)+kz;float h=q*q+4.*p3;',
+    ' if(h>=0.){h=sqrt(h);vec2 x=(vec2(h,-h)-q)/2.;vec2 uv=sign(x)*pow(abs(x),vec2(1./3.));float t=clamp(uv.x+uv.y-kx,0.,1.);res=dot2(d+(c+b*t)*t);}',
+    ' else{float z=sqrt(-p);float v=acos(q/(p*z*2.))/3.;float m=cos(v);float n=sin(v)*1.732050808;vec3 t=clamp(vec3(m+m,-n-m,n-m)*z-kx,0.,1.);',
+    '  res=min(dot2(d+(c+b*t.x)*t.x),dot2(d+(c+b*t.y)*t.y));}',
+    ' return sqrt(res);}',
+    'float ringd(vec2 p,vec2 c,float r){return abs(length(p-c)-r);}',
+    'float form(int id,vec2 p){',
+    ' if(id==0)return abs(length(p)-1.);',
+    ' if(id==1){vec2 a=vec2(abs(p.x),p.y);float s=sdRBox(p-vec2(0.,-.24),vec2(.50,.74),.08);',
+    '  s=smin(s,sdSeg(a,vec2(.36,.34),vec2(.90,-.02))-.21,.05);s=max(s,-(length(p-vec2(0.,.62))-.24));',
+    '  float u=abs(s);u=min(u,max(sdSeg(a,vec2(.50,.02),vec2(.50,-.30)),0.));return u;}',
+    ' if(id==2){float u=arcUp(p,vec2(0.,-.42),.92);u=min(u,sdSeg(p,vec2(-1.2,-.42),vec2(1.2,-.42)));u=min(u,abs(length(p-vec2(0.,.67))-.12));return u;}',
+    ' if(id==3){vec2 g=p*.94-vec2(0.,.12);vec2 w1=vec2(-.62,-.42),w2=vec2(.64,-.40);float d1=length(g-w1)-.30,d2=length(g-w2)-.32;float u=min(abs(d1),abs(d2));',
+    '  float b=sdSeg(g,vec2(-1.18,-.56),vec2(-.20,-.20));b=min(b,sdBez(g,vec2(-.20,-.20),vec2(-.04,.16),vec2(.18,.10)));',
+    '  b=min(b,sdBez(g,vec2(.18,.10),vec2(.40,.04),vec2(.52,-.12)));b=min(b,sdSeg(g,vec2(.52,-.12),vec2(1.02,-.24)));',
+    '  b=min(b,sdSeg(g,vec2(-.26,-.66),vec2(.26,-.66)));b=max(b,.09-min(d1,d2));u=min(u,b);',
+    '  u=min(u,max(length(g-w1)-.06,0.));u=min(u,max(length(g-w2)-.06,0.));',
+    '  u=min(u,sdSeg(g,vec2(-1.26,-.72),vec2(-.98,-.72)));u=min(u,sdSeg(g,vec2(-1.26,-.72),vec2(-1.26,-.52)));u=min(u,sdSeg(g,vec2(-1.26,-.52),vec2(-1.18,-.56)));',
+    '  u=min(u,sdSeg(g,vec2(1.02,-.24),vec2(1.02,.30)));u=min(u,sdSeg(g,vec2(.82,.32),vec2(1.24,.32)));return u/.94;}',
+    ' if(id==4){vec2 g=p-vec2(0.,-.10);vec2 a=vec2(abs(g.x),g.y);float u=sdSeg(a,vec2(0.,.84),vec2(1.06,-.30));',
+    '  u=min(u,sdSeg(a,vec2(.74,.04),vec2(.74,-.84)));u=min(u,sdSeg(a,vec2(0.,-.84),vec2(.90,-.84)));',
+    '  u=min(u,arcUp(g,vec2(0.,-.44),.23));u=min(u,sdSeg(a,vec2(.23,-.44),vec2(.23,-.84)));u=min(u,ringd(g,vec2(0.,.22),.15));',
+    '  u=min(u,sdSeg(g,vec2(.40,.44),vec2(.40,.76)));u=min(u,sdSeg(g,vec2(.40,.76),vec2(.62,.76)));u=min(u,sdSeg(g,vec2(.62,.76),vec2(.62,.20)));',
+    '  u=min(u,ringd(g,vec2(.58,1.00),.085));u=min(u,ringd(g,vec2(.76,1.22),.065));return u;}',
+    ' if(id==5){float e=(length(p/vec2(1.06,.86))-1.)*.86;float s=max(e,-(length(p-vec2(.74,-.70))-.38));float u=abs(s);',
+    '  u=min(u,ringd(p,vec2(.36,-.20),.15));',
+    '  u=min(u,max(length(p-vec2(-.64,.06))-.085,0.));u=min(u,max(length(p-vec2(-.36,.42))-.085,0.));',
+    '  u=min(u,max(length(p-vec2(.08,.52))-.085,0.));u=min(u,max(length(p-vec2(.52,.32))-.085,0.));u=min(u,max(length(p-vec2(-.42,-.36))-.085,0.));return u;}',
+    ' if(id==6){float s=sdRBox(p-vec2(0.,-.28),vec2(1.0,.36),.36);s=smin(s,length(p-vec2(-.44,.06))-.44,.10);s=smin(s,length(p-vec2(.10,.26))-.56,.10);s=smin(s,length(p-vec2(.62,.0))-.36,.10);return abs(s);}',
+    ' if(id==7){vec2 a=vec2(abs(p.x),p.y);float hd=length(a*vec2(.94,1.)-vec2(0.,-.10))-.84;float u=abs(hd);',
+    '  u=min(u,max(abs(length(a-vec2(.62,.60))-.27),-hd));',
+    '  u=min(u,sdSeg(a,vec2(0.,.60),vec2(0.,.30)));u=min(u,sdSeg(a,vec2(.27,.56),vec2(.19,.31)));',
+    '  u=min(u,sdSeg(a,vec2(.88,.04),vec2(.56,-.04)));u=min(u,sdSeg(a,vec2(.84,-.30),vec2(.54,-.30)));',
+    '  u=min(u,sdSeg(a,vec2(.17,.02),vec2(.42,.13)));',
+    '  u=min(u,sdSeg(a,vec2(0.,-.25),vec2(.09,-.25)));u=min(u,sdSeg(a,vec2(0.,-.25),vec2(0.,-.46)));u=min(u,sdSeg(a,vec2(0.,-.46),vec2(.23,-.58)));return u;}',
+    ' if(id==8){float u=abs(sdRBox(p-vec2(-.16,-.30),vec2(.64,.40),.10));',
+    '  u=min(u,sdSeg(p,vec2(.48,-.14),vec2(1.04,.12)));u=min(u,sdSeg(p,vec2(1.04,.12),vec2(1.04,-.72)));u=min(u,sdSeg(p,vec2(1.04,-.72),vec2(.48,-.46)));',
+    '  u=min(u,ringd(p,vec2(-.50,.42),.30));u=min(u,ringd(p,vec2(.20,.36),.24));',
+    '  u=min(u,max(length(p-vec2(-.50,.42))-.05,0.));u=min(u,max(length(p-vec2(.20,.36))-.05,0.));return u;}',
+    ' if(id==9){vec2 g=p-vec2(0.,-.06);vec2 a=vec2(abs(g.x),g.y);float u=sdSeg(a,vec2(0.,1.06),vec2(.46,.83));u=min(u,sdSeg(a,vec2(.46,.83),vec2(0.,.60)));',
+    '  u=min(u,sdSeg(a,vec2(.46,.83),vec2(.46,-.40)));u=min(u,sdSeg(a,vec2(0.,.60),vec2(0.,-.63)));u=min(u,sdSeg(a,vec2(0.,-.63),vec2(.46,-.40)));',
+    '  u=min(u,sdSeg(a,vec2(0.,.29),vec2(.46,.52)));u=min(u,sdSeg(a,vec2(0.,-.02),vec2(.46,.21)));u=min(u,sdSeg(a,vec2(0.,-.33),vec2(.46,-.10)));',
+    '  u=min(u,sdSeg(a,vec2(0.,-1.02),vec2(1.10,-.47)));u=min(u,sdSeg(a,vec2(1.10,-.47),vec2(.46,-.15)));return u;}',
+    ' if(id==10){vec2 hc=vec2(0.,.30);float hd=length(p-hc)-.62;float u=abs(hd);',
+    '  u=min(u,abs(sdRBox(p-vec2(.02,.28),vec2(.40,.27),.24)));',
+    '  float bd=abs(sdRBox(p-vec2(0.,-.74),vec2(.84,.46),.36));bd=max(bd,-hd);bd=max(bd,-(p.y+1.04));u=min(u,bd);',
+    '  u=min(u,abs(sdRBox(p-vec2(0.,-.74),vec2(.22,.13),.05)));',
+    '  u=min(u,sdSeg(p,vec2(.40,.78),vec2(.54,1.04)));u=min(u,max(length(p-vec2(.56,1.08))-.05,0.));return u;}',
+    ' vec2 q=mat2(.819,.574,-.574,.819)*p-vec2(0.,.06);vec2 a=vec2(abs(q.x),q.y);',
+    ' float s=max(max(length(q-vec2(-.62,0.))-1.04,length(q-vec2(.62,0.))-1.04),-(q.y+.52));float u=abs(s);',
+    ' u=min(u,ringd(q,vec2(0.,.20),.17));',
+    ' u=min(u,sdSeg(a,vec2(.38,-.16),vec2(.74,-.78)));u=min(u,sdSeg(a,vec2(.74,-.78),vec2(.29,-.52)));',
+    ' u=min(u,sdSeg(a,vec2(.15,-.62),vec2(0.,-1.10)));return u;}',
+    'float thick(int id){return id==1?.80:id==3?.56:id==4?.56:id==5?.60:id==6?.92:id==7?.58:id==8?.60:id==9?.44:id==10?.58:id==11?.60:1.;}',
+    'float sdf(vec3 p){',
+    ' float an=atan(p.y,p.x);',
+    ' float r=.078+.062*(.5+.5*sin(an+3.75));',
+    ' float ga=smoothstep(.34,1.,uFT),gb=1.-smoothstep(0.,.66,uFT);',
+    ' float da=length(vec2(form(uFA,p.xy),p.z))-(r*thick(uFA)-.21*ga);',
+    ' if(uFT<.001)return da;',
+    ' float db=length(vec2(form(uFB,p.xy),p.z))-(r*thick(uFB)-.21*gb);',
+    ' if(uFT>.999)return db;',
+    ' return smin(da,db,.02+.20*4.*uFT*(1.-uFT));}',
+    'float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}',
+    'void main(){',
+    ' vec2 uv=gl_FragCoord.xy/uRes;',
+    ' vec2 tx=.55/vec2(textureSize(uCloud,0));',
+    ' vec3 bg=(texture(uCloud,uv+tx*vec2(1.,.4)).rgb+texture(uCloud,uv+tx*vec2(-.4,1.)).rgb+texture(uCloud,uv+tx*vec2(-1.,-.4)).rgb+texture(uCloud,uv+tx*vec2(.4,-1.)).rgb)*.25;',
+    ' vec3 col=bg;',
+    ' vec2 p=(2.*gl_FragCoord.xy-uRes)/uRes.y;',
+    ' vec2 q=(p-uRing.xy)/uRing.z;',
+    ' if(uRingA>.002&&dot(q,q)<3.6){',
+    '  float ay=.42*sin(uTime*.31)+uMouse.x*.42;float ax=-.34+.10*sin(uTime*.23+1.)-uMouse.y*.30;',
+    '  float cy=cos(ay),sy=sin(ay),cx=cos(ax),sx=sin(ax);',
+    '  mat3 R=mat3(cy,0.,-sy, 0.,1.,0., sy,0.,cy)*mat3(1.,0.,0., 0.,cx,sx, 0.,-sx,cx);',
+    '  vec3 rdv=normalize(vec3(q,5.));',
+    '  vec3 ro=R*vec3(0.,0.,-5.);vec3 rd=R*rdv;',
+    '  float px=2./(uRes.y*uRing.z);',
+    '  float t=3.1;float md=1e3;float tm=3.1;bool hit=false;',
+    '  for(int i=0;i<96;i++){float d=sdf(ro+rd*t);if(d<md){md=d;tm=t;}if(d<px*.3){hit=true;break;}t+=max(d*.82,px*.25);if(t>6.9)break;}',
+    '  float cov=hit?1.:1.-smoothstep(px*.3,px*1.7,md);',
+    '  if(!hit)t=tm;',
+    '  if(cov>0.){',
+    '   vec3 pos=ro+rd*t;vec2 e=vec2(.0025,-.0025);',
+    '   vec3 n=normalize(e.xyy*sdf(pos+e.xyy)+e.yyx*sdf(pos+e.yyx)+e.yxy*sdf(pos+e.yxy)+e.xxx*sdf(pos+e.xxx));',
+    '   vec3 nv=transpose(R)*n;',
+    '   float ndv=clamp(dot(nv,-rdv),0.,1.);',
+    '   float F=mix(.11,.06,uTheme)+.90*pow(1.-ndv,3.2);',
+    '   vec2 du=-nv.xy*(.22+.20*(1.-ndv))*uRing.z*vec2(uRes.y/uRes.x,1.)*.5;',
+    '   vec3 refr=vec3(texture(uCloud,uv+du*.80).r,texture(uCloud,uv+du).g,texture(uCloud,uv+du*1.22).b);',
+    '   vec3 rose=vec3(1.,.80,.70);vec3 copper=vec3(.72,.38,.27);',
+    '   refr*=mix(vec3(1.),rose,.30+.40*ndv);',
+    '   refr=refr*mix(1.30,1.02,uTheme)+mix(.03,.0,uTheme);',
+    '   vec3 rr=reflect(rdv,nv);',
+    '   vec3 envLo=mix(vec3(.20,.09,.07),vec3(.62,.34,.27),uTheme);',
+    '   vec3 envHi=mix(vec3(.10,.09,.14),vec3(.80,.86,.96),uTheme);',
+    '   vec3 env=mix(envLo,envHi,smoothstep(-.25,.45,rr.y));',
+    '   float box=smoothstep(.50,.66,rr.y)*(1.-smoothstep(.90,.99,rr.y));',
+    '   env+=mix(vec3(1.5,1.18,.98)*1.6,vec3(1.5)*1.25,uTheme)*box*1.9;',
+    '   env+=vec3(1.3,1.15,1.0)*smoothstep(.16,.24,rr.y)*(1.-smoothstep(.28,.36,rr.y))*mix(1.0,.55,uTheme);',
+    '   env+=vec3(1.)*pow(max(dot(rr,normalize(vec3(-.62*uSide,.30,-.72))),0.),26.)*2.6;',
+    '   env+=mix(rose*1.1,copper*1.3,uTheme)*smoothstep(-.30,-.85,rr.y)*.9;',
+    '   env+=vec3(1.,.86,.74)*pow(max(dot(rr,normalize(vec3(.45*uSide,.30,.84))),0.),70.)*5.;',
+    '   vec3 g=mix(refr,env,F);',
+    '   g+=rose*mix(.07,.0,uTheme);',
+    '   g=mix(g,copper*mix(1.2,.85,uTheme),smoothstep(.72,1.,1.-ndv)*mix(.35,.55,uTheme));',
+    '   g=mix(g,uBg,uFog);',
+    '   col=mix(col,g,cov*uRingA);',
+    '  }',
+    '  float halo=exp(-max(md,0.)*4.2)*(hit?0.:1.)*smoothstep(3.5,1.9,dot(q,q));',
+    '  col+=mix(vec3(1.,.74,.60)*.30,vec3(1.,.96,.92)*.10,uTheme)*halo*uRingA*(1.-uFog)*(1.+1.7*uGlow);',
+    ' }',
+    ' col+=(hash(gl_FragCoord.xy+uTime*3.)-.5)/255.;',
+    ' o=vec4(col,1.);}'
+  ].join('\n');
+
+  function compile(gl, type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      throw new Error(gl.getShaderInfoLog(s) || 'shader');
+    }
+    return s;
+  }
+  function program(gl, fs) {
+    var p = gl.createProgram();
+    gl.attachShader(p, compile(gl, gl.VERTEX_SHADER, VERT));
+    gl.attachShader(p, compile(gl, gl.FRAGMENT_SHADER, fs));
+    gl.bindAttribLocation(p, 0, 'a');
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p) || 'link');
+    var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+    for (var i = 0; i < n; i++) { var info = gl.getActiveUniform(p, i); u[info.name] = gl.getUniformLocation(p, info.name); }
+    return { p: p, u: u };
+  }
+
+  function init(canvas, opts) {
+    opts = opts || {};
+    var gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+    if (!gl) return null;
+    var steps = opts.low ? 46 : 84;
+    var A, B;
+    try {
+      A = program(gl, CLOUDS.replace(/STEPS/g, String(steps)));
+      B = program(gl, RING);
+    } catch (err) {
+      if (window.console) console.warn('Halom sky: ' + err.message);
+      return null;
+    }
+    var quad = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+    var N = 256, noise = new Uint8Array(N * N * 4), r = new Uint8Array(N * N), seed = 1337;
+    function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed >>> 24; }
+    for (var i = 0; i < N * N; i++) r[i] = rnd();
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+      var k = (y * N + x) * 4;
+      noise[k] = r[y * N + x];
+      noise[k + 1] = r[((y + 239) & 255) * N + ((x + 37) & 255)];
+      noise[k + 2] = 0; noise[k + 3] = 255;
+    }
+    var noiseTex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, noiseTex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, N, N, 0, gl.RGBA, gl.UNSIGNED_BYTE, noise);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+
+    var texs = [gl.createTexture(), gl.createTexture()], fbos = [gl.createFramebuffer(), gl.createFramebuffer()], cur = 0, cw = 0, ch = 0, fresh = 2, frameNo = 0;
+    var budget = opts.low ? 110000 : 520000;
+
+    var S = {
+      theme: 0, themeTo: 0, dive: 0, fog: 0, mouse: [0, 0], mouseTo: [0, 0],
+      ring: [0, 0.1, 0.4], ringA: 1, glow: 0, side: 1, _dive: 0, _fog: 0, _theme: 0, _side: 1, fa: 0, fb: 0, ft: 0, t0: performance.now(), time: 0, frozen: false,
+      bgDark: [0.055, 0.051, 0.047], bgLight: [0.984, 0.965, 0.933]
+    };
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = Math.max(2, Math.round(canvas.clientWidth * dpr)), h = Math.max(2, Math.round(canvas.clientHeight * dpr));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      var sc = Math.min(1, Math.sqrt(budget / (w * h)));
+      var nw = Math.max(2, Math.round(w * sc)), nh = Math.max(2, Math.round(h * sc));
+      if (nw !== cw || nh !== ch) {
+        cw = nw; ch = nh; fresh = 2;
+        for (var i = 0; i < 2; i++) {
+          gl.bindTexture(gl.TEXTURE_2D, texs[i]);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, cw, ch, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.bindFramebuffer(gl.FRAMEBUFFER, fbos[i]);
+          gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texs[i], 0);
+        }
+      }
+    }
+
+    var slow = 0, frames = 0, last = 0;
+    function frame(now) {
+      resize();
+      if (!S.frozen) S.time = (now - S.t0) / 1000;
+      S.theme += (S.themeTo - S.theme) * 0.08;
+      if (Math.abs(S.themeTo - S.theme) < 0.002) S.theme = S.themeTo;
+      S.mouse[0] += (S.mouseTo[0] - S.mouse[0]) * 0.05;
+      S.mouse[1] += (S.mouseTo[1] - S.mouse[1]) * 0.05;
+      var bg = [0, 1, 2].map(function (i) { return S.bgDark[i] + (S.bgLight[i] - S.bgDark[i]) * S.theme; });
+
+      var nxt = 1 - cur; frameNo++;
+      var moved = Math.abs(S.dive - S._dive) + Math.abs(S.fog - S._fog) + Math.abs(S.theme - S._theme) + Math.abs(S.side - S._side);
+      S._dive = S.dive; S._fog = S.fog; S._theme = S.theme; S._side = S.side;
+      var blend = fresh > 0 ? 1 : Math.min(1, 0.22 + moved * 14);
+      if (fresh > 0) fresh--;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbos[nxt]);
+      gl.viewport(0, 0, cw, ch);
+      gl.useProgram(A.p);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, noiseTex);
+      gl.uniform1i(A.u.uNoise, 0);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texs[cur]);
+      gl.uniform1i(A.u.uPrev, 1);
+      gl.uniform1f(A.u.uBlend, blend);
+      gl.uniform1f(A.u.uFrame, frameNo % 1024);
+      gl.uniform1f(A.u.uSide, S.side);
+      gl.uniform2f(A.u.uRes, cw, ch);
+      gl.uniform1f(A.u.uTime, S.time);
+      gl.uniform2f(A.u.uMouse, S.mouse[0], S.mouse[1]);
+      gl.uniform1f(A.u.uDive, S.dive);
+      gl.uniform1f(A.u.uTheme, S.theme);
+      gl.uniform1f(A.u.uFog, S.fog);
+      gl.uniform3f(A.u.uBg, bg[0], bg[1], bg[2]);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.useProgram(B.p);
+      cur = nxt;
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texs[cur]);
+      gl.uniform1i(B.u.uCloud, 0);
+      gl.uniform2f(B.u.uRes, canvas.width, canvas.height);
+      gl.uniform1f(B.u.uTime, S.time);
+      gl.uniform2f(B.u.uMouse, S.mouse[0], S.mouse[1]);
+      gl.uniform1f(B.u.uTheme, S.theme);
+      gl.uniform3f(B.u.uRing, S.ring[0], S.ring[1], S.ring[2]);
+      gl.uniform1f(B.u.uRingA, S.ringA); gl.uniform1f(B.u.uGlow, S.glow);
+      gl.uniform1f(B.u.uSide, S.side);
+      gl.uniform1i(B.u.uFA, S.fa); gl.uniform1i(B.u.uFB, S.fb); gl.uniform1f(B.u.uFT, S.ft);
+      gl.uniform1f(B.u.uFog, S.fog);
+      gl.uniform3f(B.u.uBg, bg[0], bg[1], bg[2]);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      if (last) {
+        var dt = now - last; frames++;
+        if (dt > 34) slow++;
+        if (frames >= 40) {
+          if (slow > 22 && budget > 90000) { budget *= 0.72; cw = 0; }
+          frames = 0; slow = 0;
+        }
+      }
+      last = now;
+    }
+
+    var raf = 0, running = false;
+    function loop(now) { if (!running) return; frame(now); raf = requestAnimationFrame(loop); }
+    return {
+      state: S,
+      start: function () { if (running) return; running = true; last = 0; raf = requestAnimationFrame(loop); },
+      stop: function () { running = false; cancelAnimationFrame(raf); },
+      once: function () { frame(performance.now()); },
+      setTheme: function (t, instant) { S.themeTo = t; if (instant) S.theme = t; },
+      freeze: function (at) { S.frozen = true; S.time = at; }
+    };
+  }
+  return { init: init };
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var COPY = window.HALOM_COPY, doc = document, root = doc.documentElement, body = doc.body;
+  function $(s, el) { return (el || doc).querySelector(s); }
+  function $$(s, el) { return Array.prototype.slice.call((el || doc).querySelectorAll(s)); }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function smooth(a, b, v) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* storage is optional */ } }
+  };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var params = new URLSearchParams(window.location.search);
+  var WA = 'https://wa.me/972542022269';
+
+  /* ---------- Content model: which media belongs to which piece ---------- */
+  var PROJECTS = [
+    { id: 'shevatim', label: 'collab', site: 'https://shevatim.vercel.app', tagSlide: [1, 4, 2, 3, 2, 0, 5],
+      slides: [
+        { k: 'video', src: 'media/shevatim.mp4', poster: 'media/shevatim.jpg' },
+        { k: 'window', src: 'media/shv-store.mp4', poster: 'media/shv-store.jpg' },
+        { k: 'window', src: 'media/shv-shop.mp4', poster: 'media/shv-shop.jpg' },
+        { k: 'window', src: 'media/shv-item.mp4', poster: 'media/shv-item.jpg' },
+        { k: 'window', src: 'media/shv-admin.mp4', poster: 'media/shv-admin.jpg' },
+        { k: 'phone', src: 'media/shv-phone.mp4', poster: 'media/shv-phone.jpg' }
+      ],
+      film: { src: 'media/shevatim.mp4', poster: 'media/shevatim.jpg' },
+      sys: [
+        { src: 'media/shv-store.mp4', poster: 'media/shv-store.jpg' },
+        { src: 'media/shv-shop.mp4', poster: 'media/shv-shop.jpg' },
+        { src: 'media/shv-item.mp4', poster: 'media/shv-item.jpg' },
+        { src: 'media/shv-reserve.mp4', poster: 'media/shv-reserve.jpg' },
+        { src: 'media/shv-admin.mp4', poster: 'media/shv-admin.jpg' },
+        { src: 'media/shv-phone.mp4', poster: 'media/shv-phone.jpg', phone: true }
+      ],
+      made: [
+        { video: 'media/shv-cloth.mp4', poster: 'media/shv-cloth.jpg', cls: 'tall' },
+        { img: 'media/shv-products.jpg' },
+        { img: 'media/shv-tribe.jpg' },
+        { img: 'media/shv-langs.jpg', cls: 'wide' },
+        { reels: [['media/shv-social-1.mp4', 'media/shv-social-1.jpg'], ['media/shv-social-2.mp4', 'media/shv-social-2.jpg'], ['media/shv-social-3.mp4', 'media/shv-social-3.jpg'], ['media/shevatim-detail.mp4', 'media/shevatim-detail.jpg']], cls: 'wide' }
+      ] },
+    { id: 'zoaretz', label: 'collab', tagSlide: [0, 1],
+      slides: [
+        { k: 'phone', src: 'media/zoaretz.mp4', poster: 'media/zoaretz.jpg', back: 'media/zoaretz-4.jpg' },
+        { k: 'trio', imgs: ['media/zoaretz-1.jpg', 'media/zoaretz-2.jpg', 'media/zoaretz-3.jpg', 'media/zoaretz-4.jpg'], back: 'media/zoaretz-4.jpg' }
+      ],
+      film: { src: 'media/zoaretz.mp4', poster: 'media/zoaretz.jpg', tall: true, back: 'media/zoaretz-4.jpg' },
+      made: [{ img: 'media/zoaretz-2.jpg', cls: 'tall' }, { img: 'media/zoaretz-4.jpg', cls: 'tall' }] },
+    { id: 'mana', label: 'venture', site: 'https://halom.io/mana/', tagSlide: [0, 3, 2, 0, 1],
+      slides: [
+        { k: 'phone', src: 'media/mana-phone.mp4', poster: 'media/mana-phone.jpg', back: 'media/mana-table.jpg' },
+        { k: 'video', src: 'media/mana-film.mp4', poster: 'media/mana-film.jpg' },
+        { k: 'window', img: 'media/mana-site.jpg', back: 'media/mana-table.jpg' },
+        { k: 'img', img: 'media/mana-brand.jpg' }
+      ],
+      film: { src: 'media/mana-film.mp4', poster: 'media/mana-film.jpg' },
+      made: [{}, {}, { video: 'media/mana-phone.mp4', poster: 'media/mana-phone.jpg', cls: 'tall' }, { img: 'media/mana-brand.jpg' }, {}, { cls: 'full' }] },
+    { id: 'showroom', label: 'concept', site: 'https://halom.io/projects/showroom/', tagSlide: [1, 1, 0],
+      slides: [
+        { k: 'video', src: 'media/showroom.mp4', poster: 'media/showroom.jpg' },
+        { k: 'img', img: 'media/showroom-room.jpg' }
+      ],
+      film: { src: 'media/showroom.mp4', poster: 'media/showroom.jpg' },
+      made: [{ img: 'media/showroom-room.jpg', cls: 'wide' }, {}, {}, {}, {}] },
+    { id: 'quarter', label: 'concept',
+      slides: [{ k: 'video', src: 'media/quarter.mp4', poster: 'media/quarter.jpg' }],
+      film: { src: 'media/quarter.mp4', poster: 'media/quarter.jpg' },
+      made: [{}, {}, { cls: 'full' }] }
+  ];
+  var SVC_IMG = ['media/mana-brand.jpg', 'media/shv-store.jpg', 'media/shv-admin.jpg', 'media/showroom-room.jpg', 'media/quarter.jpg'];
+  var TRAIL = ['media/shevatim.jpg', 'media/zoaretz-4.jpg', 'media/shv-store.jpg', 'media/mana-film.jpg', 'media/zoaretz-2.jpg', 'media/showroom-room.jpg', 'media/shv-social-2.jpg', 'media/quarter.jpg', 'media/mana-table.jpg',
+    'media/shv-products.jpg', 'media/shevatim-bw.jpg', 'media/showroom.jpg', 'media/shv-social-1.jpg', 'media/zoaretz-1.jpg', 'media/mana-brand.jpg', 'media/shv-cloth.jpg'];
+  /* What each form of the ring opens: a case study, a section of the page, or the brief. */
+  var FORMS = [{ href: '#work' }, { c: 'shevatim' }, { c: 'mana' }, { c: 'showroom' }, { href: '#work' }, { href: '#work' }, { href: '#lab' }, { href: '#lab' },
+    { c: 'zoaretz' }, { c: 'quarter' }, { brief: 1 }, { brief: 1 }];
+  var OUT = '<svg class="out" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+  var LAB_URL = 'https://halom.io';
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var BACK = '<svg class="flip" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+  var CROSS = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>';
+
+  /* ---------- Language ---------- */
+  var lang = params.get('lang') || store.get('halom-lang') || (window.navigator.language || 'en').slice(0, 2);
+  if (lang === 'iw') lang = 'he';
+  if (!COPY[lang]) lang = 'en';
+  var T = COPY[lang];
+  function pick(path) { return path.split('.').reduce(function (o, k) { return o == null ? o : o[k]; }, T); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  function videoTag(src, poster, cls) {
+    return '<video' + (cls ? ' class="' + cls + '"' : '') + ' muted loop playsinline preload="none" poster="' + poster + '" data-src="' + src + '"></video>';
+  }
+  function tagPills(tags, map) {
+    return '<div class="card-tags">' + tags.map(function (t, i) {
+      return '<span class="pill"' + (map && map[i] != null ? ' data-s="' + map[i] + '"' : '') + '>' + esc(t) + '</span>';
+    }).join('') + '</div>';
+  }
+
+  function winHtml(inner, path) {
+    return '<div class="win"><div class="win-bar"><i></i><i></i><i></i>' + (path ? '<span class="win-url">' + esc(path) + '</span>' : '') + '</div><div class="win-body">' + inner + '</div></div>';
+  }
+  function lazyVideo(src, poster) { return '<video muted loop playsinline preload="none" data-poster="' + poster + '" data-lazy="' + src + '"></video>'; }
+  function slideHtml(sl, first, back) {
+    var inner;
+    if (sl.k === 'video') inner = lazyVideo(sl.src, sl.poster);
+    else if (sl.k === 'img') inner = '<img data-img="' + sl.img + '" alt="">';
+    else if (sl.k === 'trio') inner = '<div class="stage"><img class="stage-back" data-img="' + (sl.back || back) + '" alt=""><div class="trio">' +
+      sl.imgs.map(function (im) { return '<img data-img="' + im + '" alt="">'; }).join('') + '</div></div>';
+    else {
+      var media = sl.img ? '<img data-img="' + sl.img + '" alt="">' : lazyVideo(sl.src, sl.poster);
+      inner = '<div class="stage"><img class="stage-back" data-img="' + (sl.back || back) + '" alt="">' + (sl.k === 'phone' ? '<div class="phone">' + media + '</div>' : winHtml(media)) + '</div>';
+    }
+    return '<div class="slide' + (first ? ' on' : '') + '" data-k="' + sl.k + '">' + inner + '</div>';
+  }
+  function renderCards() {
+    $('#stack').innerHTML = PROJECTS.map(function (p, i) {
+      var c = T.projects[p.id], n = p.slides.length, back = p.slides[0].poster || p.slides[0].back;
+      var media = '<div class="slides">' + p.slides.map(function (sl, j) { return slideHtml(sl, j === 0, back); }).join('') + '</div>' +
+        (n > 1 ? '<div class="ticks" aria-hidden="true">' + p.slides.map(function (_, j) { return '<i' + (j === 0 ? ' class="on"' : '') + '></i>'; }).join('') + '</div>' +
+          '<span class="pill slide-cap" aria-hidden="true">' + esc(c.slides[0]) + '</span>' : '');
+      return '<article class="card" style="--i:' + i + '"><div class="card-box"><a class="card-in" href="#work-' + p.id + '" data-case="' + p.id + '" aria-label="' + esc(c.plain) + '">' +
+        '<div class="card-media" data-n="' + n + '">' + media + '<span class="pill card-label">' + esc(T.labels[p.label]) + '</span></div>' +
+        '<div class="card-info"><div><h3>' + c.title + '</h3><span class="card-meta">' + esc(c.meta) + '</span></div>' +
+        '<div><p class="card-line">' + esc(c.line) + '</p>' + tagPills(c.tags, p.tagSlide) + '</div>' +
+        '<span class="go">' + ARROW + '</span></div></a>' +
+        (p.site ? '<a class="card-site" href="' + p.site + '" target="_blank" rel="noopener"><span>' + esc(T.cs.visit) + '</span>' + OUT + '</a>' : '') +
+        '</div></article>';
+    }).join('');
+    bindCards();
+  }
+  function renderLists() {
+    $('#svc').innerHTML = T.services.items.map(function (s, i) {
+      return '<div class="svc-row" data-i="' + i + '"><h3>' + esc(s.name) + '</h3><p>' + esc(s.line) + '</p><small>' + esc(s.seen) + '</small>' +
+        '<img class="svc-thumb" src="' + SVC_IMG[i] + '" alt="" loading="lazy"></div>';
+    }).join('');
+    $('#howGrid').innerHTML = T.how.items.map(function (h) {
+      return '<div class="how-item"><h3>' + esc(h.t) + '</h3><p>' + esc(h.b) + '</p></div>';
+    }).join('');
+    bindPeek();
+  }
+  function applyText() {
+    T = COPY[lang];
+    root.lang = lang; root.dir = T.dir;
+    $$('[data-t]').forEach(function (el) { var v = pick(el.getAttribute('data-t')); if (v != null) el.textContent = v; });
+    $$('[data-h]').forEach(function (el) { var v = pick(el.getAttribute('data-h')); if (v != null) el.innerHTML = v; });
+    $$('#lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    $('#themeBtn').setAttribute('aria-label', T.nav.theme);
+    $('#lang').setAttribute('aria-label', T.nav.lang);
+    $('#footHe').hidden = lang === 'he';
+    $$('[data-lab]').forEach(function (a) { a.setAttribute('href', LAB_URL); });
+    renderCards(); renderLists(); setFormLabel(formShown, true);
+    if (caseOpen) renderCase(caseOpen, true);
+    if (briefOpen) renderBrief();
+  }
+  $$('#lang button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var l = b.getAttribute('data-lang'); if (l === lang) return;
+      lang = l; store.set('halom-lang', l);
+      var swap = function () { applyText(); placeRing(); };
+      if (doc.startViewTransition && !reduce) doc.startViewTransition(swap); else swap();
+    });
+  });
+
+  /* ---------- Theme ---------- */
+  function currentTheme() {
+    var a = root.getAttribute('data-theme');
+    if (a === 'dark' || a === 'light') return a;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  var saved = params.get('theme') || store.get('halom-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  var sky = null;
+  function syncSky(instant) { if (sky) { sky.setTheme(currentTheme() === 'light' ? 1 : 0, instant); kick(); } }
+  $('#themeBtn').addEventListener('click', function () {
+    var next = currentTheme() === 'light' ? 'dark' : 'light';
+    var flip = function () { root.setAttribute('data-theme', next); };
+    store.set('halom-theme', next);
+    if (doc.startViewTransition && !reduce) {
+      var r = this.getBoundingClientRect();
+      root.style.setProperty('--vx', (r.left + r.width / 2) + 'px');
+      root.style.setProperty('--vy', (r.top + r.height / 2) + 'px');
+      root.classList.add('theming');
+      if (sky) sky.setTheme(next === 'light' ? 1 : 0, true);
+      var vt = doc.startViewTransition(function () { flip(); if (sky) sky.once(); });
+      vt.finished.then(function () { root.classList.remove('theming'); }, function () { root.classList.remove('theming'); });
+    } else { flip(); }
+  });
+  new MutationObserver(function () { syncSky(false); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function () { syncSky(false); });
+
+  /* ---------- Video: play only what is on screen ---------- */
+  var vio = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) {
+        if (!v.src && v.getAttribute('data-src')) v.src = v.getAttribute('data-src');
+        v.muted = true;
+        var p = v.play(); if (p && p.catch) p.catch(function () { /* poster stays */ });
+      } else if (!v.paused) { v.pause(); }
+    });
+  }, { threshold: 0.25 }) : null;
+  function watchVideos(scope) { if (vio) $$('video[data-src]', scope).forEach(function (v) { v.muted = true; vio.observe(v); }); }
+
+  /* ---------- The sky ---------- */
+  var canvas = $('#sky'), hero = $('#top'), outro = $('#contact'), anchor = $('#ringAnchor'), nav = $('#nav');
+  var lowGl = params.get('gl') === 'low' || /Mobi|Android|iPhone|iPad/i.test(window.navigator.userAgent) || (window.navigator.deviceMemory && window.navigator.deviceMemory <= 4);
+  if (window.HalomSky && params.get('gl') !== 'off') sky = window.HalomSky.init(canvas, { low: !!lowGl });
+  if (!sky) {
+    canvas.remove();
+    var fb = doc.createElement('div'); fb.className = 'sky-fallback'; body.insertBefore(fb, body.firstChild);
+    anchor.innerHTML = '<img src="media/ring.png" alt="" style="width:100%;height:100%;object-fit:contain">';
+  }
+  var skyOn = false, skyNeeded = true;
+  var settling = 0;
+  function settle() {
+    if (!sky || settling) return;
+    settling = 8;
+    (function step() { sky.once(); if (--settling > 0) window.setTimeout(step, 30); })();
+  }
+  function kick() { if (sky && reduce) settle(); }
+  function runSky() {
+    if (!sky) return;
+    var want = skyNeeded && !doc.hidden && !caseOpen && !briefOpen;
+    if (reduce) { if (want) settle(); return; }
+    if (want && !skyOn) { sky.start(); skyOn = true; } else if (!want && skyOn) { sky.stop(); skyOn = false; }
+  }
+  function placeRing() {
+    if (!sky) return;
+    var r = anchor.getBoundingClientRect(), W = window.innerWidth, H = window.innerHeight;
+    sky.state.ring[0] = (2 * (r.left + r.width / 2) - W) / H;
+    sky.state.ring[1] = (H - 2 * (r.top + r.height / 2)) / H;
+    ringBase = (r.width / H) * 0.74;
+    sky.state.ring[2] = ringBase * (1 + 0.07 * glow);
+    sky.state.side = root.dir === 'rtl' ? -1 : 1;
+  }
+  doc.addEventListener('visibilitychange', runSky);
+  window.addEventListener('pointermove', function (e) {
+    if (sky) { sky.state.mouseTo[0] = (e.clientX / window.innerWidth - 0.5) * 2; sky.state.mouseTo[1] = (e.clientY / window.innerHeight - 0.5) * 2; }
+    px = e.clientX; py = e.clientY;
+  }, { passive: true });
+
+  /* ---------- The ring takes form ---------- */
+  var ORDER = [1, 6, 2, 8, 3, 4, 9, 5, 7, 10, 11], formAt = 0, formShown = 0, phase = 0, phaseT = 0, lastT = 0;
+  var DUR = [1.5, 1.4, 3.0, 1.2], hot = false, glow = 0, ringBase = 0.4;
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function setFormLabel(k, force) {
+    if (k === formShown && !force) return;
+    formShown = k;
+    var el = $('#formLabel'), to = $('#formTo'), chip = $('#formChip'), f = FORMS[k];
+    var set = function () { el.textContent = T.forms[k][0]; to.textContent = T.forms[k][1]; chip.setAttribute('href', f.c ? '#work-' + f.c : f.brief ? '#contact' : f.href); };
+    if (force) { set(); return; }
+    chip.classList.add('swap');
+    window.setTimeout(function () { set(); chip.classList.remove('swap'); }, 260);
+  }
+  function formGo(e) {
+    var f = FORMS[formShown];
+    if (e) e.preventDefault();
+    if (f.c) openCase(f.c, null); else if (f.brief) openBrief();
+    else { var t = $(f.href); if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
+  }
+  function setHot(v, withCursor) {
+    hot = v; hero.classList.toggle('ring-hot', v);
+    if (fine && withCursor) { cursorOn = v; cursor.classList.toggle('on', v); }
+  }
+  function tickForms(now) {
+    window.requestAnimationFrame(tickForms);
+    if (!sky || reduce || !skyOn) { lastT = now; return; }
+    var dt = Math.min(0.1, (now - lastT) / 1000 || 0); lastT = now;
+    var S = sky.state, f = ORDER[formAt];
+    glow += ((hot ? 1 : 0) - glow) * Math.min(1, dt * 7);
+    S.glow = glow; S.ring[2] = ringBase * (1 + 0.07 * glow);
+    if (!(hot && (phase === 2 || phase === 0))) phaseT += dt;
+    if (phaseT > DUR[phase]) {
+      phaseT = 0; phase = (phase + 1) % 4;
+      if (phase === 0) { formAt = (formAt + 1) % ORDER.length; }
+      if (phase === 1) setFormLabel(ORDER[formAt]);
+      if (phase === 3) setFormLabel(0);
+      f = ORDER[formAt];
+    }
+    S.fa = 0; S.fb = f;
+    S.ft = phase === 0 ? 0 : phase === 1 ? ease(phaseT / DUR[1]) : phase === 2 ? 1 : 1 - ease(phaseT / DUR[3]);
+  }
+  window.requestAnimationFrame(tickForms);
+  $('#formChip').addEventListener('click', formGo);
+  $('#formChip').addEventListener('pointerenter', function () { setHot(true, false); });
+  $('#formChip').addEventListener('pointerleave', function () { setHot(false, false); });
+  anchor.addEventListener('click', formGo);
+  anchor.addEventListener('pointerenter', function () { setHot(true, true); });
+  anchor.addEventListener('pointerleave', function () { setHot(false, true); });
+
+  /* ---------- Scroll: dive into the cloud, stack the cards, come out again ---------- */
+  var cards = [], labImg = $('#labImg'), ticking = false, px = 0, py = 0;
+  var heroKids = $$('#top > h1, #top .hero-right > *, #top .scroll-cue');
+  function onScroll() {
+    ticking = false;
+    var y = window.scrollY, H = window.innerHeight;
+    nav.classList.toggle('is-stuck', y > 30);
+    var p = clamp(y / (hero.offsetHeight * 0.92), 0, 1);
+    var or = outro.getBoundingClientRect(), o = clamp((H - or.top) / (H * 0.95), 0, 1);
+    var hf = 1 - smooth(0.18, 0.62, p);
+    if (!reduce) { heroKids.forEach(function (el) { el.style.opacity = hf.toFixed(3); }); }
+    if (sky) {
+      var S = sky.state;
+      if (o > 0) { S.dive = 0.34 - o * 0.2; S.fog = 1 - smooth(0.05, 0.8, o); S.ringA = 0; }
+      else { S.dive = p * p * 0.95; S.fog = smooth(0.5, 1, p); S.ringA = 1 - smooth(0.3, 0.8, p); }
+      skyNeeded = p < 1 || o > 0;
+      canvas.style.visibility = skyNeeded ? 'visible' : 'hidden';
+      placeRing(); runSky();
+    }
+    for (var i = 0; i < cards.length - 1; i++) {
+      var a = cards[i].getBoundingClientRect(), b = cards[i + 1].getBoundingClientRect();
+      var k = clamp((a.bottom - b.top) / a.height, 0, 1);
+      cards[i].firstElementChild.style.transform = k > 0.001 && !reduce ? 'scale(' + (1 - k * 0.05).toFixed(4) + ') translateY(' + (-k * 10).toFixed(1) + 'px)' : '';
+    }
+    if (labImg && !reduce) {
+      var lr = labImg.parentNode.getBoundingClientRect();
+      if (lr.bottom > 0 && lr.top < H) labImg.style.transform = 'translateY(' + (((lr.top + lr.height / 2) / H - 0.5) * -7).toFixed(2) + '%)';
+    }
+  }
+  function requestScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); } }
+  window.addEventListener('scroll', requestScroll, { passive: true });
+  window.addEventListener('resize', requestScroll);
+
+  /* ---------- Cards, cursor, service previews ---------- */
+  var cursor = $('#cursor'), cx = 0, cy = 0, cursorOn = false;
+  var slideTimers = [];
+  function loadSlide(sl) {
+    $$('img[data-img]', sl).forEach(function (im) { im.src = im.getAttribute('data-img'); im.removeAttribute('data-img'); });
+    $$('video[data-poster]', sl).forEach(function (v) { v.poster = v.getAttribute('data-poster'); v.removeAttribute('data-poster'); });
+  }
+  function playSlide(media, on) {
+    $$('.slide', media).forEach(function (sl) {
+      var v = $('video', sl); if (!v) return;
+      if (on && sl.classList.contains('on')) {
+        if (!v.src) v.src = v.getAttribute('data-lazy');
+        v.muted = true; var pr = v.play(); if (pr && pr.catch) pr.catch(function () { /* poster stays */ });
+      } else if (!v.paused) v.pause();
+    });
+  }
+  function setSlide(media, i) {
+    var slides = $$('.slide', media); if (!slides.length) return;
+    i = (i + slides.length) % slides.length;
+    if (+media.getAttribute('data-at') === i) return;
+    media.setAttribute('data-at', i);
+    slides.forEach(function (sl, j) { sl.classList.toggle('on', j === i); });
+    loadSlide(slides[i]);
+    $$('.ticks i', media).forEach(function (t, j) { t.classList.toggle('on', j === i); t.classList.toggle('done', j < i); });
+    var cap = $('.slide-cap', media), id = media.parentNode.getAttribute('data-case');
+    if (cap) cap.textContent = T.projects[id].slides[i];
+    playSlide(media, media._seen);
+  }
+  function bindCards() {
+    cards = $$('#stack .card');
+    slideTimers.forEach(function (t) { window.clearInterval(t); }); slideTimers = [];
+    var cio = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var m = e.target;
+        if (e.isIntersecting && !m._near) { m._near = true; $$('.slide', m).forEach(function (sl, j) { if (j === 0) loadSlide(sl); }); }
+        m._seen = e.intersectionRatio > 0.4;
+        playSlide(m, m._seen);
+      });
+    }, { threshold: [0, 0.4, 0.75], rootMargin: '200px 0px' }) : null;
+    $$('#stack .card-in').forEach(function (el) {
+      var media = el.querySelector('.card-media'), n = +media.getAttribute('data-n');
+      media.setAttribute('data-at', 0);
+      if (cio) cio.observe(media); else { media._seen = true; loadSlide($('.slide', media)); }
+      el.addEventListener('click', function (e) { e.preventDefault(); openCase(el.getAttribute('data-case'), el); });
+      if (fine) {
+        media.addEventListener('pointerenter', function () {
+          cursorOn = true; cursor.classList.add('on');
+          $$('.slide', media).forEach(loadSlide);
+        });
+        media.addEventListener('pointerleave', function () { cursorOn = false; cursor.classList.remove('on'); media.classList.remove('scrub'); setSlide(media, 0); });
+        $$('.pill[data-s]', el).forEach(function (pl) {
+          pl.addEventListener('pointerenter', function () { $$('.slide', media).forEach(loadSlide); media.classList.add('scrub'); media._seen = true; setSlide(media, +pl.getAttribute('data-s')); });
+          pl.addEventListener('pointerleave', function () { media.classList.remove('scrub'); setSlide(media, 0); });
+        });
+        if (n > 1) media.addEventListener('pointermove', function (e) {
+          var r = media.getBoundingClientRect(), f = clamp((e.clientX - r.left) / r.width, 0, 0.9999);
+          if (root.dir === 'rtl') f = 0.9999 - f;
+          media.classList.add('scrub');
+          setSlide(media, Math.floor(f * n));
+        });
+      } else if (n > 1 && !reduce) {
+        slideTimers.push(window.setInterval(function () {
+          if (media._seen && !caseOpen && !briefOpen && !doc.hidden) setSlide(media, +media.getAttribute('data-at') + 1);
+        }, 4200));
+      }
+    });
+    requestScroll();
+  }
+  var peek = $('#peek'), peekOn = false, qx = 0, qy = 0;
+  peek.innerHTML = SVC_IMG.map(function (s) { return '<img src="' + s + '" alt="" loading="lazy">'; }).join('');
+  function bindPeek() {
+    if (!fine) return;
+    $$('#svc .svc-row').forEach(function (rowEl) {
+      rowEl.addEventListener('pointerenter', function () {
+        var i = +rowEl.getAttribute('data-i');
+        $$('img', peek).forEach(function (im, j) { im.classList.toggle('on', i === j); });
+        peekOn = true; peek.classList.add('on');
+      });
+      rowEl.addEventListener('pointerleave', function () { peekOn = false; peek.classList.remove('on'); });
+    });
+  }
+  function follow() {
+    window.requestAnimationFrame(follow);
+    if (!fine) return;
+    cx += (px - cx) * 0.2; cy += (py - cy) * 0.2;
+    if (cursorOn) cursor.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+    qx += (px - qx) * 0.12; qy += (py - qy) * 0.12;
+    if (peekOn) {
+      var w = peek.offsetWidth, h = peek.offsetHeight, rtl = root.dir === 'rtl';
+      var x = rtl ? qx - w - 28 : qx + 28;
+      x = clamp(x, 12, window.innerWidth - w - 12);
+      peek.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + clamp(qy - h / 2, 12, window.innerHeight - h - 12).toFixed(1) + 'px,0)';
+    }
+  }
+  window.requestAnimationFrame(follow);
+
+  /* ---------- Hero: a trail of work that dissolves like vapour ---------- */
+  (function () {
+    if (!fine || reduce) return;
+    var layer = $('#trail'), lastX = 0, lastY = 0, at = 0, z = 1, live = [], warmed = false;
+    function warm() { if (warmed) return; warmed = true; TRAIL.forEach(function (s) { var im = new Image(); im.decoding = 'async'; im.src = s; }); }
+    window.setTimeout(warm, 2500);
+    hero.addEventListener('pointerenter', warm);
+    function gone(el, fast) {
+      var a = el.animate([{ opacity: 1, transform: el._to, filter: 'blur(0px)' }, { opacity: 0, transform: el._to + ' scale(1.16) translateY(-26px)', filter: 'blur(22px)' }],
+        { duration: fast ? 520 : 1100, easing: 'cubic-bezier(.3,0,.2,1)', fill: 'forwards' });
+      a.onfinish = function () { if (el.parentNode) el.parentNode.removeChild(el); };
+    }
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      var dx = e.clientX - lastX, dy = e.clientY - lastY, need = Math.max(110, window.innerWidth / 13);
+      if (dx * dx + dy * dy < need * need || window.scrollY > hero.offsetHeight * 0.35 || e.clientY < 120) return;
+      var t = e.target;
+      if (t.closest && t.closest('a, button, .hero-side, .nav')) { lastX = e.clientX; lastY = e.clientY; return; }
+      var ar = anchor.getBoundingClientRect(), pad = 40;
+      if (e.clientX > ar.left - pad && e.clientX < ar.right + pad && e.clientY > ar.top - pad && e.clientY < ar.bottom + pad) { lastX = e.clientX; lastY = e.clientY; return; }
+      lastX = e.clientX; lastY = e.clientY;
+      var hr = hero.getBoundingClientRect(), el = doc.createElement('img');
+      el.src = TRAIL[at % TRAIL.length]; at++;
+      el.alt = ''; el.className = 'trail-img'; el.style.zIndex = z++;
+      var rot = clamp(dx * 0.03, -7, 7), w = clamp(window.innerWidth * 0.17, 190, 290);
+      el.style.width = w + 'px';
+      el.style.left = (e.clientX - hr.left - w / 2) + 'px'; el.style.top = (e.clientY - hr.top - w * 0.62) + 'px';
+      el._to = 'rotate(' + rot.toFixed(2) + 'deg)';
+      layer.appendChild(el);
+      el.animate([{ opacity: 0, transform: 'translate(' + (-dx * 0.25).toFixed(1) + 'px,' + (-dy * 0.25 + 18).toFixed(1) + 'px) rotate(' + (rot * 2).toFixed(2) + 'deg) scale(.72)', filter: 'blur(14px)' },
+        { opacity: 1, transform: el._to, filter: 'blur(0px)' }], { duration: 520, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'forwards' });
+      live.push(el);
+      if (live.length > 5) gone(live.shift(), true);
+      window.clearTimeout(el._t);
+      el._t = window.setTimeout(function () { var k = live.indexOf(el); if (k >= 0) { live.splice(k, 1); gone(el, false); } }, 1500);
+    }, { passive: true });
+  })();
+
+  /* ---------- Reveal on first sight ---------- */
+  if ('IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    $$('.rise, #footMark').forEach(function (el) { rio.observe(el); });
+  } else { $$('.rise, #footMark').forEach(function (el) { el.classList.add('in'); }); }
+
+  /* ---------- Case study: the card, opened ---------- */
+  var caseEl = $('#case'), caseOpen = null, caseFrom = null, lastFocus = null;
+  function madeHtml(item, m) {
+    var pic = '';
+    if (m.img) pic = '<div class="made-pic"><img src="' + m.img + '" alt="" loading="lazy"></div>';
+    else if (m.video) pic = '<div class="made-pic">' + videoTag(m.video, m.poster) + '</div>';
+    if (m.reels) pic = '<div class="reels">' + m.reels.map(function (r) { return '<div class="reel">' + videoTag(r[0], r[1]) + '</div>'; }).join('') + '</div>';
+    var cls = m.cls === 'full' ? ' style="grid-column:1/-1"' : '';
+    return '<div class="made-item' + (m.cls && m.cls !== 'full' ? ' ' + m.cls : '') + (m.reels ? ' has-reels' : '') + '"' + cls + '>' + pic +
+      '<div class="made-txt"><span class="pill">' + esc(item.tag) + '</span><h3>' + esc(item.title) + '</h3><p>' + esc(item.body) + '</p></div></div>';
+  }
+  var sysAt = 0;
+  function sysHtml(p, c) {
+    var y = c.sys;
+    return '<section class="sys"><div class="sys-head"><h2>' + y.h + '</h2><p>' + esc(y.p) + '</p></div>' +
+      '<div class="sys-stage"><div class="sys-tabs" role="tablist">' + y.tabs.map(function (t, i) {
+        return '<button type="button" role="tab" class="sys-tab" data-i="' + i + '" aria-selected="' + String(i === sysAt) + '"><small>0' + (i + 1) + '</small><span>' + esc(t.name) + '</span><i></i></button>';
+      }).join('') + '</div>' +
+      '<div class="sys-main"><div class="sys-view">' + p.sys.map(function (m, i) {
+        var v = '<video muted playsinline preload="none" poster="' + m.poster + '" data-sys="' + m.src + '"></video>';
+        return '<div class="sys-pane' + (i === sysAt ? ' on' : '') + (m.phone ? ' is-phone' : '') + '" data-i="' + i + '">' +
+          (m.phone ? '<img class="stage-back" src="' + p.sys[0].poster + '" alt=""><div class="phone">' + v + '</div>' : winHtml(v, y.tabs[i].path)) + '</div>';
+      }).join('') + '</div>' +
+      '<div class="sys-cap"><small></small><h3></h3><p></p></div></div></div>' +
+      '<div class="flow"><h3>' + esc(y.flowH) + '</h3><ol>' + y.flow.map(function (f, i) {
+        return '<li><b>' + (i + 1) + '</b><strong>' + esc(f.t) + '</strong><span>' + esc(f.b) + '</span></li>';
+      }).join('') + '</ol></div><p class="credit">' + esc(y.note) + '</p></section>';
+  }
+  function bindSys(c) {
+    var box = $('.sys', caseEl); if (!box) return;
+    var tabs = $$('.sys-tab', box), panes = $$('.sys-pane', box), cap = $('.sys-cap', box), seen = false;
+    function show(i, user) {
+      sysAt = i = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, j) { t.setAttribute('aria-selected', String(j === i)); $('i', t).style.transform = 'scaleX(0)'; });
+      panes.forEach(function (pn, j) {
+        var v = $('video', pn); pn.classList.toggle('on', j === i);
+        if (j !== i) { if (!v.paused) v.pause(); return; }
+        if (!v.src) v.src = v.getAttribute('data-sys');
+        try { v.currentTime = 0; } catch (e) { /* not loaded yet */ }
+        if (seen || user) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () { /* poster stays */ }); }
+      });
+      $('small', cap).textContent = '0' + (i + 1) + ' / 0' + tabs.length;
+      $('h3', cap).textContent = c.sys.tabs[i].title; $('p', cap).textContent = c.sys.tabs[i].body;
+      if (user && tabs[i].scrollIntoView) tabs[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+    }
+    tabs.forEach(function (t, i) { t.addEventListener('click', function () { show(i, true); }); });
+    panes.forEach(function (pn, i) {
+      var v = $('video', pn), bar = $('i', tabs[i]);
+      v.addEventListener('timeupdate', function () { if (i === sysAt && v.duration) bar.style.transform = 'scaleX(' + (v.currentTime / v.duration).toFixed(4) + ')'; });
+      v.addEventListener('ended', function () { if (i === sysAt) show(i + 1, false); });
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        seen = es[0].isIntersecting;
+        var v = $('video', panes[sysAt]);
+        if (seen) { if (!v.src) v.src = v.getAttribute('data-sys'); var pr = v.play(); if (pr && pr.catch) pr.catch(function () { /* poster stays */ }); }
+        else if (!v.paused) v.pause();
+      }, { threshold: 0.35 }).observe($('.sys-view', box));
+    } else seen = true;
+    show(sysAt, false);
+  }
+  function renderCase(id, keepScroll) {
+    var p = PROJECTS.filter(function (x) { return x.id === id; })[0]; if (!p) return;
+    var c = T.projects[id], idx = PROJECTS.indexOf(p), nx = PROJECTS[(idx + 1) % PROJECTS.length], nc = T.projects[nx.id];
+    var top = caseEl.scrollTop;
+    if (!keepScroll) sysAt = 0;
+    caseEl.innerHTML = '<div class="wrap">' +
+      '<div class="case-bar"><button type="button" class="btn btn-ghost" data-close>' + BACK + '<span>' + esc(T.cs.back) + '</span></button>' +
+      '<button type="button" class="btn btn-solid" data-brief>' + esc(T.nav.start) + '</button></div>' +
+      '<article class="case-top on-card"><header><span class="pill">' + esc(T.labels[p.label]) + '</span>' +
+      '<h1 id="caseTitle">' + c.title + '</h1>' +
+      '<div class="case-sub">' + tagPills(c.tags) + '<span class="case-meta">' + esc(c.meta) + '</span>' +
+      (p.site ? '<a class="btn btn-card case-visit" href="' + p.site + '" target="_blank" rel="noopener"><span>' + esc(T.cs.visit) + '</span>' + OUT + '</a>' : '') + '</div></header>' +
+      (p.film.tall ? '<div class="case-film is-tall"><img class="stage-back" src="' + p.film.back + '" alt=""><div class="phone">' + videoTag(p.film.src, p.film.poster) + '</div></div>'
+        : '<div class="case-film">' + videoTag(p.film.src, p.film.poster) + '</div>') + '</article>' +
+      '<section class="case-brief"><h2>' + esc(T.cs.brief) + '</h2><div><p>' + esc(c.brief[0]) + '</p><p>' + esc(c.brief[1]) + '</p></div></section>' +
+      (c.sys && p.sys ? sysHtml(p, c) : '') +
+      '<section class="case-made"><h2>' + T.cs.made + '</h2><div class="made">' +
+      c.made.map(function (it, i) { return madeHtml(it, p.made[i] || {}); }).join('') + '</div>' +
+      (c.facts.length ? '<div class="facts on-card">' + c.facts.map(function (f) { return '<div><b>' + esc(f.n) + '</b><span>' + esc(f.l) + '</span></div>'; }).join('') + '</div>' : '') +
+      (c.credit ? '<p class="credit">' + esc(c.credit) + '</p>' : '') + '</section>' +
+      '<button type="button" class="case-next on-card" data-next="' + nx.id + '"><span><small>' + esc(T.cs.next) + ', ' + esc(T.labels[nx.label]) + '</small><strong>' + nc.title + '</strong></span><span class="go">' + ARROW + '</span></button>' +
+      '</div>';
+    caseEl.scrollTop = keepScroll ? top : 0;
+    watchVideos(caseEl); bindSys(c);
+    $('[data-close]', caseEl).addEventListener('click', closeCase);
+    $('[data-next]', caseEl).addEventListener('click', function () { caseOpen = this.getAttribute('data-next'); renderCase(caseOpen); setHash('work-' + caseOpen); });
+    $('[data-brief]', caseEl).addEventListener('click', openBrief);
+  }
+  function setClip(el) {
+    var W = window.innerWidth, H = window.innerHeight, r = el ? el.getBoundingClientRect() : { top: H * 0.5, bottom: H * 0.5, left: W * 0.5, right: W * 0.5 };
+    caseEl.style.setProperty('--ct', Math.max(0, r.top) + 'px');
+    caseEl.style.setProperty('--cb', Math.max(0, H - r.bottom) + 'px');
+    caseEl.style.setProperty('--cl', Math.max(0, r.left) + 'px');
+    caseEl.style.setProperty('--cr', Math.max(0, W - r.right) + 'px');
+    caseEl.style.setProperty('--crad', '36px');
+  }
+  function openClip() { ['--ct', '--cb', '--cl', '--cr', '--crad'].forEach(function (k) { caseEl.style.setProperty(k, '0px'); }); }
+  function setHash(h) { try { window.history.replaceState(null, '', h ? '#' + h : window.location.pathname + window.location.search); } catch (e) { /* not essential */ } }
+  function openCase(id, from) {
+    if (!T.projects[id]) return;
+    lastFocus = doc.activeElement; caseFrom = from; caseOpen = id;
+    cursorOn = false; cursor.classList.remove('on');
+    renderCase(id);
+    caseEl.hidden = false;
+    setClip(from);
+    void caseEl.offsetWidth;
+    openClip();
+    body.classList.add('locked'); runSky(); setHash('work-' + id);
+    var cb = $('[data-close]', caseEl); if (cb) cb.focus({ preventScroll: true });
+  }
+  function closeCase() {
+    if (!caseOpen) return;
+    var from = caseFrom && doc.body.contains(caseFrom) ? caseFrom : $('#stack [data-case="' + caseOpen + '"]');
+    caseOpen = null;
+    setClip(from);
+    body.classList.remove('locked'); setHash('');
+    window.setTimeout(function () { caseEl.hidden = true; caseEl.innerHTML = ''; runSky(); }, reduce ? 0 : 880);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+
+  /* ---------- The guided brief ---------- */
+  var briefEl = $('#brief'), briefOpen = false;
+  var B = { step: 1, needs: {}, name: '', business: '', link: '', when: -1, budget: -1, phone: '', note: '', err: '' };
+  function field(id, label, value, type, extra) {
+    return '<div class="field"><label for="' + id + '">' + esc(label) + '</label><input id="' + id + '" type="' + (type || 'text') + '" value="' + esc(value) + '"' + (extra || '') + '></div>';
+  }
+  function chips(list, isOn, group) {
+    return '<div class="chips">' + list.map(function (l, i) {
+      return '<button type="button" class="chip" data-g="' + group + '" data-i="' + i + '" aria-pressed="' + String(isOn(i)) + '">' + esc(l) + '</button>';
+    }).join('') + '</div>';
+  }
+  function briefRows() {
+    var t = T.brief, s = t.sum;
+    return [
+      [s.need, t.needs.filter(function (_, i) { return B.needs[i]; }).join(', ')],
+      [s.from, [B.name.trim(), B.business.trim()].filter(Boolean).join(', ')],
+      [s.link, B.link.trim(), 1], [s.when, B.when >= 0 ? t.whens[B.when] : ''], [s.budget, B.budget >= 0 ? t.budgets[B.budget] : ''],
+      [s.phone, B.phone.trim(), 1], [s.note, B.note.trim()]
+    ].filter(function (r) { return r[1]; });
+  }
+  function renderBrief() {
+    var t = T.brief, st = B.step, inner = '';
+    if (st === 1) inner = '<h2 id="briefTitle">' + t.s1.h + '</h2><p>' + esc(t.s1.p) + '</p>' + chips(t.needs, function (i) { return !!B.needs[i]; }, 'needs');
+    if (st === 2) inner = '<h2 id="briefTitle">' + t.s2.h + '</h2><div class="fields">' + field('bName', t.s2.name, B.name, 'text', ' autocomplete="name"') +
+      field('bBusiness', t.s2.business, B.business, 'text', ' autocomplete="organization"') + '</div>' + field('bLink', t.s2.link, B.link, 'text', ' inputmode="url" dir="ltr" placeholder="instagram.com/yourbrand"');
+    if (st === 3) inner = '<h2 id="briefTitle">' + t.s3.h + '</h2><div class="grp"><span>' + esc(t.s3.when) + '</span>' + chips(t.whens, function (i) { return B.when === i; }, 'when') + '</div>' +
+      '<div class="grp"><span>' + esc(t.s3.budget) + '</span>' + chips(t.budgets, function (i) { return B.budget === i; }, 'budget') + '</div>';
+    if (st === 4) inner = '<h2 id="briefTitle">' + t.s4.h + '</h2>' + field('bPhone', t.s4.phone, B.phone, 'tel', ' autocomplete="tel" dir="ltr" placeholder="054 000 0000" style="max-width:420px"') +
+      '<div class="field"><label for="bNote">' + esc(t.s4.note) + '</label><textarea id="bNote" rows="4">' + esc(B.note) + '</textarea></div>';
+    if (st === 5) {
+      var rows = briefRows(), text = t.hello + '\n' + rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+      inner = '<h2 id="briefTitle">' + t.s5.h + '</h2><p>' + esc(t.s5.p) + '</p><dl class="sum">' + rows.map(function (r) { return '<div><dt>' + esc(r[0]) + '</dt><dd' + (r[2] ? ' class="ltr"' : ' dir="auto"') + '>' + esc(r[1]) + '</dd></div>'; }).join('') + '</dl>' +
+        '<div class="btns" style="justify-content:flex-start"><a class="btn btn-card" target="_blank" rel="noopener" href="' + WA + '?text=' + encodeURIComponent(text) + '">' + esc(t.s5.wa) + '</a>' +
+        '<button type="button" class="btn btn-line" data-x>' + esc(t.s5.done) + '</button></div>';
+    }
+    var prog = st <= 4 ? '<div class="brief-prog">' + [1, 2, 3, 4].map(function (i) { return '<i' + (i <= st ? ' class="on"' : '') + '></i>'; }).join('') + '<span>' + st + ' / 4</span></div>' : '<span></span>';
+    briefEl.innerHTML = '<div class="brief-card on-card"><div class="brief-top"><span>' + esc(t.title) + '</span>' + prog +
+      '<button type="button" class="x" data-x aria-label="' + esc(t.close) + '">' + CROSS + '</button></div>' +
+      '<div class="brief-step">' + inner + '</div>' +
+      (st <= 4 ? '<div><p class="brief-err" role="alert">' + esc(B.err) + '</p><div class="brief-nav">' +
+        (st > 1 ? '<button type="button" class="btn btn-line" data-back>' + esc(t.back) + '</button>' : '<span></span>') +
+        '<button type="button" class="btn btn-card" data-next>' + esc(st === 4 ? t.send : t.next) + '</button></div></div>' : '') + '</div>';
+    $$('[data-x]', briefEl).forEach(function (b) { b.addEventListener('click', closeBrief); });
+    $$('.chip', briefEl).forEach(function (c) {
+      c.addEventListener('click', function () {
+        var g = c.getAttribute('data-g'), i = +c.getAttribute('data-i');
+        if (g === 'needs') B.needs[i] = !B.needs[i]; else if (g === 'when') B.when = i; else B.budget = B.budget === i ? -1 : i;
+        B.err = ''; syncBrief();
+      });
+    });
+    [['bName', 'name'], ['bBusiness', 'business'], ['bLink', 'link'], ['bPhone', 'phone'], ['bNote', 'note']].forEach(function (m) {
+      var el = $('#' + m[0], briefEl); if (el) el.addEventListener('input', function () { B[m[1]] = el.value; if (B.err) { B.err = ''; $('.brief-err', briefEl).textContent = ''; } });
+    });
+    var nb = $('[data-next]', briefEl), bb = $('[data-back]', briefEl);
+    if (nb) nb.addEventListener('click', function () {
+      var e = T.brief.err, err = '';
+      if (B.step === 1 && !Object.keys(B.needs).some(function (k) { return B.needs[k]; })) err = e[0];
+      if (B.step === 2 && (!B.name.trim() || !B.business.trim())) err = e[1];
+      if (B.step === 3 && B.when < 0) err = e[2];
+      if (B.step === 4 && B.phone.replace(/[^0-9]/g, '').length < 7) err = e[3];
+      if (err) { B.err = err; $('.brief-err', briefEl).textContent = err; return; }
+      B.step++; B.err = ''; renderBrief(); focusBrief();
+    });
+    if (bb) bb.addEventListener('click', function () { B.step--; B.err = ''; renderBrief(); focusBrief(); });
+  }
+  function syncBrief() {
+    $$('.chip', briefEl).forEach(function (c) {
+      var g = c.getAttribute('data-g'), i = +c.getAttribute('data-i');
+      c.setAttribute('aria-pressed', String(g === 'needs' ? !!B.needs[i] : g === 'when' ? B.when === i : B.budget === i));
+    });
+    $('.brief-err', briefEl).textContent = B.err;
+  }
+  function focusBrief() { var f = $('input, .chip', briefEl); if (f && fine) f.focus({ preventScroll: true }); }
+  var briefBack = null;
+  function openBrief() {
+    briefBack = doc.activeElement; briefOpen = true;
+    if (B.step === 5) B = { step: 1, needs: {}, name: '', business: '', link: '', when: -1, budget: -1, phone: '', note: '', err: '' };
+    renderBrief(); briefEl.hidden = false; void briefEl.offsetWidth; briefEl.classList.add('on');
+    body.classList.add('locked'); runSky();
+    var x = $('[data-x]', briefEl); if (x) x.focus({ preventScroll: true });
+  }
+  function closeBrief() {
+    briefOpen = false; briefEl.classList.remove('on');
+    if (!caseOpen) body.classList.remove('locked');
+    window.setTimeout(function () { if (!briefOpen) { briefEl.hidden = true; briefEl.innerHTML = ''; } runSky(); }, reduce ? 0 : 450);
+    if (briefBack && briefBack.focus) briefBack.focus({ preventScroll: true });
+  }
+  $$('[data-brief]').forEach(function (b) { b.addEventListener('click', openBrief); });
+  briefEl.addEventListener('click', function (e) { if (e.target === briefEl) closeBrief(); });
+  doc.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (briefOpen) closeBrief(); else if (caseOpen) closeCase();
+  });
+
+  /* ---------- Start ---------- */
+  applyText();
+  syncSky(true);
+  placeRing(); onScroll();
+  window.addEventListener('resize', placeRing);
+  var hash = (window.location.hash || '').replace('#', '');
+  if (hash.indexOf('work-') === 0 && T.projects[hash.slice(5)]) openCase(hash.slice(5), null);
+  if (hash === 'brief') openBrief();
+  window.requestAnimationFrame(function () { window.requestAnimationFrame(function () { root.classList.remove('load'); }); });
+  window.__halom = { openCase: openCase, openBrief: openBrief, sky: sky, brief: B };
+})();
+</script>
+</body>
+</html>
