@@ -1,21 +1,22 @@
 <!doctype html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Mana · מנה</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#FCF8F6">
-<meta name="color-scheme" content="light">
-<link rel="icon" href="data:,">
-<script>/* the app must sit at ".../studio/" (with the slash): everything it loads is relative to that */
-if (!/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
-<script src="../config.js"></script>
-  <script type="module" crossorigin src="./assets/index-BWfGFhud.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-B7Zn_ytn.css">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mana has moved</title>
+<script>
+/* Mana moved to its own repository (github.com/danieltinker/mana) on 13 Oct 2026 and is served at halom.io/mana/.
+   This page sends an old address here to the same place there, with its query and fragment. */
+(function () {
+  var p = location.pathname, i = p.indexOf('/projects/menus/');
+  var rest = i < 0 ? '' : p.slice(i + '/projects/menus/'.length);
+  location.replace('https://halom.io/mana/' + rest + location.search + location.hash);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://halom.io/mana/"></noscript>
 </head>
-<body>
-<div id="app"></div>
-<noscript>JavaScript is needed · צריך JavaScript</noscript>
+<body style="font:16px/1.5 system-ui,sans-serif;padding:24px;background:#0b0907;color:#f4ede2">
+<p>Mana has moved to <a style="color:inherit" href="https://halom.io/mana/">halom.io/mana</a>.</p>
 </body>
 </html>

@@ -7,7 +7,10 @@ without redeploying the main site.
 - `projects/selva-resort/landing/` — Selva Resort 3D site, v4.1 (concept preview by Halom; the pitch build)
 - `projects/3d-menu/` — Halom 3D Menu: ten Tel Aviv restaurant menus as hologram menus (a Halom concept demo; the page says it is not
   affiliated with the restaurants and that the dish images are AI-generated previews; `noindex`). Needs the `3d-menu` lines below in the halom.io `vercel.json`.
-- `projects/menus/<slug>/` — one restaurant's own hologram menu, written here by Menu Studio (Halom OS) when a menu is published. Needs the `menus` lines below, once.
+- `projects/menus/` — **retired on 13 Oct 2026.** Mana (the restaurant menus, its owner app and back office) lives in its own
+  repository, `github.com/danieltinker/mana`, and is served at `halom.io/mana/` and `halom.io/m/<name>`. Only three small pages
+  are left here; they send an old address on `danieltinker.github.io/halom-projects/projects/menus/…` to `halom.io/mana/…`.
+  Do not publish anything of Mana's here again.
 - `projects/selva-resort/landing-v5/` — Selva Resort v5 preview: Selva's own photographs shown in 3D, one smooth tour per villa. Not routed from halom.io; if it becomes the pitch build, publish it over `landing/`.
 - `projects/agency/` — Halom Agency site (the remaster of 8–9 Oct 2026): one page, English / Hebrew / French, light and dark. Built from the prototype sources; `noindex` until it moves to its final address.
 
@@ -28,16 +31,14 @@ without redeploying the main site.
 ]
 ```
 
-For the 3D menu and the menus Menu Studio publishes, the same two lists get these entries (the `menus` pair covers every future restaurant, so it is added once):
+For the 3D menu demo, the same two lists get these entries:
 
 ```json
 "redirects": [
-  { "source": "/projects/3d-menu", "destination": "/projects/3d-menu/", "permanent": false },
-  { "source": "/projects/menus/:slug", "destination": "/projects/menus/:slug/", "permanent": false }
+  { "source": "/projects/3d-menu", "destination": "/projects/3d-menu/", "permanent": false }
 ],
 "rewrites": [
-  { "source": "/projects/3d-menu/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/3d-menu/$1" },
-  { "source": "/projects/menus/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/menus/$1" }
+  { "source": "/projects/3d-menu/(.*)", "destination": "https://danieltinker.github.io/halom-projects/projects/3d-menu/$1" }
 ]
 ```
 
