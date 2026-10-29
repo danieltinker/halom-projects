@@ -37,7 +37,7 @@ button:focus-visible, a:focus-visible, h2:focus-visible { outline: 2px solid var
 svg { width: 20px; height: 20px; flex: none; }
 
 /* ---- the material ---- */
-#ribbon, .seg, .ic, #top .id, #hint, #fhint, #notice, #lineup button, #labels .tag, #panel, .nav, #nav .cap, #fback, #modal .card, .btn {
+#ribbon, .seg, .ic, #top .lang, #top .id, #hint, #fhint, #notice, #lineup button, #labels .tag, #panel, .nav, #nav .cap, #fback, #modal .card, .btn {
   /* from the top down: a bright hairline along the top edge that fades towards the corners, a streak of light from the upper corner, a soft
      sheen under the edge, the smoke itself */
   background: var(--hairline) top / 100% 1px no-repeat, var(--streak), var(--sheen), var(--tint);
@@ -69,7 +69,7 @@ body.noblur { --tint: rgba(18, 19, 23, 0.86); --tint-strong: rgba(18, 19, 23, 0.
 /* the larger panes: a streak of light from the upper corner */
 #panel, #modal .card, #lineup button { --streak: linear-gradient(118deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012) 22%, rgba(255, 255, 255, 0) 34%); }
 
-/* ---- top: the credit line (always on screen) and the bar under it ---- */
+/* ---- top: glass chrome on the room. Credits live in the about popover, not a strip over the hero. ---- */
 #bar { position: absolute; top: 0; inset-inline: 0; z-index: 6; }
 #bar::before { content: ''; position: absolute; inset: 0 0 auto; height: 150px; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.24) 55%, rgba(0, 0, 0, 0)); pointer-events: none; transition: opacity 0.6s; }
 #ribbon { position: relative; text-align: center; font-size: 12.5px; line-height: 1.35; padding: 6px max(12px, var(--safe-r)) 6px max(12px, var(--safe-l)); text-wrap: balance; --tint: var(--tint-strong); box-shadow: inset 0 -1px 0 var(--hair), 0 10px 26px -18px var(--ember); border-radius: 0; }
@@ -84,13 +84,18 @@ body.noblur { --tint: rgba(18, 19, 23, 0.86); --tint-strong: rgba(18, 19, 23, 0.
 #top .id strong { font-weight: var(--mark-w); font-size: 21px; letter-spacing: var(--mark-track); direction: ltr; white-space: nowrap; }
 #top .id strong.fit { min-width: 0; overflow: hidden; text-overflow: ellipsis; padding-block: 2px; } #top .id strong.fit.he { direction: rtl; }
 #top .id span { font-size: 15px; opacity: 0.9; white-space: nowrap; }
-#top .tools { display: flex; gap: 8px; align-items: center; flex: none; }
+#top .tools { display: flex; gap: 8px; align-items: center; flex: none; margin-inline-start: auto; }
 .seg { display: flex; border-radius: 999px; padding: 3px; }
 .seg button { padding: 7px 15px; border-radius: 999px; font-size: 14px; min-height: 38px; color: var(--plaster-2); transition: background 0.2s, color 0.2s; }
 .seg button:hover { color: #fff; }
+#top .lang { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 14px; border-radius: 999px; font-size: 14px; color: var(--plaster); }
+#top .lang:hover { color: #fff; }
 .ic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; }
 #top .lbl { display: grid; place-items: center; opacity: 0.65; padding-inline: 11px 3px; } #top .lbl svg { width: 17px; height: 17px; }
-body[data-state='loading'] #top, body[data-state='intro'] #top { opacity: 0; }
+/* the hero keeps the sky: name plate and scene chips wait until the lobby; language and about stay as small glass pills */
+body[data-state='loading'] #top .id, body[data-state='intro'] #top .id,
+body[data-state='loading'] #top .seg, body[data-state='intro'] #top .seg,
+body[data-state='loading'] #top .fs, body[data-state='intro'] #top .fs { display: none; }
 body[data-state='intro'] #bar::before, body[data-state='loading'] #bar::before { opacity: 0; }
 
 /* ---- entrance ---- */
@@ -113,7 +118,7 @@ body[data-state='intro'] #intro { opacity: 1; }
 .btn:disabled { opacity: 0.5; cursor: progress; filter: none; }
 .btn:focus-visible { outline-offset: 3px; }
 /* The contact button: the one lit thing on the page. A bar of amber glass, ember at one end and brass at the other, lit from inside, with dark
-   ink on it; a green speech bubble (our own drawing) in a dark well says "message". A link's colour takes the place of the amber: main.js then
+   ink on it; an amber-tinted speech bubble (our own drawing) in a dark well says "message". A link's colour takes the place of the amber: main.js then
    sets --hot-a, --hot-b, --hot-c and --hot-ink (and a gentler gloss where the ink is white). */
 .btn.wa { --hot-a: #f28a3a; --hot-b: #ecb163; --hot-c: #f5d294; --hot-ink: #1b1207;
   --hot-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0) 54%, rgba(70, 24, 0, 0.14) 100%);
@@ -122,11 +127,11 @@ body[data-state='intro'] #intro { opacity: 1; }
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34), inset 0 -9px 14px -9px rgba(120, 44, 0, 0.55), 0 0 0 1px rgba(239, 161, 86, 0.5), 0 10px 26px -8px rgba(239, 161, 86, 0.75), 0 0 30px -6px rgba(239, 161, 86, 0.6), 0 14px 30px -16px rgba(0, 0, 0, 0.7);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34), inset 0 -9px 14px -9px color-mix(in srgb, var(--hot-a) 60%, #5a1c00), 0 0 0 1px color-mix(in srgb, var(--ember) 55%, transparent), 0 10px 26px -8px color-mix(in srgb, var(--ember) 78%, transparent), 0 0 30px -6px color-mix(in srgb, var(--ember) 62%, transparent), 0 14px 30px -16px rgba(0, 0, 0, 0.7); }
 .btn.wa:hover { filter: brightness(1.06); } .btn.wa:active { transform: scale(0.975); filter: brightness(0.94); }
-.btn.wa .gl { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 30%, #17603a, #0a2616 72%); box-shadow: inset 0 1px 0 rgba(170, 255, 200, 0.4), inset 0 0 0 1px rgba(111, 220, 140, 0.55), 0 1px 4px rgba(0, 0, 0, 0.45), 0 0 10px -1px rgba(46, 190, 100, 0.6); color: #8ff3ad; }
+.btn.wa .gl { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 32%, #3a2e1c, #100e0c 74%); background: radial-gradient(circle at 50% 32%, color-mix(in srgb, var(--accent) 28%, #14110c), #100e0c 74%); box-shadow: inset 0 1px 0 rgba(232, 179, 106, 0.55), inset 0 0 0 1px rgba(232, 179, 106, 0.42), 0 1px 4px rgba(0, 0, 0, 0.45); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 55%, transparent), inset 0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent), 0 1px 4px rgba(0, 0, 0, 0.45); color: var(--accent); }
 .btn.wa .gl svg { width: 21px; height: 21px; }
 .btn.wa .tx { display: grid; gap: 1px; min-width: 0; }
-.btn.wa .tx b { font-weight: 700; font-size: 15.5px; color: var(--hot-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.btn.wa .tx > span { font-weight: 600; font-size: 12.5px; color: var(--hot-ink); white-space: nowrap; }
+.btn.wa .tx b { font-weight: 700; font-size: 18.5px; color: var(--hot-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn.wa .tx > span { font-weight: 600; font-size: 15.5px; color: var(--hot-ink); white-space: nowrap; }
 .btn.wa .tx .s2, .btn.wa .tx .brief { display: none; }
 .btn.wa .go { flex: none; margin-inline-start: auto; opacity: 0.8; display: grid; } .btn.wa .go svg { width: 17px; height: 17px; }
 html[dir='rtl'] .btn.wa .go svg { transform: scaleX(-1); }
@@ -248,7 +253,7 @@ body:not([data-state='lobby']) #lcta { visibility: hidden; }
   #notice { top: 92px; }
 }
 @media (max-width: 430px) { #top .id strong { font-size: 14.5px; letter-spacing: calc(var(--mark-track) * 0.25); } #top .id { padding-inline: 10px; } #top { gap: 8px; } } /* a phone: "YOUR SHOWROOM" whole on its plate beside the light switch */
-@media (max-width: 380px) { .seg button { padding-inline: 8px; min-width: 40px; } #top { gap: 6px; } #top .id { padding-inline: 9px; } #top .id strong { font-size: 14px; } .btn.wa { gap: 8px; padding-inline: 6px 12px; } .btn.wa .tx b { font-size: 14.5px; } .btn.wa .go { display: none; } }
+@media (max-width: 380px) { .seg button { padding-inline: 8px; min-width: 40px; } #top { gap: 6px; } #top .id { padding-inline: 9px; } #top .id strong { font-size: 14px; } #top .lang { padding-inline: 10px; } .btn.wa { gap: 8px; padding-inline: 6px 12px; } .btn.wa .tx b { font-size: 17.5px; } .btn.wa .go { display: none; } }
 @media (max-width: 340px) { .btn.wa .go { display: none; } .btn.wa .full { display: none; } .btn.wa .brief { display: inline; } }
 
 /* ---- DOCK: an upright phone or tablet. The car is the picture; its controls are a low dock under it: one row of tabs, one row of
@@ -311,7 +316,7 @@ body:not([data-state='lobby']) #lcta { visibility: hidden; }
   #lineup button img, #lineup button .ph, #lineup button .ty { display: none; }
   #lineup button b { font-size: 14px; }
   #hint { bottom: calc(58px + var(--safe-b)); font-size: 13px; padding: 6px 14px; }
-  #lcta { bottom: calc(8px + var(--safe-b)); inset-inline: auto max(10px, var(--safe-l)); margin: 0; width: auto; } #lcta .btn { min-height: 40px; height: 40px; padding-block: 2px; } #lcta .btn .tx b { display: none; } #lcta .btn .tx .s1 { font-size: 13.5px; font-weight: 700; } #lcta .btn .gl { width: 30px; height: 30px; } #lcta .btn .gl svg { width: 18px; height: 18px; }
+  #lcta { bottom: calc(8px + var(--safe-b)); inset-inline: auto max(10px, var(--safe-l)); margin: 0; width: auto; } #lcta .btn { min-height: 40px; height: 40px; padding-block: 2px; } #lcta .btn .tx b { display: none; } #lcta .btn .tx .s1 { font-size: 16.5px; font-weight: 700; } #lcta .btn .gl { width: 30px; height: 30px; } #lcta .btn .gl svg { width: 18px; height: 18px; }
   #panel { inset-block: auto calc(6px + var(--safe-b)); right: max(8px, var(--safe-r)); left: auto; width: min(336px, 44vw); margin: 0; height: auto; max-height: none; overflow: visible; border-radius: 20px; padding: 6px 8px 8px; display: grid; grid-template-columns: minmax(0, 1fr) 40px; grid-template-areas: 'tabs grab' 'body body' 'cta cta'; gap: 4px 4px; animation-name: dock; }
   @keyframes dock { from { opacity: 0; transform: translateY(26px); } }
   #panel > .head, #panel > .title, #panel > .more, #panel h3 { display: none; }
